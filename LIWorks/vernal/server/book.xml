@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GB2312" standalone="no"?>
+<books>
+    <book>
+  <name>book1</name>
+  <price>1.1</price>
+    </book>
+  
+  <book>
+  <name>book2</name>
+  <price>2.2</price>
+    </book>
+  
+  <book>
+  <name>book3</name>
+  <price>3.3</price>
+    </book>
+</books>
