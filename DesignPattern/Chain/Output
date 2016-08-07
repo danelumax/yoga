@@ -1,0 +1,6 @@
+ProjectManager approve Lee fee:300
+ProjectManager reject Tom fee:300
+DepManager approve Lee fee:600
+DepManager reject Tom fee:600
+GeneralManager approve Lee fee:1200
+GeneralManager reject Tom fee:1200

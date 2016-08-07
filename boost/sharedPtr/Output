@@ -1,0 +1,13 @@
+breakpoint 1
+
+Initializing object ...
+
+breakpoint 2
+
+breakpoint 3
+test string
+
+breakpoint 4
+
+Shared_prt is destorying object ...
+
