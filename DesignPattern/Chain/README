@@ -1,3 +1,4 @@
+[Output]
 ProjectManager approve Lee fee:300
 ProjectManager reject Tom fee:300
 DepManager approve Lee fee:600
