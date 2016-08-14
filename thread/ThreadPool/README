@@ -1,0 +1,81 @@
+[Technology]
+1. thread pool setup
+2. pthread condition signal
+3. template call(MessageQ)
+4. boost bind/function(Callback)
+5. CriticalSecion
+6. ostringstream
+
+[Output]
+[Configuration] 5 thread, 8 Message Queue, 11 Message Coming
+
+[Add]  Thread: 140250851833600 in the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+[Add]  Thread: 140250843440896 in the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+[Add]  Thread: 140250835048192 in the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+[Add]  Thread: 140250826655488 in the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+[Add]  Thread: 140250818262784 in the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+
+*** [Result]  All Threads have been initialization.***
+
+
+
+[Message Full]  "ABC + 8" is waiting for entering message queue, please wait ...
+
+[Handling]  Thread 140250843440896 fetch Message: "ABC + 0", and cost 2 sec to handle it, work time: 1
+
+[Handling]  Thread 140250835048192 fetch Message: "ABC + 1", and cost 2 sec to handle it, work time: 1
+
+[Handling]  Thread 140250826655488 fetch Message: "ABC + 2", and cost 2 sec to handle it, work time: 1
+
+[Handling]  Thread 140250818262784 fetch Message: "ABC + 3", and cost 2 sec to handle it, work time: 1
+
+[Handling]  Thread 140250851833600 fetch Message: "ABC + 4", and cost 2 sec to handle it, work time: 1
+
+[Recover]  Thread: 140250818262784 is recovered into the Thread Pool.
+
+[Handling]  Thread 140250818262784 fetch Message: "ABC + 5", and cost 2 sec to handle it, work time: 2
+
+[Recover]  Thread: 140250826655488 is recovered into the Thread Pool.
+
+[Handling]  Thread 140250826655488 fetch Message: "ABC + 6", and cost 2 sec to handle it, work time: 2
+
+[Recover]  Thread: 140250851833600 is recovered into the Thread Pool.
+
+[Handling]  Thread 140250851833600 fetch Message: "ABC + 7", and cost 2 sec to handle it, work time: 2
+
+[Recover]  Thread: 140250843440896 is recovered into the Thread Pool.
+
+[Handling]  Thread 140250843440896 fetch Message: "ABC + 8", and cost 2 sec to handle it, work time: 2
+
+[Recover]  Thread: 140250835048192 is recovered into the Thread Pool.
+
+[Handling]  Thread 140250835048192 fetch Message: "ABC + 9", and cost 2 sec to handle it, work time: 2
+
+[Recover]  Thread: 140250826655488 is recovered into the Thread Pool.
+
+[Handling]  Thread 140250826655488 fetch Message: "ABC + 10", and cost 2 sec to handle it, work time: 3
+
+[Recover]  Thread: 140250851833600 is recovered into the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+[Recover]  Thread: 140250843440896 is recovered into the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+[Recover]  Thread: 140250835048192 is recovered into the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+[Recover]  Thread: 140250818262784 is recovered into the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
+
+[Recover]  Thread: 140250826655488 is recovered into the Thread Pool.
+[Message Empty]  Please wait for new message coming ...
