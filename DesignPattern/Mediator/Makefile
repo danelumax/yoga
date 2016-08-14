@@ -1,8 +1,8 @@
 CCPLUS  =       g++
 RM	=	rm -rf
 
-DIR_INC	:=	.
-DIR_SRC	:=	.
+DIR_INC	:=	./include
+DIR_SRC	:=	./src
 DIR_RELEASE :=	./release
 OBJ_SUFFIX	= .o
 
