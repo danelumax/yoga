@@ -1,0 +1,16 @@
+There are 4 scenario in this programme.
+
+signal : SIGINT(Ctrl+C)
+
+<Scenario 1>
+ * Register and set SIGINT do nothing
+ * Ignore SIGINT
+
+<Scenario 2>
+ * Register and set SIGINT default behavior
+
+<Scenario 3>
+ * Register and set SIGINT using _exit(1) to exit
+
+<Scenario 4>
+ * Register and set SIGINT using function doSomething to handle
