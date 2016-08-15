@@ -5,8 +5,9 @@
  *      Author: eliwech
  */
 
-#include "ThreadBase.h"
 #include <iostream>
+#include "ThreadBase.h"
+#include "CriticalSection.h"
 
 ThreadBase::ThreadBase()
 	:_running(false)
@@ -21,14 +22,15 @@ ThreadBase::~ThreadBase()
 
 int ThreadBase::start()
 {
-	int ret = 0;
-	pthread_mutex_lock(&_mutexRunning);
-	if (_running)
 	{
-		pthread_mutex_unlock(&_mutexRunning);
-		ret = -1;
+		CriticalSection cs(&_mutexRunning);
+		if (_running)
+		{
+			return -1;
+		}
 	}
-	ret = pthread_create(&_thread, 0, &ThreadBase::StartThread, this);
+
+	int ret = pthread_create(&_thread, 0, &ThreadBase::StartThread, this);
 
 	return ret;
 }
@@ -36,13 +38,18 @@ int ThreadBase::start()
 void* ThreadBase::StartThread(void *arg)
 {
 	ThreadBase *me = (ThreadBase*)arg;
-	me->_running = true;
 
-	pthread_mutex_unlock( &(me->_mutexRunning) );
+	{
+		CriticalSection cs( &(me->_mutexRunning) );
+		me->_running = true;
+	}
 
 	me->run();
 
-	me->_running = false;
+	{
+		CriticalSection cs( &(me->_mutexRunning) );
+		me->_running = false;
+	}
 
 	pthread_exit(arg);
 	return arg;

@@ -18,7 +18,7 @@ public:
 	virtual void run() = 0;
 	static void* StartThread(void* arg);
 private:
-	pthread_t _thread;
+	pthread_t _thread;  // not use pointer, coredump will happen
 	pthread_mutex_t _mutexRunning;
 	bool _running;
 };
