@@ -20,7 +20,7 @@ class MessageQ
 {
 public:
 	MessageQ(uint32_t maxSize);
-	virtual ~MessageQ();
+	~MessageQ();
 	void try_put(const QType message);
 	QType try_get();
 private:
@@ -53,7 +53,6 @@ MessageQ<QType>::~MessageQ()
 template<typename QType>
 void MessageQ<QType>::try_put(const QType message)
 {
-	//pthread_mutex_lock(&_mutexMessageList);
 	CriticalSection cs(&_mutexMessageList);
 
 	while(_messageList.size() >= _maxSize)
@@ -64,14 +63,11 @@ void MessageQ<QType>::try_put(const QType message)
 	_messageList.push_back(message);
 
 	pthread_cond_signal(&_eventEmpty);
-
-	//pthread_mutex_unlock(&_mutexMessageList);
 }
 
 template<typename QType>
 QType MessageQ<QType>::try_get()
 {
-	//pthread_mutex_lock(&_mutexMessageList);
 	CriticalSection cs(&_mutexMessageList);
 
 	while(_messageList.size() <= 0)
@@ -88,8 +84,6 @@ QType MessageQ<QType>::try_get()
 	{
 		pthread_cond_signal(&_eventFull);
 	}
-
-	//pthread_mutex_unlock(&_mutexMessageList);
 
 	return message;
 }
