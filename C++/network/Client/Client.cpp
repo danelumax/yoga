@@ -15,10 +15,8 @@
 
 int main(int argc, char* argv[])
 {
-        char* message = argv[1];
-        //std::string message = argv[1];
+    char* message = argv[1];
 	int socket_fd;
-	char buf[MAXBUFFER];
 	struct sockaddr_in servaddr;
 	int ret;
 
@@ -39,7 +37,11 @@ int main(int argc, char* argv[])
 		perror("cannot connect  to the server");
 		exit(-1);
 	}
-	write(socket_fd, message, strlen(message));
+	ssize_t n = write(socket_fd, message, strlen(message));
+    if (n < 0)
+    {
+        perror("write failed");
+    }
 
 	close(socket_fd);
 

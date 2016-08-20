@@ -1,0 +1,8 @@
+[Step]
+1. start server
+2. ./Client Liwei
+
+[Output]
+ * listenfd state changing * 
+Now we have established 1 connections
+Receive message: Liwei

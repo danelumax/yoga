@@ -29,7 +29,6 @@ int main()
 	char buf[MAXLINE];
 	socklen_t clilen;
 	struct sockaddr_in cliaddr, servaddr;
-	bool isFirst = true;
 
 	listenfd = ::socket(AF_INET, SOCK_STREAM, 0);
 
@@ -55,10 +54,9 @@ int main()
 	{
 		/* reload new fd_set, last time one connection was established */
 		rset = allset;
-		/* no wait */
+		/* Focus on listenfd, wait for listenfd state changing */
 		nready = ::select(maxfd+1, &rset, NULL, NULL, NULL);
 
-		/*fisrt time, listenfd will not show in select, then listenfd will always be active */
 		if (FD_ISSET(listenfd, &rset))
 		{
 			std::cout << "Now we have established " << nready << " connections" <<std::endl;
@@ -110,8 +108,8 @@ int main()
 				n = ::read(sockfd, buf, MAXLINE);
 				if (n > 0)
 				{
-					std::string tmp(buf);
-					std::cout << tmp << std::endl;
+					std::string message(buf);
+					std::cout << "Receive message: "<< message << std::endl;
 				}
 			}
 			else

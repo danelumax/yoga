@@ -1,10 +1,10 @@
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
-OBJS =		Client.o
+OBJS =		main.o
 
 LIBS =
 
-TARGET =	Client.exe
+TARGET =	SelectMultiConnection
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
