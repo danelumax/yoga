@@ -1,0 +1,15 @@
+[Step]
+1. Start server.
+2. Send three message with "notclose" option from three different client.
+3. exit three client.
+
+[Output]
+Now we have established 1 connections
+Receive message: 123
+Now we have established 2 connections
+Receive message: 456
+Now we have established 3 connections
+Receive message: 789
+Remote client close.
+Remote client close.
+Remote client close.

@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include "unistd.h"
+#include <string>
 
 #define SERV_PORT 9877
 #define MAXBUFFER 1024
@@ -16,6 +17,9 @@
 int main(int argc, char* argv[])
 {
     char* message = argv[1];
+    char* opt = argv[2];
+    std::string option(opt);
+
 	int socket_fd;
 	struct sockaddr_in servaddr;
 	int ret;
@@ -43,7 +47,14 @@ int main(int argc, char* argv[])
         perror("write failed");
     }
 
-	close(socket_fd);
+    if (option == "close")
+    {   
+        close(socket_fd);
+    }
+    else
+    {
+        while(1){}
+    }
 
 	return 0;
 }
