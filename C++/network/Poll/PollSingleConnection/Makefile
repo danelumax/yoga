@@ -1,10 +1,10 @@
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
-OBJS =		PollMutiConnection.o
+OBJS =		main.o
 
 LIBS =
 
-TARGET =	PollMutiConnection
+TARGET =	PollSingleConnection
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
