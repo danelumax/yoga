@@ -1,0 +1,63 @@
+<CdfUnit type="SWI">
+  <Identity>
+    <identity>SWI/DIAMETER</identity>
+    <name>dia_aaa</name>
+    <version>2.0.0.8</version>
+  </Identity>
+  <Description>
+    <Systems>
+      <system type="CBA">
+        <environment type="CoreMW" />
+      </system>
+    </Systems>
+    <Attributes>
+
+      <attribute name="CppDefines">
+        <value />
+      </attribute>
+
+      <attribute name="CFlags">
+        <value />
+      </attribute>
+
+      <attribute name="CXXFlags">
+        <value />
+      </attribute>
+
+      <attribute name="ARFlags">
+        <value />
+      </attribute>
+    </Attributes>
+    <Relations>
+       <relation type="Uses">
+        <unit id="SWI/AMFAdaptor" />
+        <unit id="SWI/MYSQL_CLUSTER_DEVEL" />
+        <unit id="SWI/OPENSSL" />
+
+        <unit id="SWI/EPC_APPLICATION" />
+        <unit id="SWI/EPC_AUTH" />
+        <unit id="SWI/EPC_WIFIMM" />
+        <unit id="SWI/EPC_EAP" />
+        <unit id="SWI/EPC_EAPALGORITHM" />
+
+        <unit id="SWI/DATABASE_API" />
+        <unit id="SWI/DATABASE_SCHEMA" />
+        <unit id="SWI/NDBAPI" />
+        <unit id="SWI/NDBCACHE" />
+
+        <unit id="SWI/STACK_MANAGER" />
+        <unit id="SWI/STACK_RDCSTACK" />
+        <unit id="SWI/STACK_OMSTACK" />
+        <unit id="SWI/STACK_MAPSTACK" />
+        <unit id="SWI/STACK_DIAMETER" />
+
+        <unit id="SWI/EPC_COMMON" />
+        <unit id="SWI/DIAMETER_COMMON" />
+        <unit id="SWI/AAA_COMMON_CM" />
+        <unit id="SWI/IPW_COMMON_PM" />
+        <unit id="SWI/IPW_COMMON_FM" />
+       </relation>
+
+    </Relations>
+  </Description>
+</CdfUnit>
