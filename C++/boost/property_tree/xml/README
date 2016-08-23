@@ -1,0 +1,76 @@
+[Secnario 1]
+recursion
+
+[Output]
+CdfUnit type: SWI
+identity value: SWI/DIAMETER
+name value: dia_aaa
+version value: 2.0.0.8
+
+system type: CBA
+
+environment type: CoreMW
+
+attribute name: CppDefines
+
+attribute name: CFlags
+
+attribute name: CXXFlags
+
+attribute name: ARFlags
+
+relation type: Uses
+
+unit id: SWI/AMFAdaptor
+
+unit id: SWI/MYSQL_CLUSTER_DEVEL
+
+unit id: SWI/OPENSSL
+
+unit id: SWI/EPC_APPLICATION
+
+unit id: SWI/EPC_AUTH
+
+unit id: SWI/EPC_WIFIMM
+
+unit id: SWI/EPC_EAP
+
+unit id: SWI/EPC_EAPALGORITHM
+
+unit id: SWI/DATABASE_API
+
+unit id: SWI/DATABASE_SCHEMA
+
+unit id: SWI/NDBAPI
+
+unit id: SWI/NDBCACHE
+
+unit id: SWI/STACK_MANAGER
+
+unit id: SWI/STACK_RDCSTACK
+
+unit id: SWI/STACK_OMSTACK
+
+unit id: SWI/STACK_MAPSTACK
+
+unit id: SWI/STACK_DIAMETER
+
+unit id: SWI/EPC_COMMON
+
+unit id: SWI/DIAMETER_COMMON
+
+unit id: SWI/AAA_COMMON_CM
+
+unit id: SWI/IPW_COMMON_PM
+
+unit id: SWI/IPW_COMMON_FM
+
+[Secnario 2]
+simple
+
+[Output]
+type: SWI
+Node have value
+SWI/DIAMETER
+dia_aaa
+2.0.0.8
