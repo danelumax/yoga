@@ -110,6 +110,56 @@ void search()
 	}
 }
 
+void replace()
+{
+	std::string str("readme.txt");
+	std::string str2("Liwei");
+
+	/* (.*)(me) means you can replace "readme" */
+	boost::xpressive::sregex reg1 = boost::xpressive::sregex::compile("(.*)(me)");
+
+	/* (t)(.)(t) means you can relace "x" */
+	boost::xpressive::sregex reg2 = boost::xpressive::sregex::compile("(t)(.)(t)");
+
+	boost::xpressive::sregex reg3 = boost::xpressive::sregex::compile("(Li)(wei)");
+
+	/* totally replace "readme" with "manual" */
+	std::cout << boost::xpressive::regex_replace(str, reg1, "manual") << std::endl;
+	/* $1 means (.*), and you can add string after readme */
+	std::cout << boost::xpressive::regex_replace(str, reg1, "$1you") << std::endl;
+	/* $& = (.*) $&$&= two "readme" */
+	std::cout << boost::xpressive::regex_replace(str, reg1, "$&$&") << std::endl;
+	/* &1=(t), &2=(.) &3=(t)*/
+	/* use &1N$3 replace (t)(.)(t) */
+	std::cout << boost::xpressive::regex_replace(str, reg2, "$1N$3") << std::endl;
+
+	/* add "yoga" between Li and wei */
+	std::cout << boost::xpressive::regex_replace(str2, reg3, "$1yoga$2") << std::endl;
+}
+
+void tokenizer()
+{
+	char *str = "*Link*||+Mario+||Zelda!!!||Metroid";
+	boost::xpressive::cregex reg = boost::xpressive::cregex::compile("\\w+", boost::xpressive::icase);
+
+	boost::xpressive::cregex_token_iterator pos(str, str+strlen(str), reg);
+	while(pos != boost::xpressive::cregex_token_iterator())
+	{
+		std::cout << "[" << *pos << "]";
+		++pos;
+	}
+	std::cout << std::endl;
+
+	boost::xpressive::cregex split_reg = boost::xpressive::cregex::compile("\\|\\|");
+	pos = boost::xpressive::cregex_token_iterator(str, str+strlen(str), split_reg, -1);
+
+	while(pos != boost::xpressive::cregex_token_iterator())
+	{
+		std::cout << "[" << *pos << "]";
+		++pos;
+	}
+	std::cout << std::endl;
+}
 
 int main()
 {
@@ -125,6 +175,9 @@ int main()
 	/* partly match and fetch keyword*/
 	search();
 
+	replace();
+
+	tokenizer();
 
 	return 0;
 }
