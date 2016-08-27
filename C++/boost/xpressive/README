@@ -1,0 +1,17 @@
+[Output]
+short match
+short unmatch
+long match
+long un_match
+[999555197001019999][1970][1][01][0][01][9999][9]
+data:19700101
+search it
+POWERsuit
+error message unsearch
+manual.txt
+readyou.txt
+readmereadme.txt
+readme.tNt
+Liyogawei
+[Link][Mario][Zelda][Metroid]
+[*Link*][+Mario+][Zelda!!!][Metroid]

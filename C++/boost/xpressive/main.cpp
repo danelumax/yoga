@@ -115,17 +115,17 @@ void replace()
 	std::string str("readme.txt");
 	std::string str2("Liwei");
 
-	/* (.*)(me) means you can replace "readme" */
+	/* (.*)(me) means you can replace "readme(.*)" */
 	boost::xpressive::sregex reg1 = boost::xpressive::sregex::compile("(.*)(me)");
 
-	/* (t)(.)(t) means you can relace "x" */
+	/* (t)(.)(t) means you can relace "x"(.) */
 	boost::xpressive::sregex reg2 = boost::xpressive::sregex::compile("(t)(.)(t)");
 
 	boost::xpressive::sregex reg3 = boost::xpressive::sregex::compile("(Li)(wei)");
 
 	/* totally replace "readme" with "manual" */
 	std::cout << boost::xpressive::regex_replace(str, reg1, "manual") << std::endl;
-	/* $1 means (.*), and you can add string after readme */
+	/* $1 means (.*), and you can add "you" after readme */
 	std::cout << boost::xpressive::regex_replace(str, reg1, "$1you") << std::endl;
 	/* $& = (.*) $&$&= two "readme" */
 	std::cout << boost::xpressive::regex_replace(str, reg1, "$&$&") << std::endl;
@@ -140,8 +140,11 @@ void replace()
 void tokenizer()
 {
 	char *str = "*Link*||+Mario+||Zelda!!!||Metroid";
+
+	/* find all words */
 	boost::xpressive::cregex reg = boost::xpressive::cregex::compile("\\w+", boost::xpressive::icase);
 
+	/* only extract word, no-word is separator */
 	boost::xpressive::cregex_token_iterator pos(str, str+strlen(str), reg);
 	while(pos != boost::xpressive::cregex_token_iterator())
 	{
@@ -150,7 +153,9 @@ void tokenizer()
 	}
 	std::cout << std::endl;
 
+	//find || */
 	boost::xpressive::cregex split_reg = boost::xpressive::cregex::compile("\\|\\|");
+	/* -1, || is separator*/
 	pos = boost::xpressive::cregex_token_iterator(str, str+strlen(str), split_reg, -1);
 
 	while(pos != boost::xpressive::cregex_token_iterator())
@@ -175,8 +180,10 @@ int main()
 	/* partly match and fetch keyword*/
 	search();
 
+	/* replace word */
 	replace();
 
+	/* extract words using separator */
 	tokenizer();
 
 	return 0;
