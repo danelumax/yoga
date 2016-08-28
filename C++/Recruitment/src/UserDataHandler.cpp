@@ -1,58 +1,42 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
 #include <string>
+#include <boost/format.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string.hpp>
 #include "UserDataHandler.h"
+
+typedef boost::tokenizer< boost::char_separator<char> > CustomTokenizer;
 
 UserDataHandler::UserDataHandler()
 {
-	_head = new UserDataList;
-	_head->next = NULL;
 }
 
 UserDataHandler::~UserDataHandler()
 {
 }
 
-//read the address information from file
+
 void UserDataHandler::InitUserDataList()
 {
-    UserDataList *node, *h;
-    std::string temp;
     std::ifstream fin;
     fin.open("data.txt",std::ios::in);
-    std::cout << "The file is:" << std::endl;
+    std::cout << "List all data:" << std::endl;
     if(fin)
     {             
         fin>>std::noskipws;
-        char *word = new char[100];
-        while(!fin.eof())
+        std::string oneLine;
+        while(getline(fin, oneLine))
         {  
-            getline(fin, temp,'\n');
-            strcpy(word, temp.c_str());
-            char *p;
-            p = strtok(word," ");
-            int number = 0;
-            std::string sa[3];
-            while(p)
-            {   
-                sa[number++] = p;
-                p = strtok(NULL, " ");   
-            }
-            h = _head;
-            node = new UserDataList;
-            for(int i=0; i<number; i++)
-            {
-                if(sa[i] == "\n")
-                    std::cout <<"ok"<<std::endl;
-            }
-            node->name = sa[0];
-            node->mobile = sa[1];
-            node->address = sa[2];
-            node->next = NULL;
-            while(h->next)
-                h = h->next;
-            h->next = node;
+            boost::char_separator<char> sep(" ");
+            CustomTokenizer tok(oneLine, sep);
+            CustomTokenizer::iterator iter = tok.begin();
+
+            Userdata *data = new Userdata();
+            data->setName(*(iter++));
+			data->setMobile(*(iter++));
+			data->setAddress(*(iter++));
+			_userDataVec.push_back(data);
         }
     }
     else
@@ -63,51 +47,49 @@ void UserDataHandler::InitUserDataList()
 //display the address information in term of linked list
 void UserDataHandler::Print()
 {
-    UserDataList *h;
-    h = _head->next;
-    while(h)
-    {
-        std::cout <<h->name<<" "<<h->mobile<<" "<<h->address<<std::endl;
-        h = h->next;
-    }
+	std::vector<Userdata*>::iterator iter = _userDataVec.begin();
+	for(; iter!=_userDataVec.end(); ++iter)
+	{
+		std::cout << (*iter)->getName() << " "
+				  << (*iter)->getMobile() << " "
+				  << (*iter)->getAddress() << std::endl;
+	}
 }
 
 //Insert the address information into linked list
 void UserDataHandler::InsertUserData()
 {
-    UserDataList *node, *h;
-    h = _head;
-    node = new UserDataList;
-    std::cout <<"name:";
-    std::cin>>node->name;
+	std::string name, mobile, address;
+	Userdata* data = new Userdata();
+    std::cout << "name:";
+    std::cin >> name;
     std::cout <<"mobile:";
-    std::cin>>node->mobile;
-    std::cout <<"address:";
-    std::cin>>node->address;
-    node->next = NULL;   
-    while(h->next)
-        h = h->next;
-    h->next = node;
+    std::cin >> mobile;
+    std::cout << "address:";
+    std::cin >> address;
+
+    data->setName(name);
+    data->setMobile(mobile);
+    data->setAddress(address);
+    _userDataVec.push_back(data);
 }
 
 //Write the address information into file
 void UserDataHandler::WriteFile()
 {
-    UserDataList *h;
-    h = _head->next;
     std::ofstream fout;
     fout.open("data.txt");
-    if(h)
+
+    std::vector<Userdata*>::iterator iter = _userDataVec.begin();
+    for(; iter!=_userDataVec.end(); ++iter)
     {
-        while(h->next)
-        {
-            fout<<h->name<<" "<<h->mobile<<" "<<h->address<<std::endl;
-            h = h->next;
-        }
-            fout<<h->name<<" "<<h->mobile<<" "<<h->address;
+    	fout << (*iter)->getName() << " "
+    		 << (*iter)->getMobile() << " "
+    		 << (*iter)->getAddress() << std::endl;
     }
     fout.close();
 }
+
 
 //judge similiar std::string
 int is_sub_str(std::string str, std::string sub_str)
@@ -137,91 +119,76 @@ int is_sub_str(std::string str, std::string sub_str)
     return flag;
 }
 
-//Search the address information from the linked list
 void UserDataHandler::SearchUserData(std::string search_key, int search_id)
 {
-    UserDataList *h;
-    h = _head;
     std::string result;
     std::string key = search_key;
     int count = 0;
     if(is_sub_str(search_key, ".*") == 1)
         key = key.substr(0, search_key.length()-strlen(".*"));
-    while(h)
+    std::vector<Userdata*>::iterator iter = _userDataVec.begin();
+    for(; iter!=_userDataVec.end(); ++iter)
     {
         switch(search_id)
         {
-            case 1:
-                result = h->name;
+            case Userdata::NAME:
+                result = (*iter)->getName();
                 break;
-            case 2:
-                result = h->mobile;
+            case Userdata::MOBILE:
+                result = (*iter)->getMobile();
                 break;
-            case 3:
-                result = h->address;
+            case Userdata::ADDRESS:
+                result = (*iter)->getAddress();
                 break;
         }
-        if( is_sub_str(result, key) == 0 )
+        if( is_sub_str(result, key) != 0 )
         {
-            h = h->next;
-        }
-        else
-        {
-            std::cout <<h->name<<" "<<h->mobile<<" "<<h->address<<std::endl;
+        	std::cout << (*iter)->getName() << " "
+        			  << (*iter)->getMobile() << " "
+        			  << (*iter)->getAddress() << std::endl;
             count++;
-            h = h->next;
         }
     }
     std::cout <<count<<" address entries searched"<<std::endl;
 }
 
-//Delete the address information from the linked list
+
 void UserDataHandler::DeleteUserData(std::string search_key, int search_id)
 {
-    UserDataList *p, *h;
-    h = _head->next;
     int count = 0;
     std::string result;
     std::string key = search_key;
     if(is_sub_str(search_key, ".*") == 1)
         key = key.substr(0, search_key.length()-strlen(".*"));
-    while (h)
+
+    std::vector<Userdata*>::iterator iter = _userDataVec.begin();
+    /* don't add ++iter */
+    for(; iter!=_userDataVec.end();)
     {
         switch(search_id)
         {
             case 1:
-                result = h->name;
+                result = (*iter)->getName();
                 break;
             case 2:
-                result = h->mobile;
+                result = (*iter)->getMobile();
                 break;
             case 3:
-                result = h->address;
+                result = (*iter)->getAddress();
                 break;
         }
-        if( is_sub_str(result, key) == 0 )
+        if( is_sub_str(result, key) != 0 )
         {
-            p = h;      
-            h = h->next;
+        	/* point next element, must be set */
+        	iter = _userDataVec.erase(iter);
+            count++;
         }
         else
         {
-            if ( h == _head->next)
-            {
-                _head->next = h ->next;
-                delete h;
-                h = _head->next;
-                count++;
-            } 
-            else
-            {              
-                p->next=h->next;
-                delete h;
-                h = p->next;
-                count++;
-            } 
+        	iter++;
         }
     }
+
     std::cout <<count<<" address entries deleted"<<std::endl;
 }
 

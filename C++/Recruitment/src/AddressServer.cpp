@@ -12,7 +12,7 @@
 #include <boost/algorithm/string.hpp>
 #include <SignalManagement.h>
 
-typedef boost::tokenizer<boost::char_separator<char> > CustomTokenizer;
+typedef boost::tokenizer< boost::char_separator<char> > CustomTokenizer;
 AddressServer* AddressServer::_instance = NULL;
 
 AddressServer::AddressServer()

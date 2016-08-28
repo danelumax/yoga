@@ -15,6 +15,7 @@ class OptionState
 public:
 	OptionState(UserDataHandler *handler);
 	virtual ~OptionState();
+	int getType();
 	virtual void handle() = 0;
 protected:
 	UserDataHandler *_handler;

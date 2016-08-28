@@ -6,14 +6,8 @@
 
 #include <iostream>
 #include <cstring>
-
-typedef struct node
-{
-    std::string name;
-    std::string mobile;
-    std::string address;
-    struct node *next;
-}UserDataList;
+#include <vector>
+#include <Userdata.h>
 
 class UserDataHandler
 {
@@ -30,7 +24,7 @@ public:
     void ShowHelp();
 
 private:
-    UserDataList *_head;
+    std::vector<Userdata*> _userDataVec;
 };
 
 #endif
