@@ -6,10 +6,17 @@
  */
 
 #include "AddressServer.h"
+#include <boost/xpressive/xpressive_dynamic.hpp>
+#include <boost/format.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string.hpp>
+#include <SignalManagement.h>
 
+typedef boost::tokenizer<boost::char_separator<char> > CustomTokenizer;
 AddressServer* AddressServer::_instance = NULL;
 
 AddressServer::AddressServer()
+	:_prefix("sh"), _shutDown(false), _quitCount(0)
 {
 	_handler = new UserDataHandler();
 }
@@ -37,82 +44,72 @@ void AddressServer::destory()
 	}
 }
 
+void AddressServer::registerState()
+{
+	_stateMap["add"] = new AddState(_handler);
+	_stateMap["search"] = new SearchState(_handler);
+	_stateMap["delete"] = new DeleteState(_handler);
+	_stateMap["listall"] = new ListAllState(_handler);
+	_stateMap["help"] = new HelpState(_handler);
+	_stateMap["quit"] = new QuitState(_handler);
+}
+
 void AddressServer::init()
 {
     _handler->InitUserDataList();
     _handler->Print();
+    registerState();
+
 }
 
 void AddressServer::run()
 {
-	std::string order, key, search_key;
-    //input order command
-    while(order != "!quit")
+	std::string order;
+
+	SignalManagement::getInstance()->signal(SIGINT, SignalManagement::KEEP_RUNNING, AddressServer::die);
+	//input order command
+    while(!_shutDown)
     {
-        std::cout<<"Please input command:"<<std::endl;
-        std::cin>>order;
-        if(order == "add")
+        std::cout << _prefix << "> ";
+        std::cin >> order;
+        if(!updatePrefix(order, _prefix))
         {
-            _handler->InsertUserData();
-            std::cout<<"address entry added"<<std::endl;
-            _handler->WriteFile();
+        	std::map<std::string, OptionState*>::iterator iter = _stateMap.find(order);
+        	if (iter != _stateMap.end())
+        	{
+        		iter->second->handle();
+        	}
         }
-        else if(order == "search")
-        {
-            std::cout<<"by (name|mobile|address):";
-            std::cin>>key;
-            if(key == "name")
-            {
-                std::cout<<"name:";
-                std::cin>>search_key;
-                _handler->SearchUserData(search_key, 1);
-            }
-            if(key == "mobile")
-            {
-                std::cout<<"mobile:";
-                std::cin>>search_key;
-                _handler->SearchUserData(search_key, 2);
-            }
-            if(key == "address")
-            {
-                std::cout<<"address:";
-                std::cin>>search_key;
-                _handler->SearchUserData(search_key, 3);
-            }
-        }
-        else if(order == "delete")
-        {
-            std::cout<<"by (name|mobile|address):";
-            std::cin>>key;
-            if(key == "name")
-            {
-                std::cout<<"name:";
-                std::cin>>search_key;
-                _handler->DeleteUserData(search_key, 1);
-                _handler->WriteFile();
-            }
-            if(key == "mobile")
-            {
-                std::cout<<"mobile:";
-                std::cin>>search_key;
-                _handler->DeleteUserData(search_key, 2);
-                _handler->WriteFile();
-            }
-            if(key == "address")
-            {
-                std::cout<<"address:";
-                std::cin>>search_key;
-                _handler->DeleteUserData(search_key, 3);
-                _handler->WriteFile();
-            }
-        }
-        else if(order == "listall")
-            _handler->Print();
-        else if(order == "help")
-            _handler->ShowHelp();
-        else if(order == "quit")
-            break;
-        else
-            _handler->ShowHelp();
     }
 }
+
+int AddressServer::updatePrefix(const std::string order, std::string& prefix)
+{
+	int ret = 0;
+	/* string need use sregex, match (.) + (any char) */
+	boost::xpressive::sregex reg = boost::xpressive::sregex::compile("\\..*");
+
+	if(boost::xpressive::regex_match(order, reg))
+    {
+        boost::char_separator<char> sep("/");
+        CustomTokenizer tok(order, sep);
+
+        std::vector<std::string> vecSegTag;
+        CustomTokenizer::iterator iter = tok.begin();
+        /* get second */
+      	prefix = *(++iter);
+      	ret = 1;
+    }
+
+	return ret;
+}
+
+void AddressServer::die(int sig)
+{
+	std::cout << "\nSystem catch Ctrl+C signal, quit Address Server ..." << std::endl;
+
+	SignalManagement::getInstance()->sigDefault(sig);
+	_instance->_shutDown = true;
+
+}
+
