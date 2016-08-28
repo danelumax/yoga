@@ -2,28 +2,29 @@
 #include <fstream>
 #include <cstring>
 #include <string>
-#include "LinkedClass.h"
-using namespace std;
+#include "UserDataHandler.h"
 
-LinkedClass::LinkedClass(void)
+UserDataHandler::UserDataHandler()
 {
+	_head = new UserDataList;
+	_head->next = NULL;
 }
 
-LinkedClass::~LinkedClass(void)
+UserDataHandler::~UserDataHandler()
 {
 }
 
 //read the address information from file
-void LinkedClass::IntLinkedList(LinkedList* head)
+void UserDataHandler::InitUserDataList()
 {
-    LinkedList *node, *h; 
-    string temp;
-    ifstream fin;
-    fin.open("data.txt",ios::in); 
-    cout<<"The file is:"<<endl;
+    UserDataList *node, *h;
+    std::string temp;
+    std::ifstream fin;
+    fin.open("data.txt",std::ios::in);
+    std::cout << "The file is:" << std::endl;
     if(fin)
     {             
-        fin>>noskipws;     
+        fin>>std::noskipws;
         char *word = new char[100];
         while(!fin.eof())
         {  
@@ -32,18 +33,18 @@ void LinkedClass::IntLinkedList(LinkedList* head)
             char *p;
             p = strtok(word," ");
             int number = 0;
-            string sa[3];
+            std::string sa[3];
             while(p)
             {   
                 sa[number++] = p;
                 p = strtok(NULL, " ");   
             }
-            h = head;
-            node = new LinkedList;
+            h = _head;
+            node = new UserDataList;
             for(int i=0; i<number; i++)
             {
                 if(sa[i] == "\n")
-                    cout<<"ok"<<endl;
+                    std::cout <<"ok"<<std::endl;
             }
             node->name = sa[0];
             node->mobile = sa[1];
@@ -55,53 +56,52 @@ void LinkedClass::IntLinkedList(LinkedList* head)
         }
     }
     else
-        cout<<"No data now!"<<endl; 
+        std::cout <<"No data now!"<<std::endl;
     fin.close();
 }
 
 //display the address information in term of linked list
-void LinkedClass::Print(LinkedList* head)
+void UserDataHandler::Print()
 {
-    LinkedList *h;
-    h = head->next;
+    UserDataList *h;
+    h = _head->next;
     while(h)
     {
-        cout<<h->name<<" "<<h->mobile<<" "<<h->address<<endl;
+        std::cout <<h->name<<" "<<h->mobile<<" "<<h->address<<std::endl;
         h = h->next;
     }
 }
 
 //Insert the address information into linked list
-LinkedList* LinkedClass::InsertLinkedList(LinkedList* head)
+void UserDataHandler::InsertUserData()
 {
-    LinkedList *node, *h;
-    h = head;
-    node = new LinkedList;
-    cout<<"name:";
-    cin>>node->name;
-    cout<<"mobile:";
-    cin>>node->mobile;
-    cout<<"address:";
-    cin>>node->address;
+    UserDataList *node, *h;
+    h = _head;
+    node = new UserDataList;
+    std::cout <<"name:";
+    std::cin>>node->name;
+    std::cout <<"mobile:";
+    std::cin>>node->mobile;
+    std::cout <<"address:";
+    std::cin>>node->address;
     node->next = NULL;   
     while(h->next)
         h = h->next;
     h->next = node;
-    return head;
 }
 
 //Write the address information into file
-void LinkedClass::WriteFile(LinkedList* head)
+void UserDataHandler::WriteFile()
 {
-    LinkedList *h;
-    h = head->next;
-    ofstream fout;
+    UserDataList *h;
+    h = _head->next;
+    std::ofstream fout;
     fout.open("data.txt");
     if(h)
     {
         while(h->next)
         {
-            fout<<h->name<<" "<<h->mobile<<" "<<h->address<<endl;
+            fout<<h->name<<" "<<h->mobile<<" "<<h->address<<std::endl;
             h = h->next;
         }
             fout<<h->name<<" "<<h->mobile<<" "<<h->address;
@@ -109,11 +109,10 @@ void LinkedClass::WriteFile(LinkedList* head)
     fout.close();
 }
 
-//judge similiar string
-int is_sub_str(string str, string sub_str)
+//judge similiar std::string
+int is_sub_str(std::string str, std::string sub_str)
 {
     int i,j,k;
-    int number = 0;
     int len = sub_str.length();
     int flag = 0;
     char *str_char = new char;
@@ -139,12 +138,12 @@ int is_sub_str(string str, string sub_str)
 }
 
 //Search the address information from the linked list
-LinkedList* LinkedClass::LinkedListSearch(LinkedList *head, string search_key, int search_id)
+void UserDataHandler::SearchUserData(std::string search_key, int search_id)
 {
-    LinkedList *p, *h;
-    h=head;
-    string result;
-    string key = search_key;
+    UserDataList *h;
+    h = _head;
+    std::string result;
+    std::string key = search_key;
     int count = 0;
     if(is_sub_str(search_key, ".*") == 1)
         key = key.substr(0, search_key.length()-strlen(".*"));
@@ -164,28 +163,26 @@ LinkedList* LinkedClass::LinkedListSearch(LinkedList *head, string search_key, i
         }
         if( is_sub_str(result, key) == 0 )
         {
-            p = h;      
             h = h->next;
         }
         else
         {
-            cout<<h->name<<" "<<h->mobile<<" "<<h->address<<endl;
+            std::cout <<h->name<<" "<<h->mobile<<" "<<h->address<<std::endl;
             count++;
             h = h->next;
         }
     }
-    cout<<count<<" address entries searched"<<endl;
-    return head;
+    std::cout <<count<<" address entries searched"<<std::endl;
 }
 
 //Delete the address information from the linked list
-LinkedList* LinkedClass::LinkedListDelete(LinkedList *head, string search_key, int search_id)
+void UserDataHandler::DeleteUserData(std::string search_key, int search_id)
 {
-    LinkedList *p, *h;
-    h = head->next;
+    UserDataList *p, *h;
+    h = _head->next;
     int count = 0;
-    string result;
-    string key = search_key;
+    std::string result;
+    std::string key = search_key;
     if(is_sub_str(search_key, ".*") == 1)
         key = key.substr(0, search_key.length()-strlen(".*"));
     while (h)
@@ -209,11 +206,11 @@ LinkedList* LinkedClass::LinkedListDelete(LinkedList *head, string search_key, i
         }
         else
         {
-            if ( h == head->next)
+            if ( h == _head->next)
             {
-                head->next = h ->next;
+                _head->next = h ->next;
                 delete h;
-                h = head->next;
+                h = _head->next;
                 count++;
             } 
             else
@@ -225,16 +222,15 @@ LinkedList* LinkedClass::LinkedListDelete(LinkedList *head, string search_key, i
             } 
         }
     }
-    cout<<count<<" address entries deleted"<<endl;
-    return head;
+    std::cout <<count<<" address entries deleted"<<std::endl;
 }
 
 //Show help message
-void LinkedClass::ShowHelp()
+void UserDataHandler::ShowHelp()
 {
-    cout<<"help message"<<endl;
-    cout<<"#add  this order is used to add relevent information"<<endl;
-    cout<<"#search  this order is used to search relevent information"<<endl;
-    cout<<"#delete  this order is used to delete relevent information"<<endl;
-    cout<<"#dispaly  this order is used to display relevent information"<<endl;
+    std::cout <<"help message"<<std::endl;
+    std::cout <<"#add  this order is used to add relevent information"<<std::endl;
+    std::cout <<"#search  this order is used to search relevent information"<<std::endl;
+    std::cout <<"#delete  this order is used to delete relevent information"<<std::endl;
+    std::cout <<"#dispaly  this order is used to display relevent information"<<std::endl;
 }
