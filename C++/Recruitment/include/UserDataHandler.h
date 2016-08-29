@@ -8,6 +8,7 @@
 #include <cstring>
 #include <vector>
 #include <Userdata.h>
+#include <boost/pool/object_pool.hpp>
 
 class UserDataHandler
 {
@@ -17,7 +18,7 @@ public:
 
     void InitUserDataList();
     void Print();
-    void InsertUserData();
+    int InsertUserData();
     void WriteFile();
     void SearchUserData(std::string search_key, int search_id);
     void DeleteUserData(std::string search_key, int search_id);
@@ -25,6 +26,7 @@ public:
 
 private:
     std::vector<Userdata*> _userDataVec;
+    boost::object_pool<Userdata> _pl;
 };
 
 #endif

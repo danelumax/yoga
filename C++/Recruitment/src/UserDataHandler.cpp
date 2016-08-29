@@ -26,41 +26,47 @@ void UserDataHandler::InitUserDataList()
     {             
         fin>>std::noskipws;
         std::string oneLine;
-        while(getline(fin, oneLine))
+        while(getline(fin, oneLine, '\n'))
         {  
             boost::char_separator<char> sep(" ");
             CustomTokenizer tok(oneLine, sep);
             CustomTokenizer::iterator iter = tok.begin();
 
-            Userdata *data = new Userdata();
+            Userdata *data = _pl.construct();
             data->setName(*(iter++));
 			data->setMobile(*(iter++));
 			data->setAddress(*(iter++));
 			_userDataVec.push_back(data);
         }
     }
-    else
-        std::cout <<"No data now!"<<std::endl;
+
     fin.close();
 }
 
 //display the address information in term of linked list
 void UserDataHandler::Print()
 {
-	std::vector<Userdata*>::iterator iter = _userDataVec.begin();
-	for(; iter!=_userDataVec.end(); ++iter)
+	if (_userDataVec.size() > 0)
 	{
-		std::cout << (*iter)->getName() << " "
-				  << (*iter)->getMobile() << " "
-				  << (*iter)->getAddress() << std::endl;
+		std::vector<Userdata*>::iterator iter = _userDataVec.begin();
+		for(; iter!=_userDataVec.end(); ++iter)
+		{
+			std::cout << (*iter)->getName() << " "
+					  << (*iter)->getMobile() << " "
+					  << (*iter)->getAddress() << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << "There is no data in the list" << std::endl;
 	}
 }
 
 //Insert the address information into linked list
-void UserDataHandler::InsertUserData()
+int UserDataHandler::InsertUserData()
 {
-	std::string name, mobile, address;
-	Userdata* data = new Userdata();
+	int ret = 0;
+	std::string name(""), mobile(""), address("");
     std::cout << "name:";
     std::cin >> name;
     std::cout <<"mobile:";
@@ -68,10 +74,20 @@ void UserDataHandler::InsertUserData()
     std::cout << "address:";
     std::cin >> address;
 
-    data->setName(name);
-    data->setMobile(mobile);
-    data->setAddress(address);
-    _userDataVec.push_back(data);
+    /* protect quit program while add element */
+    if (name!="" && mobile!="" && address!="")
+    {
+    	Userdata* data = _pl.construct();
+    	data->setName(name);
+    	data->setMobile(mobile);
+    	data->setAddress(address);
+    	_userDataVec.push_back(data);
+    }
+    else
+    {
+    	ret = 1;
+    }
+    return ret;
 }
 
 //Write the address information into file
@@ -89,7 +105,6 @@ void UserDataHandler::WriteFile()
     }
     fout.close();
 }
-
 
 //judge similiar std::string
 int is_sub_str(std::string str, std::string sub_str)
@@ -179,7 +194,7 @@ void UserDataHandler::DeleteUserData(std::string search_key, int search_id)
         }
         if( is_sub_str(result, key) != 0 )
         {
-        	/* point next element, must be set */
+        	/* point to next element, must be set */
         	iter = _userDataVec.erase(iter);
             count++;
         }

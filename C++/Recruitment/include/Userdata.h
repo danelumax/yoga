@@ -9,13 +9,15 @@
 #define USERDATA_H_
 
 #include <string>
+#include <iostream>
 
 class Userdata
 {
 public:
 	enum Flag
 	{
-		NAME = 1,
+		NOTFOUND = 0,
+		NAME,
 		MOBILE,
 		ADDRESS
 	};

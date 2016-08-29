@@ -39,6 +39,10 @@ int OptionState::getType()
         std::cout<<"address:";
         type = Userdata::ADDRESS;
     }
+    else
+    {
+    	type = Userdata::NOTFOUND;
+    }
 
     return type;
 }
@@ -51,9 +55,15 @@ AddState::AddState(UserDataHandler *handler)
 
 void AddState::handle()
 {
-    _handler->InsertUserData();
-    std::cout<<"address entry added"<<std::endl;
-    _handler->WriteFile();
+    if (_handler->InsertUserData() == 0)
+    {
+    	std::cout<<"address entry added successfully"<<std::endl;
+    	_handler->WriteFile();
+    }
+    else
+    {
+    	std::cout << "address entry added failed" << std::endl;
+    }
 }
 
 /* SearchState */
@@ -67,8 +77,15 @@ void SearchState::handle()
 	std::string search_key;
     int type = getType();
 
-    std::cin>>search_key;
-    _handler->SearchUserData(search_key, type);
+    if (type != Userdata::NOTFOUND)
+    {
+    	std::cin>>search_key;
+    	_handler->SearchUserData(search_key, type);
+    }
+    else
+    {
+    	std::cout << "Please type again" << std::endl;
+    }
 }
 
 /* DeleteState */
@@ -81,10 +98,17 @@ void DeleteState::handle()
 {
 	std::string search_key;
     int type = getType();
-    std::cin>>search_key;
 
-    _handler->DeleteUserData(search_key, type);
-    _handler->WriteFile();
+    if (type != Userdata::NOTFOUND)
+    {
+    	std::cin>>search_key;
+    	_handler->DeleteUserData(search_key, type);
+    	_handler->WriteFile();
+    }
+    else
+    {
+    	std::cout << "Please type again" << std::endl;
+    }
 }
 
 /* ListAllState */

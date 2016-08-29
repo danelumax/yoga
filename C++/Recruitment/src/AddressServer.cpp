@@ -72,6 +72,8 @@ void AddressServer::run()
     {
         std::cout << _prefix << "> ";
         std::cin >> order;
+        /* change Upper to Lower */
+        order = toLowerCase(order);
         if(!updatePrefix(order, _prefix))
         {
         	std::map<std::string, OptionState*>::iterator iter = _stateMap.find(order);
@@ -111,5 +113,16 @@ void AddressServer::die(int sig)
 	SignalManagement::getInstance()->sigDefault(sig);
 	_instance->_shutDown = true;
 
+}
+
+std::string AddressServer::toLowerCase(std::string s)
+{
+	std::string ret(s.size(), char());
+	for(unsigned int i = 0; i < s.size(); ++i)
+	{
+		ret[i] = (s[i] <= 'Z' && s[i] >= 'A') ? s[i]+('a'-'A') : s[i];
+	}
+
+	return ret;
 }
 

@@ -7,13 +7,12 @@
 
 #include "Userdata.h"
 
-Userdata::Userdata() {
-	// TODO Auto-generated constructor stub
-
+Userdata::Userdata()
+{
 }
 
-Userdata::~Userdata() {
-	// TODO Auto-generated destructor stub
+Userdata::~Userdata()
+{
 }
 
 std::string Userdata::getAddress() const
