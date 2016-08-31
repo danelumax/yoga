@@ -1,0 +1,46 @@
+[Output]
+***** Start Authentication *****
+
+-----> Receive DER-Identity ----->
+Current State: STATE_IDLE
+Next State: STATE_WAIT_FOR_AUTH_VECTOR
+Event: EVENT_NO_AUTH_VECTOR
+Action: do Request Auth Vector
+
+-----> Receive MAA-Vector ----->
+Current State: STATE_WAIT_FOR_AUTH_VECTOR
+Next State: STATE_WAIT_FOR_PROFILE
+Event: EVENT_NO_PROFILE
+Action: do Request Profile
+
+-----> Receive SAA-Profile ----->
+Current State: STATE_WAIT_FOR_PROFILE
+Next State: STATE_AFTER_CHALLENGE_SEND
+Event: EVENT_GENERATE_KEY
+Action: do Send Challenge
+
+-----> Receive DER-Challenge ----->
+Current State: STATE_AFTER_CHALLENGE_SEND
+Next State: STATE_IDLE
+Event: EVENT_AUTH_SUCCESS
+Action: do Send Success
+
+-----> Receive SAA-Registeration ----->
+Current State: STATE_IDLE
+Next State: STATE_IDLE
+Event: EVENT_AUTH_SUCCESS
+Action: do Send Success
+
+***** Start Authorization *****
+
+-----> Receive DER-Identity ----->
+Current State: STATE_IDLE
+Next State: STATE_AFTER_REAUTHENTICATION_SEND
+Event: EVENT_LOAD_REAUTH_INFO
+Action: do Send Re-Authentication
+
+-----> Receive DER-Reauthenticaion ----->
+Current State: STATE_AFTER_REAUTHENTICATION_SEND
+Next State: STATE_IDLE
+Event: EVENT_AUTH_SUCCESS
+Action: do Send Success

@@ -7,13 +7,12 @@
 
 #include "StateTable.h"
 
-StateTable::StateTable() {
-	// TODO Auto-generated constructor stub
-
+StateTable::StateTable()
+{
 }
 
-StateTable::~StateTable() {
-	// TODO Auto-generated destructor stub
+StateTable::~StateTable()
+{
 }
 
 void StateTable::addStateTableEntry(StateEntry *stateEntry)

@@ -54,5 +54,14 @@ public:
 	virtual void doAction(DiaSessionContext* context);
 };
 
+class EPCActionSendReauthentication : public EPCAction
+{
+public:
+	EPCActionSendReauthentication(){};
+	virtual ~EPCActionSendReauthentication(){};
+
+	virtual void doAction(DiaSessionContext* context);
+};
+
 
 #endif /* EPCACTION_H_ */
