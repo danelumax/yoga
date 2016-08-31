@@ -42,11 +42,36 @@ void EapFSM::destory()
 
 void EapFSM::init()
 {
-	//StateEntry* pEntry = NULL;
-	StateEntry* pEntry = new StateEntry(STATE_IDLE,
+	StateEntry* pEntry = NULL;
+	pEntry = new StateEntry(STATE_IDLE,
 							STATE_WAIT_FOR_AUTH_VECTOR,
 							EVENT_NO_AUTH_VECTOR,
 							new EPCActionRequestAuthVector());
+	_stateTable->addStateTableEntry(pEntry);
+
+	pEntry = new StateEntry(STATE_WAIT_FOR_AUTH_VECTOR,
+							STATE_WAIT_FOR_PROFILE,
+							EVENT_NO_PROFILE,
+							new EPCActionRequestProfile());
+	_stateTable->addStateTableEntry(pEntry);
+
+	pEntry = new StateEntry(STATE_WAIT_FOR_PROFILE,
+							STATE_AFTER_CHALLENGE_SEND,
+							EVENT_GENERATE_KEY,
+							new EPCActionSendChallenge());
+	_stateTable->addStateTableEntry(pEntry);
+
+	pEntry = new StateEntry(STATE_AFTER_CHALLENGE_SEND,
+							STATE_SUCCESS_END,
+							EVENT_AUTH_SUCCESS,
+							new EPCActionSendSuccess());
+	_stateTable->addStateTableEntry(pEntry);
+
+	//IDLE --> SUCCESS_END :: Receive the REGISTRATION
+	pEntry = new StateEntry(STATE_IDLE,
+	                        STATE_SUCCESS_END,
+	                        EVENT_AUTH_SUCCESS,
+	                        new EPCActionSendSuccess());
 	_stateTable->addStateTableEntry(pEntry);
 }
 

@@ -25,3 +25,13 @@ void EPCActionRequestProfile::doAction(DiaSessionContext* context)
 {
 	std::cout << "do Request Profile" << std::endl;
 }
+
+void EPCActionSendChallenge::doAction(DiaSessionContext* context)
+{
+	std::cout << "do Send Challenge" << std::endl;
+}
+
+void EPCActionSendSuccess::doAction(DiaSessionContext* context)
+{
+	std::cout << "do Send Success" << std::endl;
+}

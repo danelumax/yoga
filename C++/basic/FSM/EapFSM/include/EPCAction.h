@@ -36,5 +36,23 @@ public:
 	virtual void doAction(DiaSessionContext* context);
 };
 
+class EPCActionSendChallenge : public EPCAction
+{
+public:
+	EPCActionSendChallenge(){};
+	virtual ~EPCActionSendChallenge(){};
+
+	virtual void doAction(DiaSessionContext* context);
+};
+
+class EPCActionSendSuccess : public EPCAction
+{
+public:
+	EPCActionSendSuccess(){};
+	virtual ~EPCActionSendSuccess(){};
+
+	virtual void doAction(DiaSessionContext* context);
+};
+
 
 #endif /* EPCACTION_H_ */
