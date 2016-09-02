@@ -10,6 +10,7 @@
 
 #include <string>
 #include <stdint.h>
+#include <iostream>
 
 ///////////////////////////////Application ID////////////////////////////////////////////
 static const uint32_t DIA_APP_ID_SWM = 16777264;//application id of SWm interface
@@ -25,4 +26,5 @@ static const std::string Event_DER     = "DER";
 // States
 static const std::string State_INIT                  = "INIT";
 static const std::string State_Wf_DER                = "wf_DER";
+static const std::string State_Wf_MAA                = "wf_MAA";
 #endif /* DIACOMMONCODE_H_ */

@@ -39,6 +39,7 @@ void ContextPolicyAuth::destory()
 
 void ContextPolicyAuth::initContextFsm(DiaSessionContextFsm *fsm)
 {
+	fsm->reset();
 	fsm->addContextAction(Event_DER, State_INIT, ContextActionDER::getInstance());
 }
 

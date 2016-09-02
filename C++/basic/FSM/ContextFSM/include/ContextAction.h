@@ -9,12 +9,17 @@
 #define CONTEXTACTION_H_
 
 #include <iostream>
+#include <MessageHandler.h>
+#include <DiaSessionContext.h>
 
 class ContextAction
 {
 public:
 	ContextAction();
 	virtual ~ContextAction();
+	void handleAction(DiaSessionContext* context);
+protected:
+	MessageHandler* _msgHandler;
 };
 
 class ContextActionDER : public ContextAction
@@ -24,7 +29,7 @@ public:
 	static ContextActionDER* getInstance();
 	static void destory();
 private:
-	ContextActionDER(){};
+	ContextActionDER();
 	static ContextActionDER* _instance;
 };
 

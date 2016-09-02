@@ -6,13 +6,26 @@
  */
 
 #include "DiaSessionContextFsm.h"
+#include <ContextAction.h>
+#include <DiaSessionContext.h>
+#include <DiaCommonCode.h>
 
-DiaSessionContextFsm::DiaSessionContextFsm()
+DiaSessionContextFsm::DiaSessionContextFsm(std::string currentState)
+	:_currentState(currentState)
 {
 }
 
 DiaSessionContextFsm::~DiaSessionContextFsm()
 {
+}
+
+void DiaSessionContextFsm::reset()
+{
+	_event = "";
+	_currentState = State_INIT;
+	_nextState = "";
+	_action = NULL;
+	_stateContextMap.clear();
 }
 
 void DiaSessionContextFsm::addContextAction(std::string event, std::string state, ContextAction *action)
@@ -22,5 +35,40 @@ void DiaSessionContextFsm::addContextAction(std::string event, std::string state
 		_stateContextMap.insert(std::make_pair(std::make_pair(event, state), action));
 	}
 }
+
+ContextAction *DiaSessionContextFsm::getContextAction(std::string event, std::string state)
+{
+	StateContextActionType::iterator iter = _stateContextMap.find(std::make_pair(event, state));
+	if (iter != _stateContextMap.end())
+	{
+		return iter->second;
+	}
+
+	return NULL;
+}
+
+void DiaSessionContextFsm::process(std::string event, DiaSessionContext* context)
+{
+	_event = event;
+	_action = getContextAction(event, _currentState);
+	if (NULL != _action)
+	{
+		_action->handleAction(context);
+		migrate();
+	}
+}
+
+void DiaSessionContextFsm::setNextState(std::string nextState)
+{
+	_nextState = nextState;
+}
+
+void DiaSessionContextFsm::migrate()
+{
+	_currentState = _nextState;
+	std::cout << _currentState << std::endl;
+	_nextState = "";
+}
+
 
 

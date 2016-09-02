@@ -6,14 +6,27 @@
  */
 
 #include "ContextAction.h"
+#include "MessageHandler.h"
 
-ContextAction::ContextAction() {
-	// TODO Auto-generated constructor stub
-
+ContextAction::ContextAction()
+{
 }
 
-ContextAction::~ContextAction() {
-	// TODO Auto-generated destructor stub
+ContextAction::~ContextAction()
+{
+}
+
+void ContextAction::handleAction(DiaSessionContext* context)
+{
+	if (NULL != _msgHandler)
+	{
+		_msgHandler->execute(context);
+	}
+}
+
+ContextActionDER::ContextActionDER()
+{
+	_msgHandler = new DERMessageHandler();
 }
 
 ContextActionDER* ContextActionDER::_instance = NULL;
@@ -35,3 +48,6 @@ void ContextActionDER::destory()
 		_instance = NULL;
 	}
 }
+
+
+
