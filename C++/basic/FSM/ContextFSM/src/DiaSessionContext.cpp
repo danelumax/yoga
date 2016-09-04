@@ -19,16 +19,52 @@ DiaSessionContext::~DiaSessionContext()
 {
 }
 
-void DiaSessionContext::process()
+std::string DiaSessionContext::getEvent(Message* msg)
 {
-	ContextPolicy* ctxPolicy = ContextPolicyFactory::getInstance()->getContextPolicy(DIA_APP_ID_SWM, DIA_CMD_CODE_DE);
-	ctxPolicy->initContextFsm(_fsm);
-	_fsm->process(Event_DER, this);
+	std::string event;
+	uint32_t code = msg->getCode();
+	if (code == DIA_CMD_CODE_DE)
+	{
+		event = Event_DER;
+	}
+	else if (code == DIA_CMD_CODE_MA)
+	{
+		event = Event_MAA;
+	}
+	else if (code == DIA_CMD_CODE_SA)
+	{
+		event = Event_SAA;
+	}
+	else if (code == DIA_CMD_CODE_AA)
+	{
+		event = Event_AAR;
+	}
+
+	return event;
+}
+void DiaSessionContext::process(Message* msg)
+{
+	std::string event = getEvent(msg);
+
+	if (_fsm->isInitState())
+	{
+		ContextPolicy* ctxPolicy = ContextPolicyFactory::getInstance()->getContextPolicy(msg->getAppId(), msg->getCode());
+		if (NULL != ctxPolicy)
+		{
+			ctxPolicy->initContextFsm(_fsm);
+		}
+	}
+	_fsm->process(event, this);
 }
 
 void DiaSessionContext::setFSMNextState(std::string nextState)
 {
 	_fsm->setNextState(nextState);
+}
+
+std::string DiaSessionContext::getCurrentState()
+{
+	return _fsm->getCurrentState();
 }
 
 

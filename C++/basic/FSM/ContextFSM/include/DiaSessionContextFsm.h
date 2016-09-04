@@ -23,8 +23,10 @@ public:
 	void reset();
 	void addContextAction(std::string event, std::string, ContextAction* action);
 	void process(std::string event, DiaSessionContext* context);
+	bool isInitState();
 	ContextAction* getContextAction(std::string event, std::string state);
 	void setNextState(std::string nextState);
+	std::string getCurrentState();
 	void migrate();
 
 private:

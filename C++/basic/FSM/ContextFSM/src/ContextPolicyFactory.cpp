@@ -42,7 +42,11 @@ void ContextPolicyFactory::destory()
 
 void ContextPolicyFactory::init()
 {
+	/* Authentication */
 	_ctxPolicyMap[std::make_pair(DIA_APP_ID_SWM, DIA_CMD_CODE_DE)] = ContextPolicyAuth::getInstance();
+
+	/* Authorization */
+	_ctxPolicyMap[std::make_pair(DIA_APP_ID_S6B, DIA_CMD_CODE_AA)] = ContextPolicyS6bAuthz::getInstance();
 }
 
 ContextPolicy *ContextPolicyFactory::getContextPolicy(const uint32_t appId, const uint32_t cmdCode)
@@ -53,7 +57,9 @@ ContextPolicy *ContextPolicyFactory::getContextPolicy(const uint32_t appId, cons
 	{
 		return iter->second;
 	}
-
-	return NULL;
+	else
+	{
+		return NULL;
+	}
 }
 

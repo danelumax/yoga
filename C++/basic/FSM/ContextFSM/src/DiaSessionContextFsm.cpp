@@ -36,6 +36,11 @@ void DiaSessionContextFsm::addContextAction(std::string event, std::string state
 	}
 }
 
+bool DiaSessionContextFsm::isInitState()
+{
+	return (_currentState == State_INIT);
+}
+
 ContextAction *DiaSessionContextFsm::getContextAction(std::string event, std::string state)
 {
 	StateContextActionType::iterator iter = _stateContextMap.find(std::make_pair(event, state));
@@ -63,10 +68,16 @@ void DiaSessionContextFsm::setNextState(std::string nextState)
 	_nextState = nextState;
 }
 
+std::string DiaSessionContextFsm::getCurrentState()
+{
+	return _currentState;
+}
+
 void DiaSessionContextFsm::migrate()
 {
+	std::cout << "Migrate: " << _currentState;
 	_currentState = _nextState;
-	std::cout << _currentState << std::endl;
+	std::cout << " ---> " << _currentState << std::endl;
 	_nextState = "";
 }
 

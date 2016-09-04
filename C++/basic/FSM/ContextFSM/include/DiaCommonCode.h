@@ -42,4 +42,6 @@ static const std::string State_Wf_DER                = "wf_DER";
 static const std::string State_Wf_MAA                = "wf_MAA";
 static const std::string State_Wf_SAA_GetProfile     = "wf_SAA_GetProfile";
 static const std::string State_Wf_SAA_Register       = "wf_SAA_Register";
+static const std::string State_Wf_SAA_UpdatePdnInfo  = "wf_SAA_UpdatePdnInfo";
+static const std::string State_FINAL                 = "FINAL";
 #endif /* DIACOMMONCODE_H_ */

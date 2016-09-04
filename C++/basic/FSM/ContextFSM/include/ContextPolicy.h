@@ -31,6 +31,18 @@ private:
 	static ContextPolicyAuth* _instance;
 };
 
+class ContextPolicyS6bAuthz : public ContextPolicy
+{
+public:
+	virtual ~ContextPolicyS6bAuthz(){};
+	static ContextPolicyS6bAuthz* getInstance();
+	static void destory();
+private:
+	ContextPolicyS6bAuthz(){};
+	virtual void initContextFsm(DiaSessionContextFsm* fsm);
+	static ContextPolicyS6bAuthz* _instance;
+};
+
 
 
 #endif /* CONTEXTPOLICY_H_ */

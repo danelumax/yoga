@@ -1,0 +1,36 @@
+[Output]
+
+*********************
+Start Authentication ...
+
+-----> (DER) Message Coming ----->
+* DER message handle finish *
+Migrate: INIT ---> wf_MAA
+
+-----> (MAA) Message Coming ----->
+* MAA message handle finish *
+Migrate: wf_MAA ---> wf_SAA_GetProfile
+
+-----> (SAA) Message Coming ----->
+* SAA Get Profile message handle finish *
+Migrate: wf_SAA_GetProfile ---> wf_DER
+
+-----> (DER) Message Coming ----->
+* DER Challenge message handle finish *
+Migrate: wf_DER ---> wf_SAA_Register
+
+-----> (SAA) Message Coming ----->
+* SAA Register message handle finish *
+Migrate: wf_SAA_Register ---> FINAL
+
+
+*********************
+Start Authorization ...
+
+-----> (AAR) Message Coming ----->
+* AAR message handle finish *
+Migrate: INIT ---> wf_SAA_UpdatePdnInfo
+
+-----> (SAA) Message Coming ----->
+* SAA Update Pdn Info message handle finish *
+Migrate: wf_SAA_UpdatePdnInfo ---> FINAL
