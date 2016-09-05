@@ -130,7 +130,7 @@ int main()
 	/* using string "CdfUnit" to get CdfUnit target */
 	CdfUnit = pt.get_child("CdfUnit");
 
-	//recursionLoad("CdfUnit", CdfUnit);
+	recursionLoad("CdfUnit", CdfUnit);
 
 	simpleLoad(CdfUnit);
 	return 0;

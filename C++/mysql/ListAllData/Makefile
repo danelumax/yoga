@@ -1,16 +1,47 @@
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
+CCPLUS  =       g++
+RM	=	rm -rf
 
-OBJS =		main.o
+DIR_INC	:=	./include
+DIR_SRC	:=	./src
+DIR_RELEASE :=	./release
+OBJ_SUFFIX	= .o
 
-LIBS =
+SOURCES:= $(wildcard $(DIR_SRC)/*.c $(DIR_SRC)/*.cpp)
 
-TARGET =	ListAllData
+#C_SOURCES:= $(filter %.c, $(SOURCES))
+CPP_SOURCES:= $(filter %.cpp, $(SOURCES))
 
-$(TARGET):	$(OBJS)
-	$(CXX) -lmysqlclient -o $(TARGET) $(OBJS) $(LIBS) `mysql_config --cflags --libs`
+OBJECTS := $(foreach OBJ,$(CPP_SOURCES:$(DIR_SRC)%.cpp=%$(OBJ_SUFFIX)),$(DIR_RELEASE)$(OBJ))
+
+TARGET = ListAllData
+
+BIN_TARGET = ${DIR_RELEASE}/${TARGET}
+
+CFLAGS = -Wall $(foreach DIR,$(DIR_INC),-I "$(DIR)")
+ 
+LDFLAGS   = -lpthread -lmysqlclient
+
+# define debug flag
+ifdef DEBUG
+	LDFLAGS += -g
+endif
 
 
-all:	$(TARGET)
+${BIN_TARGET}:${OBJECTS}
+	@[ -d $(DIR_BIN) ] || mkdir $(DIR_BIN)
+	$(CCPLUS) $(OBJECTS) $(LDFLAGS) -o $@
+
+${DIR_RELEASE}/%.o:${DIR_SRC}/%.cpp
+	@[ -d $(DIR_RELEASE) ] || mkdir $(DIR_RELEASE)
+	$(PRE_EXEC) $(CCPLUS) $(LDFLAGS) -c $(CFLAGS) $(foreach DIR,$(INCLUDE_DIRS),-I "$(DIR)") $< -o $@ `mysql_config --cflags --libs`
+
+all:	$(BIN_TARGET)
+
+debug:
+	$(MAKE) all "DEBUG=-g"
+
+.PHONY:clean
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	$(RM) $(DIR_RELEASE)
+
