@@ -1,0 +1,13 @@
+cp bin/* to /usr/bin
+cp lib/* to /usr/lib/x86_64-linux-gnu/
+
+[reboot]
+/etc/init.d/mysql.server start
+ndb_mgmd -f /var/lib/mysql-cluster/config.ini
+ndbd
+
+[configuration]
+http://www.hbyconsultancy.com/blog/mysql-cluster-ndb-up-and-running-7-4-and-6-3-on-ubuntu-server-trusty-14-04.html\
+
+[config file]
+./config

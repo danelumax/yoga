@@ -8,7 +8,7 @@
 #ifndef MYSQLDBMANAGER_H_
 #define MYSQLDBMANAGER_H_
 
-#include <mysql/mysql.h>
+#include <mysql.h>
 
 class MysqlDBManager
 {
