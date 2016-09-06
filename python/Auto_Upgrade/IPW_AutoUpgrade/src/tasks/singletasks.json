@@ -1,0 +1,64 @@
+{
+    "DNS" : {
+		"2-1PS&SS" : [{
+			"name" : "BackupTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopStorageServerTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopServiceProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopAssistantProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopLicenseTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopHardeningFunctionTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopOtherProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "PerformUpgradeTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartLicenseTask",
+			"status" : "ready"
+		},
+                {
+                        "name" : "SetInnodbTomcatChrootTask",
+                        "status" : "ready"
+                },
+		{
+			"name" : "StartInnoDBTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "MigrateInnoDBDataTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartStorageServerTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartServiceProcessesTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartAssistantProcessTask",
+			"status" : "ready"
+		}]
+	}	
+}

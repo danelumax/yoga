@@ -1,0 +1,39 @@
+{
+    "app" : "enum",
+    "type" : "entry2",
+    "commercial_check" : "yes",
+    "ipw_iso_path" : "/root/IPWorks14.b_build_4370_nfs.iso",
+    "hae_iso_path" : "",
+    "os_iso_path" : "",
+    "license_path" : "/root/license.per",
+    "install_path" : "/tmp/install/",
+    "mount_point" : "/tmp/ipworks/",
+    "install_ss7" : "no",
+    "ha" : {},
+    "network" : {
+        "ssh_port" : "22",
+        "default_gateway" : "",
+        "ntp_server" : "",
+        "mapping" : {},
+        "ss" : { 
+            "nodes" : [{
+                "hostname" : "ipwm18ps-01",
+                "oam_ip" : "10.175.161.117",
+                "traffic_ip" : "80.1.8.117",
+                "traffic_ipv6" : ""
+            }]
+        },
+        "ps" : {
+            "nodes" : [{
+                "hostname" : "ipwm18ps-02",
+                "oam_ip" : "10.175.161.119",
+                "traffic_ip" : "80.1.8.119",
+                "traffic_ipv6" : ""
+            }]
+        }
+    },
+    "ndb" : {
+        "data_memory_size" : "12000",
+        "index_memory_size" : "3000"
+    }
+}

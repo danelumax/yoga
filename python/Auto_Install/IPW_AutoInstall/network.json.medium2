@@ -1,0 +1,108 @@
+{
+    "app" : "clf",
+    "type" : "medium2",
+    "commercial_check" : "yes",
+    "ipw_iso_path" : "/root/IPWorks14.b_build_4437.iso",
+    "hae_iso_path" : "/root/SLE-HA-11-SP3-x86_64-GM-CD1.iso",
+    "os_iso_path" : "/root/SLES-11-SP3-DVD-x86_64-GM-DVD1.iso",
+    "license_path" : "/root/license.per",
+    "install_path" : "/tmp/install/",
+    "mount_point" : "/tmp/ipworks/",
+    "install_ss7" : "no",
+    "ha" : {
+        "emc_mode" : "nfs",
+        "ipwss_vip" : "10.175.161.200",
+        "dbcluster_vip" : "10.175.161.201",
+        "ipwsql_vip" : "10.175.161.202",
+        "csvengine_vip" : "10.175.161.203",
+        "clf_cmi_nacf_pmi_racfe4_umi_vip" : "80.0.0.30",
+        "ipw_clf_sbccops_sbce2_vip" : "80.0.0.31",
+        "ipw_pmal_cmipmi_soap_vip" : "10.175.161.204",
+        "fs_ipwvol_size" : "50",
+        "fs_mgmvol_size" : "20",
+        "fs_sqlvol_size" : "20",
+        "fs_csvvol_size" : "50",
+        "emc_disk_01" : "/dev/sdb",
+        "emc_disk_02" : "/dev/sdc",
+        "emc_disk_03" : "/dev/sdb",
+        "emc_disk_04" : "/dev/sdc",
+        "md0_size_G" : "298",
+        "sbd_size_M" : "10",
+        "ha_multicast_ip1" : "224.0.0.3",
+        "ha_multicast_ip2" : "224.0.0.4",
+        "ha_multicast_port1" : "8899",
+        "ha_multicast_port2" : "8900",
+        "ha_cluster_password" : "",
+        "emc_nfs_ip" : "80.0.0.10",
+        "ipwprov_vip" : "",
+        "ha_update" : {
+            "path" : "/root/ha_update/",
+            "rpms" : [
+                "libdlm-3.00.01-0.28.5.x86_64.rpm",
+                "libpacemaker3-1.1.10-0.15.25.x86_64.rpm",
+                "ocfs2-tools-1.8.2-0.19.1.x86_64.rpm",
+                "pacemaker-1.1.10-0.15.25.x86_64.rpm",
+                "pacemaker-mgmt-client-2.1.2-0.13.1.x86_64.rpm",
+                "libdlm3-3.00.01-0.28.5.x86_64.rpm",
+                "libqb0-0.16.0-0.9.1.x86_64.rpm",
+                "ocfs2-tools-o2cb-1.8.2-0.19.1.x86_64.rpm",
+                "pacemaker-mgmt-2.1.2-0.13.1.x86_64.rpm",
+                "sbd-1.2.1-0.7.22.x86_64.rpm"
+            ],
+            "cmds" : [
+                "rpm -U ${rpms}"
+            ]
+        }
+    },
+    "clf" : {
+        "install_clf_em" : "yes",
+        "nacf_ip_addressing_zone" : "ericsson.com",
+        "clf_sbc_e2_host" : "clf-e2.ericsson.se",
+        "clf_sbc_e2_transport" : "TCP",
+        "sbc_e2_peer_host" : "client.ericsson.com"
+    },
+    "network" : {
+        "ssh_port" : "22",
+        "default_gateway" : "",
+        "ntp_server" : "",
+        "mapping" : {},
+        "ss" : { 
+            "nodes" : [{
+                "hostname" : "ipwm18ss-01",
+                "oam_ip" : "10.175.161.113",
+                "heartbeat_ip1" : "192.168.18.1",
+                "heartbeat_ip2" : "192.168.17.1",
+                "provision_ip"  : ""
+            },
+            {
+                "hostname" : "ipwm18ss-02",
+                "oam_ip" : "10.175.161.115",
+                "heartbeat_ip1" : "192.168.18.2",
+                "heartbeat_ip2" : "192.168.17.2",
+                "provision_ip"  : ""
+            }] 
+        },
+        "ps" : {
+            "nodes" : [{
+                "hostname" : "ipwm18ps-01",
+                "oam_ip" : "10.175.161.117",
+                "heartbeat_ip1" : "192.168.18.3",
+                "heartbeat_ip2" : "192.168.17.3",
+                "traffic_ip" : "80.0.0.3",
+                "traffic_ipv6" : ""
+            },
+            {
+                "hostname" : "ipwm18ps-02",
+                "oam_ip" : "10.175.161.119",
+                "heartbeat_ip1" : "192.168.18.4",
+                "heartbeat_ip2" : "192.168.17.4",
+                "traffic_ip" : "80.0.0.4",
+                "traffic_ipv6" : ""
+            }]
+        }
+    },
+    "ndb" : {
+        "data_memory_size" : "24000",
+        "index_memory_size" : "2000"
+    }
+}

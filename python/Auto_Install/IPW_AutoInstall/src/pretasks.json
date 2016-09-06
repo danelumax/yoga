@@ -1,0 +1,74 @@
+{
+    "preparation" : [{
+        "name" : "ValidateNetworkTask",
+        "status" : "always"
+    },
+    {
+        "name" : "OsCheckTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CheckInstallEnvTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "LicenseCheckTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "FileTransferTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CheckEMCTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgHostsTask",
+        "status" : "ready"
+    }],
+    "os_cfg" : [{
+        "name" : "ReorderNetworkCardTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "ApplyingUpdateTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgRoutingTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "RebootOSTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgNetworkCardTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "StartIpmiTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgNtpTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "DisableDnsQueryOfSshTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "OptimizePerformanceTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "DisableFirewallTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "UpdateFirmwareTask",
+        "status" : "ready"
+    }]
+}

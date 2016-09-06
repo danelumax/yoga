@@ -1,0 +1,7 @@
+import logging, logging.config
+
+logging.config.fileConfig("logging.conf")
+_cons = logging.getLogger("console")
+_file = logging.getLogger("file")
+_all = logging.getLogger("all")
+_print = logging.getLogger("print")

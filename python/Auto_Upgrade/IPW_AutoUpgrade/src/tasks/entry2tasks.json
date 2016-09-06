@@ -1,0 +1,348 @@
+{
+    "DNS" : {
+		"2-1PS&SS" : [{
+			"name" : "BackupTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopStorageServerTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopServiceProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopAssistantProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopLicenseTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopOtherProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopHardeningFunctionTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "PerformUpgradeTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartLicenseTask",
+			"status" : "ready"
+		},
+                {
+                        "name" : "SetInnodbTomcatChrootTask",
+                        "status" : "ready"
+                },
+		{
+			"name" : "StartInnoDBTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "MigrateInnoDBDataTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartStorageServerTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartServiceProcessesTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartAssistantProcessTask",
+			"status" : "ready"
+		}],
+                "2-2PS1" : [{
+                        "name" : "StopServiceProcessTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopAssistantProcessTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopLicenseTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopOtherProcessTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopHardeningFunctionTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "PerformUpgradeTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartLicenseTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartServiceProcessesTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartAssistantProcessTask",
+                        "status" : "ready"
+                }]	
+           },
+           "ENUM" : {
+		"2-1PS&SS" : [{
+			"name" : "BackupTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopStorageServerTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopServiceProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopNDBClusterTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopAssistantProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopLicenseTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopOtherProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopHardeningFunctionTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "PerformUpgradeTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartLicenseTask",
+			"status" : "ready"
+		},
+                {
+                        "name" : "SetInnodbTomcatChrootTask",
+                        "status" : "ready"
+                },
+		{
+			"name" : "StartInnoDBTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "MigrateInnoDBDataTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartStorageServerTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartMgmNodeTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartDataNodeTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "SetSqlNodeChrootTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartSQLNodeTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "CheckNDBReplicationTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartServiceProcessesTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartAssistantProcessTask",
+			"status" : "ready"
+		}],
+                "2-2PS1" : [{
+                        "name" : "StopServiceProcessTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopNDBClusterTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopAssistantProcessTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopLicenseTask",
+                        "status" : "ready"
+                },                
+                {
+                        "name" : "StopOtherProcessTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopHardeningFunctionTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "PerformUpgradeTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartLicenseTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartMgmNodeTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartDataNodeTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "SetSqlNodeChrootTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartSQLNodeTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "CheckNDBReplicationTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartServiceProcessesTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartAssistantProcessTask",
+                        "status" : "ready"
+                }]	
+           },
+           "DHCP" : {
+		"2-1SS" : [{
+                        "name" : "ShorteningFailoverTimeTask",
+                        "status" : "ready"
+                },
+                {
+			"name" : "BackupTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopStorageServerTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopServiceProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopAssistantProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopLicenseTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopOtherProcessTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StopHardeningFunctionTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "PerformUpgradeTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartLicenseTask",
+			"status" : "ready"
+		},
+                {
+                        "name" : "SetInnodbTomcatChrootTask",
+                        "status" : "ready"
+                },
+		{
+			"name" : "StartInnoDBTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "MigrateInnoDBDataTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartStorageServerTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartServiceProcessesTask",
+			"status" : "ready"
+		},
+		{
+			"name" : "StartAssistantProcessTask",
+			"status" : "ready"
+		}],
+                "2-2PS1" : [{
+                        "name" : "StopServiceProcessTask",
+                        "status" : "ready"
+                },               
+                {
+                        "name" : "StopAssistantProcessTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StopLicenseTask",
+                        "status" : "ready"
+                },              
+                {
+                        "name" : "StopOtherProcessTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "PerformUpgradeTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartLicenseTask",
+                        "status" : "ready"
+                },               
+                {
+                        "name" : "StartServiceProcessesTask",
+                        "status" : "ready"
+                },
+                {
+                        "name" : "StartAssistantProcessTask",
+                        "status" : "ready"
+                },	
+                {
+                        "name" : "RestoreFailoverTimeTask",
+                        "status" : "ready"
+                }]	
+           }
+}

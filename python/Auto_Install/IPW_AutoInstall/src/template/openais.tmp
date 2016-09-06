@@ -1,0 +1,1 @@
+COROSYNC_DEFAULT_CONFIG_IFACE="openaisserviceenableexperimental:corosync_parser"

@@ -1,0 +1,41 @@
+primitive clvm ocf:lvm2:clvmd \
+        operations $id="clvm-operations" \
+        op monitor interval="10" timeout="20" \
+        params daemon_timeout="30" \
+        meta is-managed="true"
+primitive dlm ocf:pacemaker:controld \
+        operations $id="dlm-operations" \
+        op monitor interval="30" timeout="30" start-delay="0"
+primitive ipw-fs-ipworks ocf:heartbeat:Filesystem \
+        operations $id="ipw-fs-ipworks-operations" \
+        op monitor interval="20" timeout="40" \
+	op start interval="0" timeout="60" \
+        params device="/dev/ipwdg/ipwvol" directory="/global/clf" fsty\
+pe="ocfs2"
+primitive o2cb ocf:ocfs2:o2cb \
+        operations $id="o2cb-operations" \
+        op monitor interval="30" timeout="30"
+primitive vg-ipwdg ocf:heartbeat:LVM \
+        operations $id="vg-ipwdg-operations" \
+        op monitor interval="30" timeout="60" on-fail="restart" \
+        op stop interval="0" timeout="60" \
+        params volgrpname="ipwdg"
+group ipw-lvm-group dlm o2cb clvm
+clone fs-ipworks-clone ipw-fs-ipworks \
+        meta target-role="Stopped" interleave="true"
+clone ipw-lvm-clone ipw-lvm-group \
+        meta target-role="Started" interleave="true"
+clone ipw-vg-clone vg-ipwdg \
+        meta target-role="stopped" interleave="true"
+order lvm-vg mandatory: ipw-lvm-clone:start ipw-vg-clone:start
+order vg-ipworks mandatory: ipw-vg-clone:start fs-ipworks-clone:start
+property $id="cib-bootstrap-options" \
+ dc-version="1.1.9-2db99f1" \
+                  cluster-infrastructure="openais" \
+        expected-quorum-votes="2" \
+        no-quorum-policy="ignore" \
+        stonith-enabled="false" \
+        last-lrm-refresh="1313375940" \
+        startup-fencing="false"
+rsc_defaults $id="rsc-options" \
+resource-stickiness="100"

@@ -1,0 +1,94 @@
+{
+    "diskarray_ha_install" : [{
+        "name" : "InstallHATask",
+        "status" : "ready"
+    },
+    {
+        "name" : "UpdateHATask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgOpenAISTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgRaidTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgCrmTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgFsTask",
+        "status" : "ready"
+    }],
+    "nfs_ha_install" : [{
+        "name" : "InstallHATask",
+        "status" : "ready"
+    },
+    {
+        "name" : "UpdateHATask",
+        "status" : "ready"
+    },
+    {
+        "name" : "CfgOpenAISTask",
+        "status" : "ready"
+    }],
+    "ipw_install" : [{
+        "name" : "MountIsoTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "InstallIpwTask",
+        "status" : "ready"
+    }],
+    "sbd_cfg" : [{
+        "name" : "ConfigSbdTask",
+        "status" : "ready"
+    }],
+    "ipw_cfg" : [{
+        "name" : "StartSnmpTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "ConfigSlmTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "ConfigSSTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "ConfigNdbTask",
+        "status" : "ready"
+    },
+    {
+        "name" : "ConfigSmTask",
+        "status" : "ready"
+    }],
+    "aaa_cfg" : [{
+        "name" : "ConfigAAATask",
+        "status" : "ready"
+    }],
+    "dns_cfg" : [{
+        "name" : "ConfigDnsTask",
+        "status" : "ready"
+    }],
+    "enum_cfg" : [{
+        "name" : "ConfigEnumTask",
+        "status" : "ready"
+    }],
+    "dhcp_cfg" : [{
+        "name" : "ConfigDhcpTask",
+        "status" : "ready"
+    }],
+    "clf_cfg" : [{
+        "name" : "ConfigClfTask",
+        "status" : "ready"
+    }],
+    "alarm_check" : [{
+        "name" : "HealthCheckAlarmTask",
+        "status" : "ready"
+    }]
+}

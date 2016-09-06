@@ -1,0 +1,15 @@
+{
+    "os_version_check" : {
+        "version" : "11",
+        "patchlevel" : "3"
+    },
+    "kernal_version_check" : {
+        "version" : "3.0.101-0.35-default"
+    },
+    "ipworks_version_check" : {
+        "version" : "###"
+    },
+    "license_md5_check" : {
+        "md5_checksum" : "360bb9546074299fac31e6fc6d801e05"
+    }
+}

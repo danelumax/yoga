@@ -1,0 +1,35 @@
+{
+"1-1Precheck" : [{
+        "name" : "ValidateNetworkTask",
+        "status" : "always"
+    },  
+    {   
+        "name" : "FileTransferTask",
+        "status" : "ready"
+    },  
+    {   
+        "name" : "CheckIPWVersionTask",
+        "status" : "ready"
+    },  
+    {   
+        "name" : "SetActiveSSTask",
+        "status" : "ready"
+    },  
+    {   
+        "name" : "CheckCliTask",
+        "status" : "ready"
+    },  
+    {   
+        "name" : "MountISOTask",
+        "status" : "ready"
+    },
+    {   
+        "name" : "CancelBackupCrontabTask",
+        "status" : "ready"
+    },
+    {   
+        "name" : "UpdateSlesPatchTask",
+        "status" : "ready"
+    }]
+}
+
