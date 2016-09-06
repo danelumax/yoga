@@ -7,7 +7,7 @@ LIBS =
 TARGET =	ObjectPool
 
 $(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CXX) -o $(TARGET) $(OBJS) $(LIBS) -lboost_system
 
 all:	$(TARGET)
 

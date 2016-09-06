@@ -29,7 +29,7 @@ endif
 
 ${BIN_TARGET}:${OBJECTS}
 	@[ -d $(DIR_BIN) ] || mkdir $(DIR_BIN)
-	$(CCPLUS) $(OBJECTS) $(LDFLAGS) -o $@
+	$(CCPLUS) $(OBJECTS) $(LDFLAGS) -o $@ -lboost_system
 
 ${DIR_RELEASE}/%.o:${DIR_SRC}/%.cpp
 	@[ -d $(DIR_RELEASE) ] || mkdir $(DIR_RELEASE)
