@@ -13,13 +13,15 @@ NdbClusterManager* NdbClusterManager::_instance = NULL;
 NdbClusterManager::NdbClusterManager()
 	:_connectionUrl("127.0.0.1")
 {
+	/* ndb_init must be called first */
 	ndb_init();
 }
 
 NdbClusterManager::~NdbClusterManager()
 {
-	delete _ndbClusterConnection;
 	delete _ndb;
+	delete _ndbClusterConnection;
+	ndb_end(0);
 }
 
 NdbClusterManager* NdbClusterManager::getInstance()
@@ -46,7 +48,7 @@ int NdbClusterManager::connectToCluster()
 	int ret = 0;
 	_ndbClusterConnection = new Ndb_cluster_connection(_connectionUrl);
 
-	if (_ndbClusterConnection->connect(0, 0, 0))
+	if (_ndbClusterConnection->connect(0, 0, 0) == 0)
 	{
 		if (_ndbClusterConnection->wait_until_ready(10, 0) < 0)
 		{

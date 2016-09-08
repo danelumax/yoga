@@ -91,9 +91,6 @@ static void do_insert(Ndb* myNdb)
 		NdbUtils::executeNdbTransaction(myTransaction,
 										NdbTransaction::Commit,
 										NdbOperation::AbortOnError);
-		//if (myTransaction->execute( NdbTransaction::Commit ) == -1)
-		//	APIERROR(myTransaction->getNdbError());
-  
 		myNdb->closeTransaction(myTransaction);
 	}
 }
@@ -126,8 +123,6 @@ static void do_update(Ndb* myNdb)
 		NdbUtils::executeNdbTransaction(myTransaction,
 										NdbTransaction::Commit,
 										NdbOperation::AbortOnError);
-		//if( myTransaction->execute( NdbTransaction::Commit ) == -1 )
-		//	APIERROR(myTransaction->getNdbError());
   
 		myNdb->closeTransaction(myTransaction);
 	}
@@ -158,8 +153,6 @@ static void do_delete(Ndb* myNdb)
 	NdbUtils::executeNdbTransaction(myTransaction,
 									NdbTransaction::Commit,
 									NdbOperation::AbortOnError);
-	//if (myTransaction->execute(NdbTransaction::Commit) == -1)
-	//	APIERROR(myTransaction->getNdbError());
 
 	myNdb->closeTransaction(myTransaction);
 }
@@ -216,8 +209,8 @@ static void do_read(Ndb* myNdb)
 	}
 }
 
-static void run_application(MYSQL &mysql, Ndb_cluster_connection &cluster_connection)
-//static void run_application(MYSQL &mysql)
+//static void run_application(MYSQL &mysql, Ndb_cluster_connection* cluster_connection)
+static void run_application(MYSQL &mysql)
 {
 	/********************************************
 	 * Connect to database via mysql-c          *ndb_examples
@@ -230,14 +223,7 @@ static void run_application(MYSQL &mysql, Ndb_cluster_connection &cluster_connec
 	/********************************************
 	 * Connect to database via NdbApi           *
 	 ********************************************/
-	// Object representing the database
-//	Ndb myNdb( &cluster_connection, "ndb_examples" );
-//	if (myNdb.init())
-//		APIERROR(myNdb.getNdbError());
-	Ndb* myNdb = new Ndb( &cluster_connection, "ndb_examples" );
-	if (myNdb->init())
-		APIERROR(myNdb->getNdbError());
-	//Ndb* myNdb = NdbClusterManager::getInstance()->getNdb();
+	Ndb* myNdb = NdbClusterManager::getInstance()->getNdb();
 
 	/*
 	 * Do different operations on database
@@ -247,56 +233,26 @@ static void run_application(MYSQL &mysql, Ndb_cluster_connection &cluster_connec
 	do_delete(myNdb);
 	do_read(myNdb);
 
-	delete myNdb;
 }
 
 
 int main(int argc, char** argv)
 {
-    // ndb_init must be called first
-    ndb_init();
-
     // connect to mysql server and cluster and run application
-    {
-    	const char *connection_string = "127.0.0.1";
-    	// Object representing the cluster
-    	Ndb_cluster_connection cluster_connection(connection_string);
+    NdbClusterManager::getInstance()->connectToCluster();
 
-    	// Connect to cluster management server (ndb_mgmd)
-//    	if (cluster_connection.connect(4 /* retries               */,
-//				   5 /* delay between retries */,
-//				   1 /* verbose               */))
-    	if (cluster_connection.connect(0 /* retries               */,
-				   0 /* delay between retries */,
-				   0 /* verbose               */))
-    	{
-    		std::cout << "Cluster management server was not ready within 30 secs.\n";
-    		_exit(-1);
-    	}
-
-    	// Optionally connect and wait for the storage nodes (ndbd's)
-    	if (cluster_connection.wait_until_ready(10,0) < 0)
-    	{
-    		std::cout << "Cluster was not ready within 10 secs.\n";
-    		_exit(-1);
-    	}
-    	NdbClusterManager::getInstance()->connectToCluster();
-
-    	// connect to mysql server
-    	MYSQL mysql;
-    	if ( !mysql_init(&mysql) ) {
-    		std::cout << "mysql_init failed\n";
-    		_exit(-1);
-    	}
-    	if ( !mysql_real_connect(&mysql, "localhost", "root", "rootroot", "test", 0, NULL, 0) )
-    		MYSQLERROR(mysql);
-
-    	// run the application code
-    	run_application(mysql, cluster_connection);
-    	//run_application(mysql);
+    // connect to mysql server
+    MYSQL mysql;
+    if ( !mysql_init(&mysql) ) {
+    	std::cout << "mysql_init failed\n";
+    	_exit(-1);
     }
+    if ( !mysql_real_connect(&mysql, "localhost", "root", "rootroot", "test", 0, NULL, 0) )
+    	MYSQLERROR(mysql);
 
-  ndb_end(0);
+    run_application(mysql);
 
-  return 0;
+    NdbClusterManager::destory();
+
+    return 0;
 }
