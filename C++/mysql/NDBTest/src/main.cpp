@@ -39,6 +39,7 @@
  *********************************************************/
 static void create_table(MYSQL &mysql)
 {
+	/* ATTR1 is primary key. 1,2,3,4,5,6,7,8,9,10 */
 	while (mysql_query(&mysql,
 					   "CREATE TABLE api_simple (ATTR1 INT UNSIGNED NOT NULL PRIMARY KEY, ATTR2 INT UNSIGNED NOT NULL) ENGINE=NDB"))
 	{
@@ -60,7 +61,9 @@ static void create_table(MYSQL &mysql)
  **************************************************************************/
 static void do_insert(Ndb* myNdb)
 {
+	/* obtain an object for retrieving or manipulating database schema information */
 	const NdbDictionary::Dictionary* myDict= myNdb->getDictionary();
+	/* access the table with a known name */
 	const NdbDictionary::Table *myTable= myDict->getTable("api_simple");
 
 	if (myTable == NULL)
@@ -68,26 +71,39 @@ static void do_insert(Ndb* myNdb)
 
 	for (int i = 0; i < 5; i++)
 	{
+		/*
+		 * A transaction belongs to an Ndb object and is created using Ndb::startTransaction()
+		 * A transaction consists of a list of operations represented by the NdbOperation class
+		 * */
 		NdbTransaction *myTransaction= myNdb->startTransaction();
 		if (myTransaction == NULL)
 			APIERROR(myNdb->getNdbError());
   
+		/* create an NdbOperation associated with a given table. */
 		NdbOperation *myOperation= myTransaction->getNdbOperation(myTable);
 		if (myOperation == NULL)
 			APIERROR(myTransaction->getNdbError());
   
+		/* an INSERT operation */
 		myOperation->insertTuple();
+		/* search condition
+		 * insert ATTR2 value in ATTR1 == i
+		 * */
 		myOperation->equal("ATTR1", i);
 		myOperation->setValue("ATTR2", i);
 
+		/* Before you want to use any operation within the same transaction, you must initialize them this "getNdbOperation" */
 		myOperation= myTransaction->getNdbOperation(myTable);
 		if (myOperation == NULL)
 			APIERROR(myTransaction->getNdbError());
 
+		/* an INSERT operation */
 		myOperation->insertTuple();
+		/* 5~10 */
 		myOperation->equal("ATTR1", i+5);
 		myOperation->setValue("ATTR2", i+5);
   
+		/* execute a transaction, and execute operation in this trans */
 		NdbUtils::executeNdbTransaction(myTransaction,
 										NdbTransaction::Commit,
 										NdbOperation::AbortOnError);
@@ -116,8 +132,13 @@ static void do_update(Ndb* myNdb)
 		if (myOperation == NULL)
 			APIERROR(myTransaction->getNdbError());
   
+		/* This method defines the NdbOperation as an UPDATE operation.
+		 * When the NdbTransaction::execute() method is invoked,
+		 * the operation updates a tuple found in the table.
+		 * */
 		myOperation->updateTuple();
 		myOperation->equal( "ATTR1", i );
+		/*(0,10)(1,1)(2,12)(3,3)(4,14) ... (8,18)(9,9)*/
 		myOperation->setValue( "ATTR2", i+10);
   
 		NdbUtils::executeNdbTransaction(myTransaction,
@@ -147,7 +168,9 @@ static void do_delete(Ndb* myNdb)
 	if (myOperation == NULL)
 		APIERROR(myTransaction->getNdbError());
 
+	/* a DELETE operation */
 	myOperation->deleteTuple();
+	 /* find (3,3) */
 	myOperation->equal( "ATTR1", 3 );
 
 	NdbUtils::executeNdbTransaction(myTransaction,
@@ -180,18 +203,20 @@ static void do_read(Ndb* myNdb)
 		if (myOperation == NULL)
 			APIERROR(myTransaction->getNdbError());
   
+		/* a READ operation */
 		myOperation->readTuple(NdbOperation::LM_Read);
+		/* find key */
 		myOperation->equal("ATTR1", i);
 
+		/* get what, but wait for "execute" */
 		NdbRecAttr *myRecAttr= myOperation->getValue("ATTR2", NULL);
 		if (myRecAttr == NULL)
 			APIERROR(myTransaction->getNdbError());
   
+		/* after execute, myOperation take effect and myRecAttr get value */
 		NdbUtils::executeNdbTransaction(myTransaction,
 										NdbTransaction::Commit,
 										NdbOperation::DefaultAbortOption);
-		//if(myTransaction->execute( NdbTransaction::Commit ) == -1)
-		//	APIERROR(myTransaction->getNdbError());
   
 		if (myTransaction->getNdbError().classification == NdbError::NoDataFound)
 		{

@@ -46,10 +46,13 @@ void NdbClusterManager::destory()
 int NdbClusterManager::connectToCluster()
 {
 	int ret = 0;
+	/* a object, which represents one connection to a cluster management server which IP is _connectionUrl. */
 	_ndbClusterConnection = new Ndb_cluster_connection(_connectionUrl);
 
+	/* connection operation */
 	if (_ndbClusterConnection->connect(0, 0, 0) == 0)
 	{
+		/* wait for the connection to reach one or more data nodes */
 		if (_ndbClusterConnection->wait_until_ready(10, 0) < 0)
 		{
 			std::cout << "connect fail." << std::endl;
@@ -62,7 +65,11 @@ int NdbClusterManager::connectToCluster()
 
 Ndb* NdbClusterManager::getNdb()
 {
+	/*  represents a connection to the MySQL Cluster
+	 *  the second parameter is "the database"
+	 * */
 	_ndb = new Ndb(_ndbClusterConnection, "ndb_examples" );
+	/* initialize an Ndb object */
 	if (_ndb->init() != 0)
 	{
 		std::cout << "NdbConnectionPool::factoryNdb failed to initialize NDB object." << std::endl;
