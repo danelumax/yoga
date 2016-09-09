@@ -25,6 +25,7 @@
 
 #include "NdbUtils.h"
 #include "NdbClusterManager.h"
+#include "NdbOperationTransaction.h"
 
 #define PRINT_ERROR(code,msg) \
   std::cout << "Error in " << __FILE__ << ", line: " << __LINE__ \
@@ -75,9 +76,12 @@ static void do_insert(Ndb* myNdb)
 		 * A transaction belongs to an Ndb object and is created using Ndb::startTransaction()
 		 * A transaction consists of a list of operations represented by the NdbOperation class
 		 * */
-		NdbTransaction *myTransaction= myNdb->startTransaction();
-		if (myTransaction == NULL)
-			APIERROR(myNdb->getNdbError());
+//		NdbTransaction *myTransaction= myNdb->startTransaction();
+//		if (myTransaction == NULL)
+//			APIERROR(myNdb->getNdbError());
+		NdbOperationTransaction *oprTrans = new NdbOperationTransaction();
+		oprTrans->startTransaction();
+		NdbTransaction *myTransaction = oprTrans->getNdbTransaction();
   
 		/* create an NdbOperation associated with a given table. */
 		NdbOperation *myOperation= myTransaction->getNdbOperation(myTable);
@@ -234,48 +238,51 @@ static void do_read(Ndb* myNdb)
 	}
 }
 
-//static void run_application(MYSQL &mysql, Ndb_cluster_connection* cluster_connection)
-static void run_application(MYSQL &mysql)
+static void run_application()
 {
-	/********************************************
-	 * Connect to database via mysql-c          *ndb_examples
-	 ********************************************/
+	Ndb* ndb = NdbClusterManager::getInstance()->getNdb();
+
+	do_insert(ndb);
+	do_update(ndb);
+	do_delete(ndb);
+	do_read(ndb);
+
+	delete ndb;
+}
+
+void createMysql()
+{
+	/* connect to mysql server */
+    MYSQL mysql;
+    if (!mysql_init(&mysql))
+    {
+    	std::cout << "mysql_init failed\n";
+    	_exit(-1);
+    }
+
+    if ( !mysql_real_connect(&mysql, "localhost", "root", "rootroot", "test", 0, NULL, 0) )
+    {
+    	MYSQLERROR(mysql);
+    }
+
 	mysql_query(&mysql, "CREATE DATABASE ndb_examples");
+
 	if (mysql_query(&mysql, "USE ndb_examples") != 0)
+	{
 		MYSQLERROR(mysql);
+	}
+
 	create_table(mysql);
-
-	/********************************************
-	 * Connect to database via NdbApi           *
-	 ********************************************/
-	Ndb* myNdb = NdbClusterManager::getInstance()->getNdb();
-
-	/*
-	 * Do different operations on database
-	 */
-	do_insert(myNdb);
-	do_update(myNdb);
-	do_delete(myNdb);
-	do_read(myNdb);
-
 }
 
 
 int main(int argc, char** argv)
 {
-    // connect to mysql server and cluster and run application
-    NdbClusterManager::getInstance()->connectToCluster();
+	NdbClusterManager::getInstance()->run();
 
-    // connect to mysql server
-    MYSQL mysql;
-    if ( !mysql_init(&mysql) ) {
-    	std::cout << "mysql_init failed\n";
-    	_exit(-1);
-    }
-    if ( !mysql_real_connect(&mysql, "localhost", "root", "rootroot", "test", 0, NULL, 0) )
-    	MYSQLERROR(mysql);
+	createMysql();
 
-    run_application(mysql);
+    run_application();
 
     NdbClusterManager::destory();
 

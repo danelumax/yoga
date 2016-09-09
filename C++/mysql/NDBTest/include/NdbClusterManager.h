@@ -9,6 +9,7 @@
 #define NDBCLUSTERMANAGER_H_
 
 #include <NdbApi.hpp>
+#include <NdbConnectionPool.h>
 
 class NdbClusterManager
 {
@@ -18,13 +19,14 @@ public:
 	static void destory();
 	int connectToCluster();
 	Ndb* getNdb();
+	void run();
 private:
 	NdbClusterManager();
 	static NdbClusterManager* _instance;
 
 	Ndb_cluster_connection* _ndbClusterConnection;
-	Ndb* _ndb;
 	const char* _connectionUrl;
+	NdbConnectionPool* _ndbPool;
 };
 
 #endif /* NDBCLUSTERMANAGER_H_ */

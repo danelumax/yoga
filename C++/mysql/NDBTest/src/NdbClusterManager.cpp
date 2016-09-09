@@ -14,14 +14,16 @@ NdbClusterManager::NdbClusterManager()
 	:_connectionUrl("127.0.0.1")
 {
 	/* ndb_init must be called first */
+	_ndbPool = new NdbConnectionPool();
 	ndb_init();
 }
 
 NdbClusterManager::~NdbClusterManager()
 {
-	delete _ndb;
 	delete _ndbClusterConnection;
-	ndb_end(0);
+	delete _ndbPool;
+	_ndbClusterConnection = NULL;
+	_ndbPool = NULL;
 }
 
 NdbClusterManager* NdbClusterManager::getInstance()
@@ -41,6 +43,8 @@ void NdbClusterManager::destory()
 		delete _instance;
 		_instance = NULL;
 	}
+
+	ndb_end(0);
 }
 
 int NdbClusterManager::connectToCluster()
@@ -65,16 +69,11 @@ int NdbClusterManager::connectToCluster()
 
 Ndb* NdbClusterManager::getNdb()
 {
-	/*  represents a connection to the MySQL Cluster
-	 *  the second parameter is "the database"
-	 * */
-	_ndb = new Ndb(_ndbClusterConnection, "ndb_examples" );
-	/* initialize an Ndb object */
-	if (_ndb->init() != 0)
-	{
-		std::cout << "NdbConnectionPool::factoryNdb failed to initialize NDB object." << std::endl;
-		return NULL;
-	}
+	return _ndbPool->getNdb();
+}
 
-	return _ndb;
+void NdbClusterManager::run()
+{
+	connectToCluster();
+	_ndbPool->factory(_ndbClusterConnection);
 }
