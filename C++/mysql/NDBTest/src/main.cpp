@@ -26,6 +26,9 @@
 #include "NdbUtils.h"
 #include "NdbClusterManager.h"
 #include "NdbOperationTransaction.h"
+#include "DaoFactory.h"
+#include "NdbAbstractExecutor.h"
+#include "NdbOperationCondition.h"
 
 #define PRINT_ERROR(code,msg) \
   std::cout << "Error in " << __FILE__ << ", line: " << __LINE__ \
@@ -60,58 +63,70 @@ static void create_table(MYSQL &mysql)
 /**************************************************************************
  * Using 5 transactions, insert 10 tuples in table: (0,0),(1,1),...,(9,9) *
  **************************************************************************/
+
+//static void do_insert(Ndb* myNdb)
+//{
+//	/* obtain an object for retrieving or manipulating database schema information */
+//	const NdbDictionary::Dictionary* myDict= myNdb->getDictionary();
+//	/* access the table with a known name */
+//	const NdbDictionary::Table *myTable= myDict->getTable("api_simple");
+//
+//	if (myTable == NULL)
+//		APIERROR(myDict->getNdbError());
+//
+//	for (int i = 0; i < 5; i++)
+//	{
+//		/*
+//		 * A transaction belongs to an Ndb object and is created using Ndb::startTransaction()
+//		 * A transaction consists of a list of operations represented by the NdbOperation class
+//		 * */
+////		NdbTransaction *myTransaction= myNdb->startTransaction();
+////		if (myTransaction == NULL)
+////			APIERROR(myNdb->getNdbError());
+//		NdbOperationTransaction *oprTrans = new NdbOperationTransaction();
+//		oprTrans->startTransaction();
+//		//DaoFactory::getInstance()->startTransaction();
+//		NdbTransaction *myTransaction = oprTrans->getNdbTransaction();
+//
+//		/* create an NdbOperation associated with a given table. */
+//		NdbOperation *myOperation= myTransaction->getNdbOperation(myTable);
+//		if (myOperation == NULL)
+//			APIERROR(myTransaction->getNdbError());
+//
+//		/* an INSERT operation */
+//		myOperation->insertTuple();
+//		/* search condition
+//		 * insert ATTR2 value in ATTR1 == i
+//		 * */
+//		myOperation->equal("ATTR1", i);
+//		myOperation->setValue("ATTR2", i);
+//
+//		/* Before you want to use any operation within the same transaction, you must initialize them this "getNdbOperation" */
+//		myOperation= myTransaction->getNdbOperation(myTable);
+//		if (myOperation == NULL)
+//			APIERROR(myTransaction->getNdbError());
+//
+//		/* an INSERT operation */
+//		myOperation->insertTuple();
+//		/* 5~10 */
+//		myOperation->equal("ATTR1", i+5);
+//		myOperation->setValue("ATTR2", i+5);
+//
+//		/* execute a transaction, and execute operation in this trans */
+//		NdbUtils::executeNdbTransaction(myTransaction,
+//										NdbTransaction::Commit,
+//										NdbOperation::AbortOnError);
+//		myNdb->closeTransaction(myTransaction);
+//	}
+//}
+
 static void do_insert(Ndb* myNdb)
 {
-	/* obtain an object for retrieving or manipulating database schema information */
-	const NdbDictionary::Dictionary* myDict= myNdb->getDictionary();
-	/* access the table with a known name */
-	const NdbDictionary::Table *myTable= myDict->getTable("api_simple");
-
-	if (myTable == NULL)
-		APIERROR(myDict->getNdbError());
-
 	for (int i = 0; i < 5; i++)
 	{
-		/*
-		 * A transaction belongs to an Ndb object and is created using Ndb::startTransaction()
-		 * A transaction consists of a list of operations represented by the NdbOperation class
-		 * */
-//		NdbTransaction *myTransaction= myNdb->startTransaction();
-//		if (myTransaction == NULL)
-//			APIERROR(myNdb->getNdbError());
-		NdbOperationTransaction *oprTrans = new NdbOperationTransaction();
-		oprTrans->startTransaction();
-		NdbTransaction *myTransaction = oprTrans->getNdbTransaction();
-  
-		/* create an NdbOperation associated with a given table. */
-		NdbOperation *myOperation= myTransaction->getNdbOperation(myTable);
-		if (myOperation == NULL)
-			APIERROR(myTransaction->getNdbError());
-  
-		/* an INSERT operation */
-		myOperation->insertTuple();
-		/* search condition
-		 * insert ATTR2 value in ATTR1 == i
-		 * */
-		myOperation->equal("ATTR1", i);
-		myOperation->setValue("ATTR2", i);
-
-		/* Before you want to use any operation within the same transaction, you must initialize them this "getNdbOperation" */
-		myOperation= myTransaction->getNdbOperation(myTable);
-		if (myOperation == NULL)
-			APIERROR(myTransaction->getNdbError());
-
-		/* an INSERT operation */
-		myOperation->insertTuple();
-		/* 5~10 */
-		myOperation->equal("ATTR1", i+5);
-		myOperation->setValue("ATTR2", i+5);
-  
-		/* execute a transaction, and execute operation in this trans */
-		NdbUtils::executeNdbTransaction(myTransaction,
-										NdbTransaction::Commit,
-										NdbOperation::AbortOnError);
-		myNdb->closeTransaction(myTransaction);
+		NdbOperationCondition noc(NdbOperationCondition::INSERT);
+		NdbAbstractExecutor executor(noc, NULL);
+		executor.execute(i);
 	}
 }
 
@@ -213,6 +228,7 @@ static void do_read(Ndb* myNdb)
 		myOperation->equal("ATTR1", i);
 
 		/* get what, but wait for "execute" */
+		//NdbUtils::prepareNdbOperationQuerySpace
 		NdbRecAttr *myRecAttr= myOperation->getValue("ATTR2", NULL);
 		if (myRecAttr == NULL)
 			APIERROR(myTransaction->getNdbError());

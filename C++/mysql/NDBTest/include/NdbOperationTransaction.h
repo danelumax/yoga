@@ -15,8 +15,9 @@ class NdbOperationTransaction
 public:
 	NdbOperationTransaction();
 	virtual ~NdbOperationTransaction();
-	void startTransaction();
+	int startTransaction();
 	NdbTransaction* getNdbTransaction();
+	Ndb* getNdb();
 private:
 	Ndb* _ndb;
 	NdbTransaction* _ndbTrans;

@@ -24,16 +24,23 @@ NdbOperationTransaction::~NdbOperationTransaction()
 {
 }
 
-void NdbOperationTransaction::startTransaction()
+int NdbOperationTransaction::startTransaction()
 {
 	_ndb = NdbClusterManager::getInstance()->getNdb();
 
 	_ndbTrans = _ndb->startTransaction();
+
+	return 0;
 }
 
 NdbTransaction* NdbOperationTransaction::getNdbTransaction()
 {
 	return _ndbTrans;
+}
+
+Ndb* NdbOperationTransaction::getNdb()
+{
+	return _ndb;
 }
 
 

@@ -6,6 +6,7 @@
  */
 
 #include "NdbClusterManager.h"
+#include "NdbOperationTransaction.h"
 #include <iostream>
 
 NdbClusterManager* NdbClusterManager::_instance = NULL;
@@ -13,8 +14,8 @@ NdbClusterManager* NdbClusterManager::_instance = NULL;
 NdbClusterManager::NdbClusterManager()
 	:_connectionUrl("127.0.0.1")
 {
-	/* ndb_init must be called first */
 	_ndbPool = new NdbConnectionPool();
+	/* ndb_init must be called first */
 	ndb_init();
 }
 
@@ -76,4 +77,9 @@ void NdbClusterManager::run()
 {
 	connectToCluster();
 	_ndbPool->factory(_ndbClusterConnection);
+}
+
+bool NdbClusterManager::isNDBClusterRunning()
+{
+
 }

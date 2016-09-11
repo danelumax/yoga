@@ -9,12 +9,25 @@
 #define NDBUTILS_H_
 
 #include <NdbApi.hpp>
+#include <NdbOperationCondition.h>
+#include <NdbColumnCondition.h>
 
 class NdbUtils {
 public:
 	static int executeNdbTransaction(NdbTransaction* &trans,
 									 NdbTransaction::ExecType execType,
 									 NdbOperation::AbortOption abortOp);
+
+	static int setNdbOperationType(NdbOperationCondition* opCondition,
+						    const NdbDictionary::Table * &myTable,
+	                        NdbTransaction* &myTrans,
+	                        NdbOperation * &myOp);
+
+	static int setNdbOperationActivity(NdbOperation * &oper, NdbOperationCondition& noc);
+
+	static int setKeyNdbOperationInfo(NdbOperation * &myOp, NdbColumnCondition* cqf);
+
+	static int prepareNdbOperationValues(NdbOperation* myOp, NdbColumnCondition* cqf);
 };
 
 #endif /* NDBUTILS_H_ */

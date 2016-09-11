@@ -20,6 +20,7 @@ public:
 	int connectToCluster();
 	Ndb* getNdb();
 	void run();
+	bool isNDBClusterRunning();
 private:
 	NdbClusterManager();
 	static NdbClusterManager* _instance;
