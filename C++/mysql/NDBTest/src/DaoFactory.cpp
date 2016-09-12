@@ -49,3 +49,9 @@ Transaction* DaoFactory::startTransaction()
 
 	return transaction;
 }
+
+NdbDao *DaoFactory::factoryDao()
+{
+	NdbDao* dao = new NdbDao();
+	return dao;
+}

@@ -9,6 +9,7 @@
 #define DAOFACTORY_H_
 
 #include "Transaction.h"
+#include "NdbDao.h"
 
 class DaoFactory
 {
@@ -17,6 +18,7 @@ public:
 	static DaoFactory* getInstance();
 	static void destory();
 	Transaction* startTransaction();
+	NdbDao* factoryDao();
 private:
 	DaoFactory();
 	static DaoFactory* _instance;

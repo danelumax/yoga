@@ -7,6 +7,8 @@
 
 #include "DBServiceProvider.h"
 #include <iostream>
+#include "NdbDao.h"
+#include "DaoFactory.h"
 
 DBServiceProvider* DBServiceProvider::_instance = NULL;
 
@@ -35,4 +37,15 @@ void DBServiceProvider::destory()
 		delete _instance;
 		_instance = NULL;
 	}
+}
+
+int DBServiceProvider::insert(int i)
+{
+	NdbDao* dao = getDao();
+	dao->insert(i);
+}
+
+NdbDao* DBServiceProvider::getDao()
+{
+	return DaoFactory::getInstance()->factoryDao();
 }
