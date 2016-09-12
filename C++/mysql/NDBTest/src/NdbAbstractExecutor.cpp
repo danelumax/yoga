@@ -30,7 +30,7 @@ NdbAbstractExecutor::~NdbAbstractExecutor()
 	}
 }
 
-int NdbAbstractExecutor::execute(int i)
+int NdbAbstractExecutor::execute()
 {
 	if (_selfControlTransaction)
 	{
@@ -40,12 +40,12 @@ int NdbAbstractExecutor::execute(int i)
 	Ndb* ndb = _transaction->getNdb();
 	NdbTransaction* ndbTransaction = _transaction->getNdbTransaction();
 
-	int result = execute(ndb, ndbTransaction, i);
+	int result = execute(ndb, ndbTransaction);
 
 	return result;
 }
 
-int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction,int i)
+int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 {
 	/* obtain an object for retrieving or manipulating database schema information */
 	const NdbDictionary::Dictionary* myDict= ndb->getDictionary();
@@ -58,28 +58,23 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction,int i)
 	NdbUtils::setNdbOperationType(_opCondition, myTable, myTrans, myOperation);
 
 	/* an INSERT operation */
-	NdbUtils::setNdbOperationActivity(myOperation, *_opCondition);
+	setNdbOperationActivity(myOperation);
 
 	/* search condition
 	* insert ATTR2 value in ATTR1 == i
 	* */
-	NdbColumnCondition *cqf = new NdbColumnCondition("ATTR1", i);
-	NdbUtils::setKeyNdbOperationInfo(myOperation, cqf);
+	std::vector<NdbColumnCondition*> columnVector = _opCondition->getChangeColumns();
+	std::vector<NdbColumnCondition*>::iterator iter = columnVector.begin();
+	for(; iter!=columnVector.end(); ++iter)
+	{
+		NdbColumnCondition *cqf = *iter;
+		NdbUtils::setKeyNdbOperationInfo(myOperation, cqf);
+	}
 
-	cqf = new NdbColumnCondition("ATTR2", i);
-	NdbUtils::prepareNdbOperationValues(myOperation, cqf);
+	NdbUtils::prepareNdbOperationValues(myOperation, _opCondition);
 
-	/* Before you want to use any operation within the same transaction, you must initialize them this "getNdbOperation" */
-	NdbUtils::setNdbOperationType(_opCondition, myTable, myTrans, myOperation);
-
-	/* an INSERT operation */
-	NdbUtils::setNdbOperationActivity(myOperation, *_opCondition);
-	/* 5~10 */
-	cqf = new NdbColumnCondition("ATTR1", i+5);
-	NdbUtils::setKeyNdbOperationInfo(myOperation, cqf);
-
-	cqf = new NdbColumnCondition("ATTR2", i+5);
-	NdbUtils::prepareNdbOperationValues(myOperation, cqf);
+//	/* Before you want to use any operation within the same transaction, you must initialize them this "getNdbOperation" */
+//	NdbUtils::setNdbOperationType(_opCondition, myTable, myTrans, myOperation);
 
 	/* execute a transaction, and execute operation in this trans */
 	NdbUtils::executeNdbTransaction(myTrans,
@@ -90,4 +85,11 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction,int i)
 
 	return 0;
 }
+
+int NdbAbstractExecutor::setNdbOperationActivity(NdbOperation *& oper)
+{
+	return NdbUtils::setNdbOperationActivity(oper, *_opCondition);
+}
+
+
 

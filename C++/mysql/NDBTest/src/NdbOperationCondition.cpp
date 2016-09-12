@@ -32,3 +32,17 @@ bool NdbOperationCondition::isSingleRowOpearation()
 
 	return singleRowOperation;
 }
+
+int NdbOperationCondition::addChangeColumn(NdbColumnCondition *column)
+{
+	_changeColumns.push_back(column);
+}
+
+std::vector<NdbColumnCondition*> NdbOperationCondition::getChangeColumns()
+{
+	return _changeColumns;
+}
+
+
+
+

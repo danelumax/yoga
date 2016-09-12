@@ -27,6 +27,7 @@
 #include "NdbClusterManager.h"
 #include "DBServiceProvider.h"
 #include "NdbOperationTransaction.h"
+#include "Modification.h"
 //#include "DaoFactory.h"
 //#include "NdbAbstractExecutor.h"
 //#include "NdbOperationCondition.h"
@@ -67,9 +68,11 @@ static void create_table(MYSQL &mysql)
 
 static void do_insert(Ndb* myNdb)
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		DBServiceProvider::getInstance()->insert(i);
+		Modification modify;
+		modify.addValue("ATTR1", i);
+		DBServiceProvider::getInstance()->insert(modify);
 	}
 }
 

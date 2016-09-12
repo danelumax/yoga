@@ -9,14 +9,14 @@
 #define DBSERVICEPROVIDER_H_
 
 #include "NdbDao.h"
-
+#include "Modification.h"
 class DBServiceProvider
 {
 public:
 	virtual ~DBServiceProvider();
 	static DBServiceProvider* getInstance();
 	static void destory();
-	int insert(int i);
+	int insert(Modification& record);
 	NdbDao* getDao();
 private:
 	DBServiceProvider();

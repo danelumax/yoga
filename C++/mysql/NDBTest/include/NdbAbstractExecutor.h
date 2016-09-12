@@ -17,9 +17,10 @@ class NdbAbstractExecutor {
 public:
 	NdbAbstractExecutor(NdbOperationCondition& opCondition, NdbOperationTransaction* transaction = NULL);
 	virtual ~NdbAbstractExecutor();
-	int execute(int i);
+	int execute();
 private:
-	int execute(Ndb* ndb, NdbTransaction* ndbTransaction, int i);
+	int execute(Ndb* ndb, NdbTransaction* ndbTransaction);
+	int setNdbOperationActivity(NdbOperation* &oper);
 private:
 	NdbOperationCondition* _opCondition;
     NdbOperationTransaction* _transaction;

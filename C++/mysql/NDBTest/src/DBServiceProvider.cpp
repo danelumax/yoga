@@ -39,10 +39,10 @@ void DBServiceProvider::destory()
 	}
 }
 
-int DBServiceProvider::insert(int i)
+int DBServiceProvider::insert(Modification& record)
 {
 	NdbDao* dao = getDao();
-	dao->insert(i);
+	dao->insert(record);
 }
 
 NdbDao* DBServiceProvider::getDao()
