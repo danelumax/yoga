@@ -22,6 +22,11 @@ NdbOperationTransaction::NdbOperationTransaction()
 
 NdbOperationTransaction::~NdbOperationTransaction()
 {
+	if (_ndbTrans != NULL)
+	{
+		_ndbTrans->close();
+		_ndbTrans = NULL;
+	}
 }
 
 int NdbOperationTransaction::startTransaction()

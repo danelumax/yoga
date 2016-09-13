@@ -55,7 +55,7 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 	NdbTransaction* myTrans = ndbTransaction;
 
 	NdbOperation *myOperation = NULL;
-	NdbUtils::setNdbOperationType(_opCondition, myTable, myTrans, myOperation);
+	setNdbOperationType(_opCondition, myTable, myTrans, myOperation);
 
 	/* an INSERT operation */
 	setNdbOperationActivity(myOperation);
@@ -63,25 +63,25 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 	/* search condition
 	* insert ATTR2 value in ATTR1 == i
 	* */
-	std::vector<NdbColumnCondition*> columnVector = _opCondition->getChangeColumns();
-	std::vector<NdbColumnCondition*>::iterator iter = columnVector.begin();
-	for(; iter!=columnVector.end(); ++iter)
-	{
-		NdbColumnCondition *cqf = *iter;
-		NdbUtils::setKeyNdbOperationInfo(myOperation, cqf);
-	}
+	prepareKeyNdbOperation(myOperation, _opCondition);
 
-	NdbUtils::prepareNdbOperationValues(myOperation, _opCondition);
+	prepareNdbOperation(myOperation, _opCondition);
 
 //	/* Before you want to use any operation within the same transaction, you must initialize them this "getNdbOperation" */
 //	NdbUtils::setNdbOperationType(_opCondition, myTable, myTrans, myOperation);
 
 	/* execute a transaction, and execute operation in this trans */
-	NdbUtils::executeNdbTransaction(myTrans,
-									NdbTransaction::Commit,
-									NdbOperation::AbortOnError);
+	executeNdbTransaction(myTrans);
 
-	ndb->closeTransaction(myTrans);
+	return 0;
+}
+
+int NdbAbstractExecutor::setNdbOperationType(NdbOperationCondition* opCondition,
+											 const NdbDictionary::Table * &myTable,
+											 NdbTransaction* &myTrans,
+											 NdbOperation * &myOp)
+{
+	NdbUtils::setNdbOperationType(opCondition, myTable, myTrans, myOp);
 
 	return 0;
 }
@@ -91,5 +91,46 @@ int NdbAbstractExecutor::setNdbOperationActivity(NdbOperation *& oper)
 	return NdbUtils::setNdbOperationActivity(oper, *_opCondition);
 }
 
+int NdbAbstractExecutor::prepareKeyNdbOperation(NdbOperation * &myOp, NdbOperationCondition* opCondition)
+{
+	if (opCondition->isSingleRowOpearation())
+	{
+		NdbUtils::prepareKeyNdbSingleOp(myOp, opCondition);
+	}
+
+	return 0;
+}
+
+int NdbAbstractExecutor::prepareNdbOperation(NdbOperation * &myOp, NdbOperationCondition* opCondition)
+{
+	NdbOperationCondition::Type opType = opCondition->getType();
+
+	switch(opType)
+	{
+		case NdbOperationCondition::INSERT:
+		{
+			NdbUtils::prepareNdbOperationValues(myOp, opCondition);
+		}
+	}
+
+	return 0;
+}
+
+int NdbAbstractExecutor::executeNdbTransaction(NdbTransaction* &trans)
+{
+	NdbOperationCondition::Type opType = _opCondition->getType();
+
+	switch(opType)
+	{
+		case NdbOperationCondition::INSERT:
+		{
+			NdbUtils::executeNdbTransaction(trans,
+											NdbTransaction::Commit,
+											NdbOperation::AbortOnError);
+		}
+	}
+
+	return 0;
+}
 
 

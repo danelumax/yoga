@@ -50,6 +50,17 @@ int NdbUtils::setNdbOperationActivity(NdbOperation * &oper, NdbOperationConditio
 	return 0;
 }
 
+int NdbUtils::prepareKeyNdbSingleOp(NdbOperation* oper, NdbOperationCondition* opCondition)
+{
+	std::vector<NdbColumnCondition*> columnVector = opCondition->getChangeColumns();
+	std::vector<NdbColumnCondition*>::iterator iter = columnVector.begin();
+	for(; iter!=columnVector.end(); ++iter)
+	{
+		NdbColumnCondition *cqf = *iter;
+		NdbUtils::setKeyNdbOperationInfo(oper, cqf);
+	}
+}
+
 int NdbUtils::setKeyNdbOperationInfo(NdbOperation * &myOp, NdbColumnCondition* cqf)
 {
 	myOp->equal(cqf->getColumnName(), cqf->getColumnValue());

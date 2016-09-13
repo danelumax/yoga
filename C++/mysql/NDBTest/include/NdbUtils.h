@@ -25,9 +25,13 @@ public:
 
 	static int setNdbOperationActivity(NdbOperation * &oper, NdbOperationCondition& noc);
 
+	static int prepareKeyNdbSingleOp(NdbOperation* oper, NdbOperationCondition* opCondition);
+
 	static int setKeyNdbOperationInfo(NdbOperation * &myOp, NdbColumnCondition* cqf);
 
 	static int prepareNdbOperationValues(NdbOperation* myOp, NdbOperationCondition* opCondition);
+
+
 };
 
 #endif /* NDBUTILS_H_ */

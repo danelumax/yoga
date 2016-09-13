@@ -7,13 +7,12 @@
 
 #include "Modification.h"
 
-Modification::Modification() {
-	// TODO Auto-generated constructor stub
-
+Modification::Modification()
+{
 }
 
-Modification::~Modification() {
-	// TODO Auto-generated destructor stub
+Modification::~Modification()
+{
 }
 
 void Modification::addValue(std::string key, int value)

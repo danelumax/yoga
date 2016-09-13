@@ -13,14 +13,22 @@
 #include <NdbOperationTransaction.h>
 #include <NdbOperationCondition.h>
 
-class NdbAbstractExecutor {
+class NdbAbstractExecutor
+{
 public:
 	NdbAbstractExecutor(NdbOperationCondition& opCondition, NdbOperationTransaction* transaction = NULL);
 	virtual ~NdbAbstractExecutor();
 	int execute();
 private:
 	int execute(Ndb* ndb, NdbTransaction* ndbTransaction);
+	int setNdbOperationType(NdbOperationCondition* opCondition,
+							const NdbDictionary::Table * &myTable,
+							NdbTransaction* &myTrans,
+							NdbOperation * &myOp);
 	int setNdbOperationActivity(NdbOperation* &oper);
+	int prepareKeyNdbOperation(NdbOperation * &myOp, NdbOperationCondition* opCondition);
+	int prepareNdbOperation(NdbOperation * &myOp, NdbOperationCondition* opCondition);
+	int executeNdbTransaction(NdbTransaction* &trans);
 private:
 	NdbOperationCondition* _opCondition;
     NdbOperationTransaction* _transaction;

@@ -25,9 +25,10 @@
 
 #include "NdbUtils.h"
 #include "NdbClusterManager.h"
-#include "DBServiceProvider.h"
+//#include "DBServiceProvider.h"
 #include "NdbOperationTransaction.h"
-#include "Modification.h"
+#include "DiaSessionDataDBUtil.h"
+//#include "Modification.h"
 //#include "DaoFactory.h"
 //#include "NdbAbstractExecutor.h"
 //#include "NdbOperationCondition.h"
@@ -59,20 +60,6 @@ static void create_table(MYSQL &mysql)
 		{
 			MYSQLERROR(mysql);
 		}
-	}
-}
-
-/**************************************************************************
- * Using 5 transactions, insert 10 tuples in table: (0,0),(1,1),...,(9,9) *
- **************************************************************************/
-
-static void do_insert(Ndb* myNdb)
-{
-	for (int i = 0; i < 10; i++)
-	{
-		Modification modify;
-		modify.addValue("ATTR1", i);
-		DBServiceProvider::getInstance()->insert(modify);
 	}
 }
 
@@ -204,7 +191,7 @@ static void run_application()
 {
 	Ndb* ndb = NdbClusterManager::getInstance()->getNdb();
 
-	do_insert(ndb);
+	DiaSessionDataDBUtil::insertSessionDataToDB();
 	do_update(ndb);
 	do_delete(ndb);
 	do_read(ndb);
