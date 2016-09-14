@@ -20,6 +20,7 @@ int DiaSessionDataDBUtil::insertSessionDataToDB()
 	{
 		Modification modify;
 		modify.addValue("ATTR1", i);
+		//modify.addValue("ATTR2", i);
 		DBServiceProvider::getInstance()->insert(modify);
 	}
 

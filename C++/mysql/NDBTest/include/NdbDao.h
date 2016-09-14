@@ -14,6 +14,10 @@
 class NdbDao
 {
 public:
+    enum QUERY_PURPOSE
+    {
+        QUERY_TO_DELETE=1
+    };
 	NdbDao();
 	virtual ~NdbDao();
 	int insert(Modification& record);

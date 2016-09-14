@@ -15,7 +15,8 @@ class NdbOperationCondition {
 public:
 	enum Type
 	{
-		INSERT = 1
+		INSERT = 1,
+		UNKNOWN_OP
 	};
 	NdbOperationCondition(Type type);
 	virtual ~NdbOperationCondition();
