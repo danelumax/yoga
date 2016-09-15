@@ -16,6 +16,7 @@ public:
 	NdbOperationTransaction();
 	virtual ~NdbOperationTransaction();
 	int startTransaction();
+	int commitTransaction();
 	NdbTransaction* getNdbTransaction();
 	Ndb* getNdb();
 private:

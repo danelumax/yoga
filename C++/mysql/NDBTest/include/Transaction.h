@@ -14,6 +14,7 @@ public:
 	Transaction(){};
 	virtual ~Transaction(){};
 	virtual int start() = 0;
+	virtual int commit() = 0;
 
 };
 

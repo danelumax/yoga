@@ -71,8 +71,11 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 //	/* Before you want to use any operation within the same transaction, you must initialize them this "getNdbOperation" */
 //	NdbUtils::setNdbOperationType(_opCondition, myTable, myTrans, myOperation);
 
-	/* execute a transaction, and execute operation in this trans */
-	executeNdbTransaction(myTrans);
+	if (_selfControlTransaction)
+	{
+		/* execute a transaction, and execute operation in this trans */
+		executeNdbTransaction(myTrans);
+	}
 
 	return 0;
 }

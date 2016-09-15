@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "NdbOperationTransaction.h"
+#include "NdbUtils.h"
 #include "NdbClusterManager.h"
 
 #define PRINT_ERROR(code,msg) \
@@ -34,6 +35,15 @@ int NdbOperationTransaction::startTransaction()
 	_ndb = NdbClusterManager::getInstance()->getNdb();
 
 	_ndbTrans = _ndb->startTransaction();
+
+	return 0;
+}
+
+int NdbOperationTransaction::commitTransaction()
+{
+	NdbUtils::executeNdbTransaction(_ndbTrans,
+									NdbTransaction::Commit,
+									NdbOperation::AbortOnError);
 
 	return 0;
 }

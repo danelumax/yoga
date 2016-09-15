@@ -43,6 +43,8 @@ int DBServiceProvider::insert(Modification& record)
 {
 	NdbDao* dao = getDao();
 	dao->insert(record);
+
+	return 0;
 }
 
 NdbDao* DBServiceProvider::getDao(Transaction* transaction)

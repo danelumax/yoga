@@ -84,5 +84,5 @@ void NdbClusterManager::run()
 
 bool NdbClusterManager::isNDBClusterRunning()
 {
-
+	return true;
 }

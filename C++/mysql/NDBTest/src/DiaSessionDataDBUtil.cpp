@@ -26,6 +26,7 @@ int DiaSessionDataDBUtil::insertSessionDataToDB()
 		Transaction* transaction = db->startTransaction();
 		NdbDao* dao = db->getDao(transaction);
 	    dao->insert(modify);
+	    transaction->commit();
 	}
 
 	return 0;

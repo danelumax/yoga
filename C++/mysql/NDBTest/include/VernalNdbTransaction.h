@@ -17,6 +17,7 @@ public:
 	VernalNdbTransaction();
 	virtual ~VernalNdbTransaction();
 	virtual int start();
+	virtual int commit();
 	NdbOperationTransaction* getNdbTransaction();
 private:
 	NdbOperationTransaction* _ndbTrans;
