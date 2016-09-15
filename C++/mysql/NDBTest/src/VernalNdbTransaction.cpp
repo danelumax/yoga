@@ -27,3 +27,8 @@ int VernalNdbTransaction::start()
 
 	return 0;
 }
+
+NdbOperationTransaction* VernalNdbTransaction::getNdbTransaction()
+{
+    return _ndbTrans;
+}

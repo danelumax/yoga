@@ -10,6 +10,8 @@
 
 #include "NdbDao.h"
 #include "Modification.h"
+#include "Transaction.h"
+
 class DBServiceProvider
 {
 public:
@@ -17,7 +19,8 @@ public:
 	static DBServiceProvider* getInstance();
 	static void destory();
 	int insert(Modification& record);
-	NdbDao* getDao();
+	NdbDao* getDao(Transaction* transaction = NULL);
+	Transaction* startTransaction();
 private:
 	DBServiceProvider();
 	static DBServiceProvider* _instance;

@@ -21,8 +21,9 @@ NdbClusterManager::NdbClusterManager()
 
 NdbClusterManager::~NdbClusterManager()
 {
-	delete _ndbClusterConnection;
+	/* deleting ndb before Ndb_cluster_connection */
 	delete _ndbPool;
+	delete _ndbClusterConnection;
 	_ndbClusterConnection = NULL;
 	_ndbPool = NULL;
 }
@@ -51,7 +52,9 @@ void NdbClusterManager::destory()
 int NdbClusterManager::connectToCluster()
 {
 	int ret = 0;
-	/* a object, which represents one connection to a cluster management server which IP is _connectionUrl. */
+	/* a object, which represents one connection to a cluster management server which IP is _connectionUrl.
+	 * creating a Ndb_cluster_connection first before creating NDB
+	 * */
 	_ndbClusterConnection = new Ndb_cluster_connection(_connectionUrl);
 
 	/* connection operation */

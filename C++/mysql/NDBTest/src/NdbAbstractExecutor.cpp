@@ -34,12 +34,12 @@ int NdbAbstractExecutor::execute()
 {
 	if (_selfControlTransaction)
 	{
+		std::cout << "_transaction is null" << std::endl;
 		_transaction->startTransaction();
 	}
 
 	Ndb* ndb = _transaction->getNdb();
 	NdbTransaction* ndbTransaction = _transaction->getNdbTransaction();
-
 	int result = execute(ndb, ndbTransaction);
 
 	return result;
@@ -49,8 +49,10 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 {
 	/* obtain an object for retrieving or manipulating database schema information */
 	const NdbDictionary::Dictionary* myDict= ndb->getDictionary();
+
+	std::string table = _opCondition->getTableName();
 	/* access the table with a known name */
-	const NdbDictionary::Table *myTable= myDict->getTable("api_simple");
+	const NdbDictionary::Table *myTable= myDict->getTable(table.c_str());
 
 	NdbTransaction* myTrans = ndbTransaction;
 
@@ -60,11 +62,10 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 	/* an INSERT operation */
 	setNdbOperationActivity(myOperation);
 
-	/* search condition
-	* insert ATTR2 value in ATTR1 == i
-	* */
+	/* equal */
 	prepareKeyNdbOperation(myOperation, _opCondition);
 
+	/* setValue */
 	prepareNdbOperation(myOperation, _opCondition);
 
 //	/* Before you want to use any operation within the same transaction, you must initialize them this "getNdbOperation" */

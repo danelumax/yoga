@@ -11,22 +11,28 @@
 #include <iostream>
 #include "NdbOperationCondition.h"
 #include "NdbAbstractExecutor.h"
+#include "VernalNdbTransaction.h"
 
-NdbDao::NdbDao() {
-	// TODO Auto-generated constructor stub
-
+NdbDao::NdbDao(Transaction* trans)
+	:_trans(trans)
+{
 }
 
-NdbDao::~NdbDao() {
-	// TODO Auto-generated destructor stub
+NdbDao::~NdbDao()
+{
 }
 
 int NdbDao::insert(Modification& record)
 {
-	NdbOperationCondition noc(NdbOperationCondition::INSERT);
+	std::string tableName = record.getTable();
+	NdbOperationCondition noc(tableName, NdbOperationCondition::INSERT);
 	buildChangeParameters(&record, noc);
-	NdbAbstractExecutor executor(noc, NULL);
+
+	NdbOperationTransaction* ndbOpTransaction = convertTransaction(_trans);
+	NdbAbstractExecutor executor(noc, ndbOpTransaction);
 	executor.execute();
+
+	return 0;
 }
 
 int NdbDao::buildChangeParameters(Modification *change, NdbOperationCondition & noc)
@@ -40,6 +46,20 @@ int NdbDao::buildChangeParameters(Modification *change, NdbOperationCondition & 
 		NdbColumnCondition *column = new NdbColumnCondition(colName, colValue);
 		noc.addChangeColumn(column);
 	}
+
+	return 0;
+}
+
+NdbOperationTransaction* NdbDao::convertTransaction(Transaction* trans)
+{
+    NdbOperationTransaction* ndbOpTransaction = NULL;
+
+    if(trans != NULL)
+    {
+        ndbOpTransaction = (dynamic_cast<VernalNdbTransaction*>(trans))->getNdbTransaction();
+    }
+
+    return ndbOpTransaction;
 }
 
 

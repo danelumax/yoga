@@ -50,8 +50,8 @@ Transaction* DaoFactory::startTransaction()
 	return transaction;
 }
 
-NdbDao *DaoFactory::factoryDao()
+NdbDao *DaoFactory::factoryDao(Transaction* transaction)
 {
-	NdbDao* dao = new NdbDao();
+	NdbDao* dao = new NdbDao(transaction);
 	return dao;
 }

@@ -195,8 +195,6 @@ static void run_application()
 	do_update(ndb);
 	do_delete(ndb);
 	do_read(ndb);
-
-	delete ndb;
 }
 
 void createMysql()

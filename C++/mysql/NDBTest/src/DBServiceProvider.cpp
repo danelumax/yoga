@@ -45,7 +45,12 @@ int DBServiceProvider::insert(Modification& record)
 	dao->insert(record);
 }
 
-NdbDao* DBServiceProvider::getDao()
+NdbDao* DBServiceProvider::getDao(Transaction* transaction)
 {
-	return DaoFactory::getInstance()->factoryDao();
+	return DaoFactory::getInstance()->factoryDao(transaction);
+}
+
+Transaction* DBServiceProvider::startTransaction()
+{
+	return DaoFactory::getInstance()->startTransaction();
 }

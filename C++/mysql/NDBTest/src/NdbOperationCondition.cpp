@@ -7,8 +7,8 @@
 
 #include "NdbOperationCondition.h"
 
-NdbOperationCondition::NdbOperationCondition(Type type)
-	:_type(type)
+NdbOperationCondition::NdbOperationCondition(std::string tableName, Type type)
+	:_tableName(tableName), _type(type)
 {
 }
 
@@ -36,11 +36,18 @@ bool NdbOperationCondition::isSingleRowOpearation()
 int NdbOperationCondition::addChangeColumn(NdbColumnCondition *column)
 {
 	_changeColumns.push_back(column);
+
+	return 0;
 }
 
 std::vector<NdbColumnCondition*> NdbOperationCondition::getChangeColumns()
 {
 	return _changeColumns;
+}
+
+std::string NdbOperationCondition::getTableName()
+{
+	return _tableName;
 }
 
 

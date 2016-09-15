@@ -9,22 +9,24 @@
 #define NDBOPERATIONCONDITION_H_
 
 #include <vector>
+#include <string>
 #include <NdbColumnCondition.h>
 
 class NdbOperationCondition {
 public:
 	enum Type
 	{
-		INSERT = 1,
-		UNKNOWN_OP
+		INSERT = 1
 	};
-	NdbOperationCondition(Type type);
+	NdbOperationCondition(std::string tableName, Type type);
 	virtual ~NdbOperationCondition();
 	Type getType();
 	bool isSingleRowOpearation();
 	int addChangeColumn(NdbColumnCondition* column);
 	std::vector<NdbColumnCondition*> getChangeColumns();
+	std::string getTableName();
 private:
+	std::string _tableName;
 	Type _type;
 	std::vector<NdbColumnCondition*> _changeColumns;
 };

@@ -11,13 +11,16 @@
 #include <map>
 #include <string>
 
-class Modification {
+class Modification
+{
 public:
-	Modification();
+	Modification(std::string table);
 	virtual ~Modification();
 	void addValue(std::string key, int value);
 	std::map<std::string, int> getValues();
+	std::string getTable();
 private:
+	std::string _table;
 	std::map<std::string, int> _values;
 };
 

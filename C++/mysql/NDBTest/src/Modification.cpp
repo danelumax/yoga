@@ -7,7 +7,8 @@
 
 #include "Modification.h"
 
-Modification::Modification()
+Modification::Modification(std::string table)
+	:_table(table)
 {
 }
 
@@ -23,6 +24,11 @@ void Modification::addValue(std::string key, int value)
 std::map<std::string,int> Modification::getValues()
 {
 	return _values;
+}
+
+std::string Modification::getTable()
+{
+	return _table;
 }
 
 

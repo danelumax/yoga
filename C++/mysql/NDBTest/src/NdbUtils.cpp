@@ -64,10 +64,16 @@ int NdbUtils::prepareKeyNdbSingleOp(NdbOperation* oper, NdbOperationCondition* o
 		NdbColumnCondition *cqf = *iter;
 		NdbUtils::setKeyNdbOperationInfo(oper, cqf);
 	}
+
+	return 0;
 }
 
 int NdbUtils::setKeyNdbOperationInfo(NdbOperation * &myOp, NdbColumnCondition* cqf)
 {
+    /*
+	 * search condition
+	 * insert ATTR2 value in ATTR1 == i
+	 * */
 	if (myOp->equal(cqf->getColumnName(), cqf->getColumnValue()) != 0)
 	{
 		std::cout << "NdbUtils::setKeyNdbOperationInfo equal failed" << std::endl;

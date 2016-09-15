@@ -18,7 +18,7 @@ public:
 	static DaoFactory* getInstance();
 	static void destory();
 	Transaction* startTransaction();
-	NdbDao* factoryDao();
+	NdbDao* factoryDao(Transaction* transaction = NULL);
 private:
 	DaoFactory();
 	static DaoFactory* _instance;

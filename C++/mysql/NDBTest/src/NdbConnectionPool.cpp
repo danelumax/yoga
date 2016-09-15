@@ -6,14 +6,18 @@
  */
 
 #include "NdbConnectionPool.h"
+#include <iostream>
+
+const int NdbPoolSize = 10;
 
 NdbConnectionPool::NdbConnectionPool()
-	:_initNdbPoolSize(1), _ndbClusterConnection(NULL),_databaseName("ndb_examples")
+	:_initNdbPoolSize(NdbPoolSize), _ndbClusterConnection(NULL),_databaseName("ndb_examples")
 {
 }
 
 NdbConnectionPool::~NdbConnectionPool()
 {
+    destory();
 }
 
 
@@ -57,9 +61,22 @@ Ndb *NdbConnectionPool::getNdb()
 	if (!_freeQueue.empty())
 	{
 		Ndb* ndb = _freeQueue.front();
-		//_freeQueue.pop();
+		/* must not use same ndb */
+		_freeQueue.pop();
+		/* let ndb obj alive */
+		_busyQueue[ndb] = ndb;
 
 		return ndb;
+	}
+	else
+	{
+		Ndb* ndb = factoryNdb();
+		if (ndb)
+		{
+			/* let ndb obj alive */
+			_busyQueue[ndb] = ndb;
+			return ndb;
+		}
 	}
 
 	return NULL;
@@ -71,4 +88,29 @@ void NdbConnectionPool::addPoolNdb(Ndb *ndb)
 	{
 		_freeQueue.push(ndb);
 	}
+}
+
+void NdbConnectionPool::destory()
+{
+    std::map<Ndb*, Ndb*>::iterator iter;
+    for(iter = _busyQueue.begin(); iter != _busyQueue.end(); iter++)
+    {
+        Ndb* ndb = (*iter).first;
+        if(ndb)
+        {
+            delete ndb;
+        }
+    }
+
+    while(!_freeQueue.empty())
+    {
+    	Ndb* ndb = _freeQueue.front();
+    	_freeQueue.pop();
+    	if (ndb)
+    	{
+    		delete ndb;
+    	}
+    }
+
+    _busyQueue.clear();
 }
