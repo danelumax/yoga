@@ -7,11 +7,15 @@
 
 #include "ResultSet.h"
 
-ResultSet::ResultSet() {
-	// TODO Auto-generated constructor stub
-
+ResultSet::ResultSet()
+{
 }
 
-ResultSet::~ResultSet() {
-	// TODO Auto-generated destructor stub
+ResultSet::~ResultSet()
+{
+}
+
+void ResultSet::addValue(std::string key, std::string value)
+{
+	_value[key] = value;
 }
