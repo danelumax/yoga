@@ -7,7 +7,8 @@
 
 #include "ResultSet.h"
 
-ResultSet::ResultSet()
+ResultSet::ResultSet(std::string table)
+	:_table(table)
 {
 }
 
@@ -15,7 +16,12 @@ ResultSet::~ResultSet()
 {
 }
 
+std::string ResultSet::getTable()
+{
+	return _table;
+}
+
 void ResultSet::addValue(std::string key, std::string value)
 {
-	_value[key] = value;
+	_values[key] = value;
 }

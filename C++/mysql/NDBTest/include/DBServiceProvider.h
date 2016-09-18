@@ -8,9 +8,12 @@
 #ifndef DBSERVICEPROVIDER_H_
 #define DBSERVICEPROVIDER_H_
 
+#include <vector>
 #include "NdbDao.h"
+#include "ResultSet.h"
 #include "Modification.h"
 #include "Transaction.h"
+#include "SearchOption.h"
 
 class DBServiceProvider
 {
@@ -18,6 +21,8 @@ public:
 	virtual ~DBServiceProvider();
 	static DBServiceProvider* getInstance();
 	static void destory();
+	int find(SearchOption& searchOption, ResultSet& record);
+	int find(SearchOption& searchOption, std::vector<ResultSet>& records);
 	int insert(Modification& record);
 	NdbDao* getDao(Transaction* transaction = NULL);
 	Transaction* startTransaction();

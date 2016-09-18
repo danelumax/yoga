@@ -39,6 +39,39 @@ void DBServiceProvider::destory()
 	}
 }
 
+/* single query */
+int DBServiceProvider::find(SearchOption & searchOption, ResultSet & record)
+{
+	std::vector<ResultSet> records;
+	int ret = find(searchOption, records);
+	if (ret == RE_DAO_SUC)
+	{
+		if (records.size() > 0)
+		{
+			record = records[0];
+		}
+		else
+		{
+			ret = RE_DAO_ERROR;
+		}
+	}
+
+	return ret;
+}
+
+int DBServiceProvider::find(SearchOption & searchOption, std::vector<ResultSet> & records)
+{
+	NdbDao* dao = getDao();
+	if (!dao)
+	{
+		return RE_DAO_ERROR;
+	}
+
+	int ret = dao->find(searchOption, records);
+
+	return ret;
+}
+
 int DBServiceProvider::insert(Modification& record)
 {
 	NdbDao* dao = getDao();
