@@ -16,7 +16,9 @@ class NdbOperationCondition {
 public:
 	enum Type
 	{
-		INSERT = 1
+		QUERY_SINGLE = 1,
+		INSERT,
+		UNKNOWN_OP
 	};
 	NdbOperationCondition(std::string tableName, Type type);
 	virtual ~NdbOperationCondition();

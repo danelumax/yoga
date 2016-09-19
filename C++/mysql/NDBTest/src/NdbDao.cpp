@@ -33,6 +33,10 @@ int NdbDao::find(SearchOption & searchOption, std::vector<ResultSet> & records)
 		return RE_DAO_ERROR;
 	}
 
+	std::string tableName = query.getTable();
+	NdbOperationCondition::Type ndbOpType = NdbOperationCondition::UNKNOWN_OP;
+	buildQueryFilterType(query, NdbDao::PURE_QUERY, ndbOpType);
+
 	/* just for test */
 	std::cout << query.getType() << std::endl;
 	std::vector<SearchOption::SearchCriteria*> criteriaVec = query.getCriteriaVector();
@@ -47,7 +51,16 @@ int NdbDao::find(SearchOption & searchOption, std::vector<ResultSet> & records)
 			}
 		}
 	}
+	std::cout << "ndbOpType :" << ndbOpType << std::endl;
 	/* test finished */
+
+	std::vector<NdbColumnCondition*> tempVector;
+	NdbOperationTransaction* ndbOpTransaction = convertTransaction(_trans);
+
+	NdbOperationCondition noc(tableName, ndbOpType);
+	NdbAbstractExecutor executor(noc, ndbOpTransaction);
+
+	return 0;
 }
 
 int NdbDao::insert(Modification& record)
@@ -110,6 +123,28 @@ int NdbDao::buildChangeParameters(Modification *change, NdbOperationCondition & 
 	}
 
 	return 0;
+}
+
+int NdbDao::buildQueryFilterType(NdbSearchOption & query,
+								 NdbDao::QUERY_PURPOSE queryPurpose,
+								 NdbOperationCondition::Type &ndbOpType)
+{
+	NdbSearchOption::Type queryType = query.getType();
+	switch(queryType)
+	{
+		case NdbSearchOption::T_SINGLE_PK:
+		{
+			if (queryPurpose == NdbDao::PURE_QUERY)
+			{
+				ndbOpType = NdbOperationCondition::QUERY_SINGLE;
+			}
+		}
+		default:
+		{
+			return RE_DAO_ERROR;
+		}
+	}
+	return RE_DAO_SUC;
 }
 
 NdbOperationTransaction* NdbDao::convertTransaction(Transaction* trans)

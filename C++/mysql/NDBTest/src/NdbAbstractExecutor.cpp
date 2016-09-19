@@ -115,6 +115,10 @@ int NdbAbstractExecutor::prepareNdbOperation(NdbOperation * &myOp, NdbOperationC
 		{
 			NdbUtils::prepareNdbOperationValues(myOp, opCondition);
 		}
+		default:
+		{
+			return -1;
+		}
 	}
 
 	return 0;
@@ -131,6 +135,10 @@ int NdbAbstractExecutor::executeNdbTransaction(NdbTransaction* &trans)
 			NdbUtils::executeNdbTransaction(trans,
 											NdbTransaction::Commit,
 											NdbOperation::AbortOnError);
+		}
+		default:
+		{
+			return -1;
 		}
 	}
 

@@ -50,6 +50,10 @@ int NdbUtils::setNdbOperationActivity(NdbOperation * &oper, NdbOperationConditio
 			}
 			break;
 		}
+		default:
+		{
+			return -1;
+		}
 	}
 
 	return 0;

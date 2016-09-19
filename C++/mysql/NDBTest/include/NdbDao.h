@@ -23,7 +23,8 @@ class NdbDao : public Dao
 public:
     enum QUERY_PURPOSE
     {
-        QUERY_TO_DELETE=1
+        PURE_QUERY = 1,
+    	QUERY_TO_DELETE
     };
 	NdbDao(Transaction* trans);
 	virtual ~NdbDao();
@@ -33,6 +34,7 @@ public:
 private:
 	NdbOperationTransaction* convertTransaction(Transaction* trans);
 	int buildChangeParameters(Modification* change, NdbOperationCondition &noc);
+	int buildQueryFilterType(NdbSearchOption &query, NdbDao::QUERY_PURPOSE queryPurpose, NdbOperationCondition::Type &ndbOpType);
 	int mapToNdbSearchOption(SearchOption& searchOption, NdbSearchOption& ndbSearchOption);
 };
 

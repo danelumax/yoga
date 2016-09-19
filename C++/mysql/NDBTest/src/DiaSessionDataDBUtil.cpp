@@ -42,6 +42,8 @@ int DiaSessionDataDBUtil::findSessionDatafromDB()
 	ResultSet record(table);
 	DBServiceProvider* db = DBServiceProvider::getInstance();
 	db->find(querySession, record);
+
+	return 0;
 }
 
 
