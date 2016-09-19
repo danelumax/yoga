@@ -192,6 +192,7 @@ static void run_application()
 	Ndb* ndb = NdbClusterManager::getInstance()->getNdb();
 
 	DiaSessionDataDBUtil::insertSessionDataToDB();
+	DiaSessionDataDBUtil::findSessionDatafromDB();
 	do_update(ndb);
 	do_delete(ndb);
 	do_read(ndb);

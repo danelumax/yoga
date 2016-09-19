@@ -11,6 +11,7 @@
 class DiaSessionDataDBUtil {
 public:
 	static int insertSessionDataToDB();
+	static int findSessionDatafromDB();
 private:
 	DiaSessionDataDBUtil(){};
 };

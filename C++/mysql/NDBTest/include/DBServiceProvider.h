@@ -9,7 +9,7 @@
 #define DBSERVICEPROVIDER_H_
 
 #include <vector>
-#include "NdbDao.h"
+#include "Dao.h"
 #include "ResultSet.h"
 #include "Modification.h"
 #include "Transaction.h"
@@ -24,7 +24,7 @@ public:
 	int find(SearchOption& searchOption, ResultSet& record);
 	int find(SearchOption& searchOption, std::vector<ResultSet>& records);
 	int insert(Modification& record);
-	NdbDao* getDao(Transaction* transaction = NULL);
+	Dao* getDao(Transaction* transaction = NULL);
 	Transaction* startTransaction();
 private:
 	DBServiceProvider();

@@ -6,7 +6,8 @@
  */
 
 #include "DiaSessionDataDBUtil.h"
-
+#include "ResultSet.h"
+#include "SearchOption.h"
 #include "Modification.h"
 #include "DBServiceProvider.h"
 #include "VernalNdbTransaction.h"
@@ -24,12 +25,23 @@ int DiaSessionDataDBUtil::insertSessionDataToDB()
 		//modify.addValue("ATTR2", i);
 		DBServiceProvider* db = DBServiceProvider::getInstance();
 		Transaction* transaction = db->startTransaction();
-		NdbDao* dao = db->getDao(transaction);
+		Dao* dao = db->getDao(transaction);
 	    dao->insert(modify);
 	    transaction->commit();
 	}
 
 	return 0;
+}
+
+int DiaSessionDataDBUtil::findSessionDatafromDB()
+{
+	std::string table = "api_simple";
+	SearchOption querySession(table);
+	querySession.addCriteria(SEARCH_OPTION_QUERY_TYPE, SearchOption::CT_EQ, SEARCH_OPTION_QUERY_TYPE_SINGLE_PK);
+	querySession.addCriteria("ATTR2", SearchOption::CT_EQ, "1");
+	ResultSet record(table);
+	DBServiceProvider* db = DBServiceProvider::getInstance();
+	db->find(querySession, record);
 }
 
 

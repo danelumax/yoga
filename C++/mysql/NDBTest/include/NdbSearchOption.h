@@ -23,6 +23,7 @@ public:
 	virtual ~NdbSearchOption();
 	void setTable(std::string table);
 	void setType(NdbSearchOption::Type type);
+	NdbSearchOption::Type getType();
 private:
 	NdbSearchOption::Type _type;
 };

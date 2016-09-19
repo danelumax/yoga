@@ -61,7 +61,7 @@ int DBServiceProvider::find(SearchOption & searchOption, ResultSet & record)
 
 int DBServiceProvider::find(SearchOption & searchOption, std::vector<ResultSet> & records)
 {
-	NdbDao* dao = getDao();
+	Dao* dao = getDao();
 	if (!dao)
 	{
 		return RE_DAO_ERROR;
@@ -74,13 +74,13 @@ int DBServiceProvider::find(SearchOption & searchOption, std::vector<ResultSet> 
 
 int DBServiceProvider::insert(Modification& record)
 {
-	NdbDao* dao = getDao();
+	Dao* dao = getDao();
 	dao->insert(record);
 
 	return 0;
 }
 
-NdbDao* DBServiceProvider::getDao(Transaction* transaction)
+Dao* DBServiceProvider::getDao(Transaction* transaction)
 {
 	return DaoFactory::getInstance()->factoryDao(transaction);
 }

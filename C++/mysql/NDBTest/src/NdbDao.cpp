@@ -15,7 +15,7 @@
 
 
 NdbDao::NdbDao(Transaction* trans)
-	:_trans(trans)
+	:Dao(trans)
 {
 }
 
@@ -32,6 +32,22 @@ int NdbDao::find(SearchOption & searchOption, std::vector<ResultSet> & records)
 	{
 		return RE_DAO_ERROR;
 	}
+
+	/* just for test */
+	std::cout << query.getType() << std::endl;
+	std::vector<SearchOption::SearchCriteria*> criteriaVec = query.getCriteriaVector();
+	std::vector<SearchOption::SearchCriteria*>::iterator iter = criteriaVec.begin();
+	for(; iter!=criteriaVec.end(); ++iter)
+	{
+		SearchOption::SearchCriteria* searchCriteria = *iter;
+		{
+			if (searchCriteria)
+			{
+				std::cout << searchCriteria->key << " " << searchCriteria->type << " " << searchCriteria->value << std::endl;
+			}
+		}
+	}
+	/* test finished */
 }
 
 int NdbDao::insert(Modification& record)

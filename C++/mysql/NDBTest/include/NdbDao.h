@@ -9,6 +9,7 @@
 #define NDBDAO_H_
 
 #include <vector>
+#include "Dao.h"
 #include "ResultSet.h"
 #include "Transaction.h"
 #include "Modification.h"
@@ -17,11 +18,7 @@
 #include "NdbOperationCondition.h"
 #include "NdbOperationTransaction.h"
 
-static const int RE_DAO_SUC = 0;
-static const int RE_DAO_UNAVAILABLE = -1;
-static const int RE_DAO_ERROR = -2;
-
-class NdbDao
+class NdbDao : public Dao
 {
 public:
     enum QUERY_PURPOSE
@@ -31,14 +28,12 @@ public:
 	NdbDao(Transaction* trans);
 	virtual ~NdbDao();
 	//int find(SearchOption& query, ResultSet& record);
-	int find(SearchOption& searchOption, std::vector<ResultSet>& records);
-	int insert(Modification& record);
+	virtual int find(SearchOption& searchOption, std::vector<ResultSet>& records);
+	virtual int insert(Modification& record);
 private:
 	NdbOperationTransaction* convertTransaction(Transaction* trans);
 	int buildChangeParameters(Modification* change, NdbOperationCondition &noc);
 	int mapToNdbSearchOption(SearchOption& searchOption, NdbSearchOption& ndbSearchOption);
-private:
-	Transaction* _trans;
 };
 
 #endif /* NDBDAO_H_ */

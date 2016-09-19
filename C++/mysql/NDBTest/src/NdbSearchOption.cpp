@@ -26,6 +26,11 @@ void NdbSearchOption::setType(NdbSearchOption::Type type)
 	_type = type;
 }
 
+NdbSearchOption::Type NdbSearchOption::getType()
+{
+	return _type;
+}
+
 
 
 
