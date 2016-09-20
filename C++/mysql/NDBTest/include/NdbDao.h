@@ -34,7 +34,16 @@ public:
 private:
 	NdbOperationTransaction* convertTransaction(Transaction* trans);
 	int buildChangeParameters(Modification* change, NdbOperationCondition &noc);
-	int buildQueryFilterType(NdbSearchOption &query, NdbDao::QUERY_PURPOSE queryPurpose, NdbOperationCondition::Type &ndbOpType);
+
+	int buildQueryFilterType(NdbSearchOption &query,
+							 NdbDao::QUERY_PURPOSE queryPurpose,
+							 NdbOperationCondition::Type &ndbOpType);
+
+	int buildQueryFilterCond(SearchOption::CRITERIA_TYPE &ct,
+							 NdbColumnCondition::Condition &cond);
+
+	int buildQueryFilterContent(NdbSearchOption& query, NdbOperationCondition& queryFilter);
+
 	int mapToNdbSearchOption(SearchOption& searchOption, NdbSearchOption& ndbSearchOption);
 };
 

@@ -10,11 +10,6 @@
 #include "NdbUtils.h"
 #include "NdbClusterManager.h"
 
-#define PRINT_ERROR(code,msg) \
-  std::cout << "Error in " << __FILE__ << ", line: " << __LINE__ \
-            << ", code: " << code \
-            << ", msg: " << msg << "." << std::endl
-#define APIERROR(error) {PRINT_ERROR(error.code,error.message); _exit(-1);}
 
 NdbOperationTransaction::NdbOperationTransaction()
 	:_ndb(NULL), _ndbTrans(NULL)

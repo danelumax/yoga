@@ -37,28 +37,32 @@ int NdbDao::find(SearchOption & searchOption, std::vector<ResultSet> & records)
 	NdbOperationCondition::Type ndbOpType = NdbOperationCondition::UNKNOWN_OP;
 	buildQueryFilterType(query, NdbDao::PURE_QUERY, ndbOpType);
 
-	/* just for test */
-	std::cout << query.getType() << std::endl;
-	std::vector<SearchOption::SearchCriteria*> criteriaVec = query.getCriteriaVector();
-	std::vector<SearchOption::SearchCriteria*>::iterator iter = criteriaVec.begin();
-	for(; iter!=criteriaVec.end(); ++iter)
-	{
-		SearchOption::SearchCriteria* searchCriteria = *iter;
-		{
-			if (searchCriteria)
-			{
-				std::cout << searchCriteria->key << " " << searchCriteria->type << " " << searchCriteria->value << std::endl;
-			}
-		}
-	}
-	std::cout << "ndbOpType :" << ndbOpType << std::endl;
-	/* test finished */
+//	/* just for test */
+//	std::cout << query.getType() << std::endl;
+//	std::vector<SearchOption::SearchCriteria*> criteriaVec = query.getCriteriaVector();
+//	std::vector<SearchOption::SearchCriteria*>::iterator iter = criteriaVec.begin();
+//	for(; iter!=criteriaVec.end(); ++iter)
+//	{
+//		SearchOption::SearchCriteria* searchCriteria = *iter;
+//		{
+//			if (searchCriteria)
+//			{
+//				std::cout << searchCriteria->key << " " << searchCriteria->type << " " << searchCriteria->value << std::endl;
+//			}
+//		}
+//	}
+//	std::cout << "ndbOpType :" << ndbOpType << std::endl;
+//	/* test finished */
 
 	std::vector<NdbColumnCondition*> tempVector;
 	NdbOperationTransaction* ndbOpTransaction = convertTransaction(_trans);
 
 	NdbOperationCondition noc(tableName, ndbOpType);
 	NdbAbstractExecutor executor(noc, ndbOpTransaction);
+
+	buildQueryFilterContent(query, noc);
+
+	executor.execute();
 
 	return 0;
 }
@@ -74,6 +78,36 @@ int NdbDao::insert(Modification& record)
 	executor.execute();
 
 	return 0;
+}
+
+int NdbDao::buildQueryFilterContent(NdbSearchOption & query, NdbOperationCondition & queryFilter)
+{
+	std::vector<SearchOption::SearchCriteria*> conditions = query.getCriteriaVector();
+	std::vector<SearchOption::SearchCriteria*>::iterator iter = conditions.begin();
+	for(; iter!=conditions.end(); ++iter)
+	{
+		SearchOption::SearchCriteria* vqc = *iter;
+		if (vqc)
+		{
+			SearchOption::CRITERIA_TYPE ct = vqc->type;
+			NdbColumnCondition::Condition cond;
+			buildQueryFilterCond(ct, cond);
+
+
+//			std::cout << "NdbDao::buildQueryFilterContent tostring:"
+//					  << "\tkey:" << vqc->key
+//					  << "\tvalue:" << vqc->value
+//					  << "\tcond:" << cond << std::endl;
+
+			NdbColumnCondition* ncc = new NdbColumnCondition(vqc->key, vqc->value, cond);
+			if (queryFilter.addQueryColumn(ncc) != 0)
+			{
+				std::cout << "NdbDao::buildQueryFilterContent invalid argument" << std::endl;
+				delete ncc;
+				return RE_DAO_INVALID_ARGUMENT;
+			}
+		}
+	}
 }
 
 int NdbDao::mapToNdbSearchOption(SearchOption & searchOption, NdbSearchOption & ndbSearchOption)
@@ -112,12 +146,12 @@ int NdbDao::mapToNdbSearchOption(SearchOption & searchOption, NdbSearchOption & 
 
 int NdbDao::buildChangeParameters(Modification *change, NdbOperationCondition & noc)
 {
-	std::map<std::string, int> values = change->getValues();
-	std::map<std::string, int>::iterator iter = values.begin();
+	std::map<std::string, std::string> values = change->getValues();
+	std::map<std::string, std::string>::iterator iter = values.begin();
 	for(; iter!=values.end(); ++iter)
 	{
 		std::string colName = iter->first;
-		int colValue = iter->second;
+		std::string colValue = iter->second;
 		NdbColumnCondition *column = new NdbColumnCondition(colName, colValue);
 		noc.addChangeColumn(column);
 	}
@@ -138,12 +172,27 @@ int NdbDao::buildQueryFilterType(NdbSearchOption & query,
 			{
 				ndbOpType = NdbOperationCondition::QUERY_SINGLE;
 			}
+			break;
 		}
 		default:
 		{
 			return RE_DAO_ERROR;
 		}
 	}
+	return RE_DAO_SUC;
+}
+
+int NdbDao::buildQueryFilterCond(SearchOption::CRITERIA_TYPE & ct, NdbColumnCondition::Condition & cond)
+{
+	switch(ct)
+	{
+		case NdbSearchOption::CT_EQ:
+		{
+			cond = NdbColumnCondition::COND_EQ;
+			break;
+		}
+	}
+
 	return RE_DAO_SUC;
 }
 

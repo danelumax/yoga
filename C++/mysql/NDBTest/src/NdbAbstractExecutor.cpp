@@ -34,12 +34,13 @@ int NdbAbstractExecutor::execute()
 {
 	if (_selfControlTransaction)
 	{
-		std::cout << "_transaction is null" << std::endl;
+		std::cout << "Get a new ndb obj and start transaction" << std::endl;
 		_transaction->startTransaction();
 	}
 
 	Ndb* ndb = _transaction->getNdb();
 	NdbTransaction* ndbTransaction = _transaction->getNdbTransaction();
+
 	int result = execute(ndb, ndbTransaction);
 
 	return result;
@@ -59,6 +60,10 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 	NdbOperation *myOperation = NULL;
 	setNdbOperationType(_opCondition, myTable, myTrans, myOperation);
 
+	if (NULL == myOperation)
+	{
+		std::cout << "NdbAbstractExecutor::execute error" << std::endl;
+	}
 	/* an INSERT operation */
 	setNdbOperationActivity(myOperation);
 
@@ -75,9 +80,15 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 	{
 		/* execute a transaction, and execute operation in this trans */
 		executeNdbTransaction(myTrans);
+
+		NdbOperationCondition::Type opType = _opCondition->getType();
+		if (NdbOperationCondition::QUERY_SINGLE == opType)
+		{
+			std::cout << "NdbAbstractExecutor::execute Query data successfully: " << getQuerySpace()->u_32_value() << std::endl;
+		}
 	}
 
-	return 0;
+	return RE_DAO_SUC;
 }
 
 int NdbAbstractExecutor::setNdbOperationType(NdbOperationCondition* opCondition,
@@ -111,9 +122,13 @@ int NdbAbstractExecutor::prepareNdbOperation(NdbOperation * &myOp, NdbOperationC
 
 	switch(opType)
 	{
+		case NdbOperationCondition::QUERY_SINGLE:
+		{
+			return NdbUtils::prepareNdbOperationQuerySpace(myOp, opCondition, this);
+		}
 		case NdbOperationCondition::INSERT:
 		{
-			NdbUtils::prepareNdbOperationValues(myOp, opCondition);
+			return NdbUtils::prepareNdbOperationValues(myOp, opCondition);
 		}
 		default:
 		{
@@ -130,19 +145,34 @@ int NdbAbstractExecutor::executeNdbTransaction(NdbTransaction* &trans)
 
 	switch(opType)
 	{
+		case NdbOperationCondition::QUERY_SINGLE:
+		{
+			return NdbUtils::executeNdbTransaction(trans,
+												   NdbTransaction::NoCommit,
+												   NdbOperation::AbortOnError);
+		}
 		case NdbOperationCondition::INSERT:
 		{
-			NdbUtils::executeNdbTransaction(trans,
-											NdbTransaction::Commit,
-											NdbOperation::AbortOnError);
+			return _transaction->commitTransaction();
 		}
 		default:
 		{
+			std::cout << "NdbAbstractExecutor::executeNdbTransaction unsupported operation type" << std::endl;
 			return -1;
 		}
 	}
 
 	return 0;
+}
+
+NdbRecAttr* NdbAbstractExecutor::getQuerySpace()
+{
+	return _ptr_attrs;
+}
+
+void NdbAbstractExecutor::setQuerySpace(NdbRecAttr* attr)
+{
+	_ptr_attrs = attr;
 }
 
 

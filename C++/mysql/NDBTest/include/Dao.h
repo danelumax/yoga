@@ -16,6 +16,7 @@
 static const int RE_DAO_SUC = 0;
 static const int RE_DAO_UNAVAILABLE = -1;
 static const int RE_DAO_ERROR = -2;
+static const int RE_DAO_INVALID_ARGUMENT = -5;
 
 class Dao
 {

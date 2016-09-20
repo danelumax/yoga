@@ -13,13 +13,20 @@
 class NdbColumnCondition
 {
 public:
-	NdbColumnCondition(std::string columnName, int columnValue);
+	enum Condition
+	{
+		COND_EQ = 0
+	};
+	NdbColumnCondition(std::string columnName,
+					   std::string columnValue,
+					   NdbColumnCondition::Condition op = NdbColumnCondition::COND_EQ);
 	virtual ~NdbColumnCondition();
 	const char* getColumnName();
-	int getColumnValue();
+	std::string getColumnValue();
 private:
 	std::string _columnName;
-	int _columnValue;
+	std::string _columnValue;
+	NdbColumnCondition::Condition _op;
 };
 
 #endif /* NDBCOLUMNCONDITION_H_ */

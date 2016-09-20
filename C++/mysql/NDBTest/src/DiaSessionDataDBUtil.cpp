@@ -24,10 +24,13 @@ int DiaSessionDataDBUtil::insertSessionDataToDB()
 		modify.addValue("ATTR1", i);
 		//modify.addValue("ATTR2", i);
 		DBServiceProvider* db = DBServiceProvider::getInstance();
+
 		Transaction* transaction = db->startTransaction();
 		Dao* dao = db->getDao(transaction);
 	    dao->insert(modify);
 	    transaction->commit();
+
+	    //db->insert(modify);
 	}
 
 	return 0;
@@ -38,7 +41,7 @@ int DiaSessionDataDBUtil::findSessionDatafromDB()
 	std::string table = "api_simple";
 	SearchOption querySession(table);
 	querySession.addCriteria(SEARCH_OPTION_QUERY_TYPE, SearchOption::CT_EQ, SEARCH_OPTION_QUERY_TYPE_SINGLE_PK);
-	querySession.addCriteria("ATTR2", SearchOption::CT_EQ, "1");
+	querySession.addCriteria("ATTR1", SearchOption::CT_EQ, "6");
 	ResultSet record(table);
 	DBServiceProvider* db = DBServiceProvider::getInstance();
 	db->find(querySession, record);

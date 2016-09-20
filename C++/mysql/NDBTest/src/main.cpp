@@ -25,13 +25,8 @@
 
 #include "NdbUtils.h"
 #include "NdbClusterManager.h"
-//#include "DBServiceProvider.h"
 #include "NdbOperationTransaction.h"
 #include "DiaSessionDataDBUtil.h"
-//#include "Modification.h"
-//#include "DaoFactory.h"
-//#include "NdbAbstractExecutor.h"
-//#include "NdbOperationCondition.h"
 
 #define PRINT_ERROR(code,msg) \
   std::cout << "Error in " << __FILE__ << ", line: " << __LINE__ \
@@ -191,11 +186,17 @@ static void run_application()
 {
 	Ndb* ndb = NdbClusterManager::getInstance()->getNdb();
 
+	std::cout << "\ninsert" << std::endl;
 	DiaSessionDataDBUtil::insertSessionDataToDB();
-	DiaSessionDataDBUtil::findSessionDatafromDB();
+	std::cout << "\nupdate" << std::endl;
 	do_update(ndb);
+	std::cout << "\ndelete" << std::endl;
 	do_delete(ndb);
+	std::cout << "\nread" << std::endl;
 	do_read(ndb);
+
+	std::cout << "\nfind" << std::endl;
+	DiaSessionDataDBUtil::findSessionDatafromDB();
 }
 
 void createMysql()

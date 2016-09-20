@@ -7,8 +7,12 @@
 
 #include "NdbColumnCondition.h"
 
-NdbColumnCondition::NdbColumnCondition(std::string columnName, int columnValue)
-	:_columnName(columnName), _columnValue(columnValue)
+NdbColumnCondition::NdbColumnCondition(std::string columnName,
+									   std::string columnValue,
+									   NdbColumnCondition::Condition op)
+	:_columnName(columnName),
+	 _columnValue(columnValue),
+	 _op(op)
 {
 }
 
@@ -21,7 +25,7 @@ const char* NdbColumnCondition::getColumnName()
 	return _columnName.c_str();
 }
 
-int NdbColumnCondition::getColumnValue()
+std::string NdbColumnCondition::getColumnValue()
 {
 	return _columnValue;
 }

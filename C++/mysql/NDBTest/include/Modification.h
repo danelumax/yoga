@@ -17,11 +17,12 @@ public:
 	Modification(std::string table);
 	virtual ~Modification();
 	void addValue(std::string key, int value);
-	std::map<std::string, int> getValues();
+	void addValue(std::string key, std::string value);
+	std::map<std::string, std::string> getValues();
 	std::string getTable();
 private:
 	std::string _table;
-	std::map<std::string, int> _values;
+	std::map<std::string, std::string> _values;
 };
 
 #endif /* MODIFICATION_H_ */

@@ -11,6 +11,7 @@
 #include <NdbApi.hpp>
 #include <NdbOperationCondition.h>
 #include <NdbColumnCondition.h>
+#include <NdbAbstractExecutor.h>
 
 class NdbUtils {
 public:
@@ -30,6 +31,10 @@ public:
 	static int setKeyNdbOperationInfo(NdbOperation * &myOp, NdbColumnCondition* cqf);
 
 	static int prepareNdbOperationValues(NdbOperation* myOp, NdbOperationCondition* opCondition);
+
+	static int prepareNdbOperationQuerySpace(NdbOperation* oper,
+											 NdbOperationCondition* opCondition,
+											 NdbAbstractExecutor* queryExecutor);
 
 
 };

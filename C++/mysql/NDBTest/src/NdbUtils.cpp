@@ -6,8 +6,8 @@
  */
 
 #include "NdbUtils.h"
+#include <stdlib.h>
 #include <iostream>
-
 
 
 int NdbUtils::executeNdbTransaction(NdbTransaction *& trans,
@@ -28,10 +28,21 @@ int NdbUtils::setNdbOperationType(NdbOperationCondition* opCondition,
                                   NdbTransaction* &myTrans,
                                   NdbOperation * &myOp)
 {
+	if (NULL == opCondition)
+	{
+		std::cout << "NdbUtils::setNdbOperationType invalid operation condition NULL argument." << std::endl;
+		return -1;
+	}
 	bool singleRowOp = opCondition->isSingleRowOpearation();
 	if (singleRowOp)
 	{
 		myOp = myTrans->getNdbOperation(myTable);
+	}
+
+	if (NULL == myOp)
+	{
+		std::cout << "NdbUtils::setNdbOperationType ndb error" << std::endl;
+		return -1;
 	}
 	return 0;
 }
@@ -41,6 +52,15 @@ int NdbUtils::setNdbOperationActivity(NdbOperation * &oper, NdbOperationConditio
 	NdbOperationCondition::Type opType = noc.getType();
 	switch(opType)
 	{
+		case NdbOperationCondition::QUERY_SINGLE:
+		{
+			if (oper->readTuple(NdbOperation::LM_CommittedRead) != 0)
+			{
+				std::cout << "NdbUtils::setNdbOperationActivity QUERY_SINGLE tuple ndb error" << std::endl;
+				return -1;
+			}
+			break;
+		}
 		case NdbOperationCondition::INSERT:
 		{
 			if (oper->insertTuple() != 0)
@@ -61,7 +81,27 @@ int NdbUtils::setNdbOperationActivity(NdbOperation * &oper, NdbOperationConditio
 
 int NdbUtils::prepareKeyNdbSingleOp(NdbOperation* oper, NdbOperationCondition* opCondition)
 {
-	std::vector<NdbColumnCondition*> columnVector = opCondition->getChangeColumns();
+	std::vector<NdbColumnCondition*> columnVector;
+
+	if (opCondition->getType() == NdbOperationCondition::INSERT)
+	{
+		if (!opCondition->hasChangeColumn())
+		{
+			std::cout << "NdbUtils::prepareKeyNdbSingleOp to insert action, no available column found." << std::endl;
+			return -1;
+		}
+		columnVector = opCondition->getChangeColumns();
+	}
+	else
+	{
+		if (!opCondition->hasQueryColumn())
+		{
+			std::cout << "NdbUtils::prepareKeyNdbSingleOp the condition has no available query column." << std::endl;
+			return -1;
+		}
+		columnVector = opCondition->getQueryColumns();
+	}
+
 	std::vector<NdbColumnCondition*>::iterator iter = columnVector.begin();
 	for(; iter!=columnVector.end(); ++iter)
 	{
@@ -74,11 +114,17 @@ int NdbUtils::prepareKeyNdbSingleOp(NdbOperation* oper, NdbOperationCondition* o
 
 int NdbUtils::setKeyNdbOperationInfo(NdbOperation * &myOp, NdbColumnCondition* cqf)
 {
-    /*
+	int tempValue = atoi((cqf->getColumnValue()).c_str());
+
+//	std::cout << "NdbUtils::setKeyNdbOperationInfo tostring:"
+//			  << "\tkey:" << cqf->getColumnName()
+//			  << "\tvalue:" << tempValue << std::endl;
+
+	/*
 	 * search condition
 	 * insert ATTR2 value in ATTR1 == i
 	 * */
-	if (myOp->equal(cqf->getColumnName(), cqf->getColumnValue()) != 0)
+	if (myOp->equal(cqf->getColumnName(), tempValue) != 0)
 	{
 		std::cout << "NdbUtils::setKeyNdbOperationInfo equal failed" << std::endl;
 		return -1;
@@ -94,11 +140,27 @@ int NdbUtils::prepareNdbOperationValues(NdbOperation* myOp, NdbOperationConditio
 	for(; iter!=columnVector.end(); ++iter)
 	{
 		NdbColumnCondition *cqf = *iter;
-		if (myOp->setValue("ATTR2", cqf->getColumnValue()) != 0)
+
+		int tempValue = atoi((cqf->getColumnValue()).c_str());
+		if (myOp->setValue("ATTR2", tempValue) != 0)
 		{
 			std::cout << "NdbUtils::prepareNdbOperationValues setValue failed" << std::endl;
 		}
 	}
 
 	return 0;
+}
+
+int NdbUtils::prepareNdbOperationQuerySpace(NdbOperation* oper,
+											NdbOperationCondition* opCondition,
+											NdbAbstractExecutor* queryExecutor)
+{
+	std::string tableName = opCondition->getTableName();
+	NdbRecAttr* querySpace = queryExecutor->getQuerySpace();
+	querySpace = oper->getValue("ATTR2", NULL);
+	queryExecutor->setQuerySpace(querySpace);
+	if (NULL == queryExecutor->getQuerySpace())
+	{
+		std::cout << "NdbUtils::prepareNdbOperationQuerySpace error" << std::endl;
+	}
 }

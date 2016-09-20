@@ -24,12 +24,17 @@ public:
 	virtual ~NdbOperationCondition();
 	Type getType();
 	bool isSingleRowOpearation();
+	int addQueryColumn(NdbColumnCondition* column);
 	int addChangeColumn(NdbColumnCondition* column);
+	bool hasQueryColumn();
+	bool hasChangeColumn();
+	std::vector<NdbColumnCondition*> getQueryColumns();
 	std::vector<NdbColumnCondition*> getChangeColumns();
 	std::string getTableName();
 private:
 	std::string _tableName;
 	Type _type;
+	std::vector<NdbColumnCondition*> _queryColumns;
 	std::vector<NdbColumnCondition*> _changeColumns;
 };
 

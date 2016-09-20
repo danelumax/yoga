@@ -8,7 +8,7 @@
 #include "NdbConnectionPool.h"
 #include <iostream>
 
-const int NdbPoolSize = 10;
+const int NdbPoolSize = 20;
 
 NdbConnectionPool::NdbConnectionPool()
 	:_initNdbPoolSize(NdbPoolSize), _ndbClusterConnection(NULL),_databaseName("ndb_examples")
