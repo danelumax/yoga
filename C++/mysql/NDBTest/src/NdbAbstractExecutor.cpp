@@ -99,8 +99,9 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 		NdbOperationCondition::Type opType = _opCondition->getType();
 		if (NdbOperationCondition::QUERY_SINGLE == opType)
 		{
-			NdbRecAttr** ndbRecAttrPtr = getQuerySpace();
-			std::cout << "NdbAbstractExecutor::execute Query data successfully: " << ndbRecAttrPtr[0]->u_32_value() << std::endl;
+			//std::string sink("");
+			//NdbUtils::sinkValues(this, sink);
+			//std::cout << "NdbAbstractExecutor::execute Query data successfully: " << sink << std::endl;
 		}
 	}
 

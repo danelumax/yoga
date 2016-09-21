@@ -9,11 +9,13 @@
 #define NDBUTILS_H_
 
 #include <NdbApi.hpp>
+#include "NdbRowData.h"
 #include <NdbOperationCondition.h>
 #include <NdbColumnCondition.h>
 #include <NdbAbstractExecutor.h>
 
-class NdbUtils {
+class NdbUtils
+{
 public:
 	static int executeNdbTransaction(NdbTransaction* &trans,
 									 NdbTransaction::ExecType execType,
@@ -38,6 +40,11 @@ public:
 
 	static bool isValidColumnName(const std::string& columnName);
 
+	static int getValue(NdbRecAttr* ndbRecAttr, std::string& sink);
+
+	static NdbRecAttr* findNdbRecAttr(NdbRecAttr** querySpace);
+
+	static int sinkValues(NdbAbstractExecutor* queryExecutor, NdbRowData& sink);
 
 };
 

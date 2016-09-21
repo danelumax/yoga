@@ -6,7 +6,6 @@
  */
 
 #include "DiaSessionDataDBUtil.h"
-#include "ResultSet.h"
 #include "SearchOption.h"
 #include "Modification.h"
 #include "DBServiceProvider.h"
@@ -38,15 +37,29 @@ int DiaSessionDataDBUtil::insertSessionDataToDB()
 
 int DiaSessionDataDBUtil::findSessionDatafromDB()
 {
+	int ret = 0;
 	std::string table = "api_simple";
 	SearchOption querySession(table);
 	querySession.addCriteria(SEARCH_OPTION_QUERY_TYPE, SearchOption::CT_EQ, SEARCH_OPTION_QUERY_TYPE_SINGLE_PK);
 	querySession.addCriteria("ATTR1", SearchOption::CT_EQ, "6");
-	ResultSet record(table);
+	ResultSet record;
 	DBServiceProvider* db = DBServiceProvider::getInstance();
-	db->find(querySession, record);
+	ret = db->find(querySession, record);
+	if (RE_DAO_SUC != ret)
+	{
+		std::cout << "DiaSessionDataDBUtil::findSessionDatafromDB Find failed" << std::endl;
+	}
+
+	sinkValueForSessionTable(record);
 
 	return 0;
+}
+
+void DiaSessionDataDBUtil::sinkValueForSessionTable(ResultSet& record)
+{
+	std::map<std::string, std::string> test = record.getValues();
+	std::map<std::string, std::string>::iterator iter = test.find("ATTR2");
+	std::cout << "DiaSessionDataDBUtil::sinkValueForSessionTable find: " << iter->second << std::endl;
 }
 
 

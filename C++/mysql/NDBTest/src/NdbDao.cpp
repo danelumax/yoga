@@ -65,6 +65,8 @@ int NdbDao::find(SearchOption & searchOption, std::vector<ResultSet> & records)
 
 	executor.execute();
 
+	buildQueryResult(&executor, records);
+
 	return 0;
 }
 
@@ -212,6 +214,17 @@ int NdbDao::buildQueryFilterCond(SearchOption::CRITERIA_TYPE & ct, NdbColumnCond
 	return RE_DAO_SUC;
 }
 
+int NdbDao::buildQueryResult(NdbAbstractExecutor* queryExecutor, std::vector<ResultSet>& records)
+{
+	ResultSet sink;
+	NdbRowData rowData;
+	NdbUtils::sinkValues(queryExecutor, rowData);
+
+	mapNdbRowDataToResultSet(rowData, sink);
+
+	records.push_back(sink);
+}
+
 NdbOperationTransaction* NdbDao::convertTransaction(Transaction* trans)
 {
     NdbOperationTransaction* ndbOpTransaction = NULL;
@@ -222,5 +235,15 @@ NdbOperationTransaction* NdbDao::convertTransaction(Transaction* trans)
     }
 
     return ndbOpTransaction;
+}
+
+void NdbDao::mapNdbRowDataToResultSet(NdbRowData& rowData, ResultSet& resultSet)
+{
+	std::map<std::string, std::string> values = rowData.getValues();
+	std::map<std::string, std::string>::iterator iter = values.begin();
+	for(; iter!=values.end(); ++iter)
+	{
+		resultSet.addValue(iter->first, iter->second);
+	}
 }
 

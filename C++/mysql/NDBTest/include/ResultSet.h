@@ -14,10 +14,11 @@
 class ResultSet
 {
 public:
-	ResultSet(std::string table);
+	ResultSet();
 	virtual ~ResultSet();
 	std::string getTable();
 	void addValue(std::string key, std::string value);
+	std::map<std::string, std::string> getValues();
 private:
 	std::string _table;
 	std::map<std::string, std::string> _values;

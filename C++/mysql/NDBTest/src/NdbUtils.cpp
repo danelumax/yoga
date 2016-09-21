@@ -8,6 +8,7 @@
 #include "NdbUtils.h"
 #include <stdlib.h>
 #include <iostream>
+#include <sstream>
 
 
 int NdbUtils::executeNdbTransaction(NdbTransaction *& trans,
@@ -177,4 +178,49 @@ bool NdbUtils::isValidColumnName(const std::string& columnName)
 	}
 
 	return ret;
+}
+
+int NdbUtils::getValue(NdbRecAttr* ndbRecAttr, std::string& sink)
+{
+	if (NULL == ndbRecAttr)
+	{
+		std::cout << "NdbUtils::getValue invalid NULL argument." << std::endl;
+		return -1;
+	}
+
+	std::ostringstream oss;
+	if (0 == ndbRecAttr->isNULL())
+	{
+		oss << ndbRecAttr->u_32_value();
+	}
+
+	sink = oss.str();
+
+	return 0;
+}
+
+NdbRecAttr* NdbUtils::findNdbRecAttr(NdbRecAttr** querySpace)
+{
+	NdbRecAttr* ndbRecAttr = NULL;
+
+	ndbRecAttr = querySpace[0];
+
+	if (NULL == ndbRecAttr)
+	{
+		std::cout << "NdbUtils::findNdbRecAttr No NdbRecAttr found" << std::endl;
+	}
+
+	return ndbRecAttr;
+}
+
+int NdbUtils::sinkValues(NdbAbstractExecutor* queryExecutor, NdbRowData& sink)
+{
+	std::string valueSink("");
+	NdbRecAttr** querySpace = queryExecutor->getQuerySpace();
+
+	NdbRecAttr* ndbRecAttr = findNdbRecAttr(querySpace);
+
+	getValue(ndbRecAttr, valueSink);
+
+	sink.addValue("ATTR2", valueSink);
 }

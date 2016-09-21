@@ -11,10 +11,12 @@
 #include <vector>
 #include "Dao.h"
 #include "ResultSet.h"
+#include "NdbRowData.h"
 #include "Transaction.h"
 #include "Modification.h"
 #include "SearchOption.h"
 #include "NdbSearchOption.h"
+#include "NdbAbstractExecutor.h"
 #include "NdbOperationCondition.h"
 #include "NdbOperationTransaction.h"
 
@@ -44,7 +46,12 @@ private:
 
 	int buildQueryFilterContent(NdbSearchOption& query, NdbOperationCondition& queryFilter);
 
+	int buildQueryResult(NdbAbstractExecutor* queryExecutor, std::vector<ResultSet>& records);
+
 	int mapToNdbSearchOption(SearchOption& searchOption, NdbSearchOption& ndbSearchOption);
+
+	void mapNdbRowDataToResultSet(NdbRowData& rowData, ResultSet& resultSet);
+
 };
 
 #endif /* NDBDAO_H_ */
