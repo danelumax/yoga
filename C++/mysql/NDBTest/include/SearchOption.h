@@ -32,10 +32,13 @@ public:
 
 	SearchOption(std::string table);
 	virtual ~SearchOption();
+
 	std::string getTable();
 	void addCriteria(std::string key, SearchOption::CRITERIA_TYPE ct, std::string value);
 	int getCriteria(std::string key, std::string &value);
 	std::vector<SearchOption::SearchCriteria*> getCriteriaVector();
+	bool isHelpSearchKey(const std::string& key);
+
 protected:
 	std::string _table;
 	std::vector<SearchOption::SearchCriteria*> _criteriaVector;

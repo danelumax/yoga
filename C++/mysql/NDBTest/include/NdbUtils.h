@@ -36,6 +36,8 @@ public:
 											 NdbOperationCondition* opCondition,
 											 NdbAbstractExecutor* queryExecutor);
 
+	static bool isValidColumnName(const std::string& columnName);
+
 
 };
 

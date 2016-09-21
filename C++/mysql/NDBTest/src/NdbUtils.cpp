@@ -156,11 +156,25 @@ int NdbUtils::prepareNdbOperationQuerySpace(NdbOperation* oper,
 											NdbAbstractExecutor* queryExecutor)
 {
 	std::string tableName = opCondition->getTableName();
-	NdbRecAttr* querySpace = queryExecutor->getQuerySpace();
-	querySpace = oper->getValue("ATTR2", NULL);
-	queryExecutor->setQuerySpace(querySpace);
+	NdbRecAttr** querySpace = queryExecutor->getQuerySpace();
+	querySpace[0] = oper->getValue("ATTR2", NULL);
+	//queryExecutor->setQuerySpace(querySpace);
 	if (NULL == queryExecutor->getQuerySpace())
 	{
 		std::cout << "NdbUtils::prepareNdbOperationQuerySpace error" << std::endl;
+		return -1;
 	}
+
+	return 0;
+}
+
+bool NdbUtils::isValidColumnName(const std::string& columnName)
+{
+	bool ret = false;
+	if (columnName.compare(SEARCH_OPTION_QUERY_TYPE)!= 0)
+	{
+		ret = true;
+	}
+
+	return ret;
 }

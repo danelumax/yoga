@@ -63,4 +63,14 @@ std::vector<SearchOption::SearchCriteria*> SearchOption::getCriteriaVector()
 	return _criteriaVector;
 }
 
+bool SearchOption::isHelpSearchKey(const std::string& key)
+{
+	bool found = false;
+	if (key.compare(SEARCH_OPTION_QUERY_TYPE) == 0)
+	{
+		found = true;
+	}
+
+	return found;
+}
 

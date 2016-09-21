@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include "NdbUtils.h"
 #include "NdbOperationCondition.h"
 #include "NdbAbstractExecutor.h"
 #include "VernalNdbTransaction.h"
@@ -108,8 +109,14 @@ int NdbDao::buildQueryFilterContent(NdbSearchOption & query, NdbOperationConditi
 			}
 		}
 	}
+
+	return RE_DAO_SUC;
 }
 
+/*
+ * map searchOption to ndbSearchOption
+ * skip SEARCH_OPTION_QUERY_TYPE query
+ * */
 int NdbDao::mapToNdbSearchOption(SearchOption & searchOption, NdbSearchOption & ndbSearchOption)
 {
 	ndbSearchOption.setTable(searchOption.getTable());
@@ -136,7 +143,16 @@ int NdbDao::mapToNdbSearchOption(SearchOption & searchOption, NdbSearchOption & 
 		{
 			if (searchCriteria)
 			{
-				ndbSearchOption.addCriteria(searchCriteria->key, searchCriteria->type, searchCriteria->value);
+				/* skip SEARCH_OPTION_QUERY_TYPE */
+				if (NdbUtils::isValidColumnName(searchCriteria->key))
+				{
+					ndbSearchOption.addCriteria(searchCriteria->key, searchCriteria->type, searchCriteria->value);
+				}
+				else if (!searchOption.isHelpSearchKey(searchCriteria->key))
+				{
+					std::cout << "NdbDao::mapToNdbSearchOption invalid search argument" << std::endl;
+					return -1;
+				}
 			}
 		}
 	}

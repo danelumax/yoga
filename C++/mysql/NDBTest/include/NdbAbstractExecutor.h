@@ -20,7 +20,7 @@ public:
 	NdbAbstractExecutor(NdbOperationCondition& opCondition, NdbOperationTransaction* transaction = NULL);
 	virtual ~NdbAbstractExecutor();
 	int execute();
-	NdbRecAttr* getQuerySpace();
+	NdbRecAttr** getQuerySpace();
 	void setQuerySpace(NdbRecAttr* attr);
 private:
 	int execute(Ndb* ndb, NdbTransaction* ndbTransaction);
@@ -36,7 +36,7 @@ private:
 	NdbOperationCondition* _opCondition;
     NdbOperationTransaction* _transaction;
     bool _selfControlTransaction;
-    NdbRecAttr* _ptr_attrs;
+    NdbRecAttr** _ptr_attrs;
 };
 
 #endif /* NDBABSTRACTEXECUTOR_H_ */

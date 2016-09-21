@@ -9,15 +9,24 @@
 #include <iostream>
 #include "NdbUtils.h"
 
+const int columnCount = 20;
+
 NdbAbstractExecutor::NdbAbstractExecutor(NdbOperationCondition& opCondition, NdbOperationTransaction* transaction)
 	:_opCondition(&opCondition),
 	 _transaction(transaction),
-	 _selfControlTransaction(false)
+	 _selfControlTransaction(false),
+	 _ptr_attrs(NULL)
 {
 	if (_transaction == NULL)
 	{
 		_transaction = new NdbOperationTransaction();
 		_selfControlTransaction = true;
+	}
+
+	_ptr_attrs = new NdbRecAttr*[columnCount];
+	for(int i=0; i<columnCount; i++)
+	{
+		_ptr_attrs[i] = NULL;
 	}
 }
 
@@ -27,6 +36,12 @@ NdbAbstractExecutor::~NdbAbstractExecutor()
 	{
 		delete _transaction;
 		_transaction = NULL;
+	}
+
+	if (_ptr_attrs)
+	{
+		delete[] _ptr_attrs;
+		_ptr_attrs = NULL;
 	}
 }
 
@@ -84,7 +99,8 @@ int NdbAbstractExecutor::execute(Ndb* ndb, NdbTransaction* ndbTransaction)
 		NdbOperationCondition::Type opType = _opCondition->getType();
 		if (NdbOperationCondition::QUERY_SINGLE == opType)
 		{
-			std::cout << "NdbAbstractExecutor::execute Query data successfully: " << getQuerySpace()->u_32_value() << std::endl;
+			NdbRecAttr** ndbRecAttrPtr = getQuerySpace();
+			std::cout << "NdbAbstractExecutor::execute Query data successfully: " << ndbRecAttrPtr[0]->u_32_value() << std::endl;
 		}
 	}
 
@@ -165,14 +181,8 @@ int NdbAbstractExecutor::executeNdbTransaction(NdbTransaction* &trans)
 	return 0;
 }
 
-NdbRecAttr* NdbAbstractExecutor::getQuerySpace()
+NdbRecAttr** NdbAbstractExecutor::getQuerySpace()
 {
 	return _ptr_attrs;
 }
-
-void NdbAbstractExecutor::setQuerySpace(NdbRecAttr* attr)
-{
-	_ptr_attrs = attr;
-}
-
 
