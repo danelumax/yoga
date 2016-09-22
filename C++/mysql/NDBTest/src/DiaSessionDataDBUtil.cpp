@@ -45,6 +45,10 @@ int DiaSessionDataDBUtil::findSessionDatafromDB()
 	ResultSet record;
 	DBServiceProvider* db = DBServiceProvider::getInstance();
 	ret = db->find(querySession, record);
+	if (RE_DAO_NO_DATA == ret)
+	{
+		std::cout << "DiaSessionDataDBUtil::findSessionDatafromDB Can't find in DB" << std::endl;
+	}
 	if (RE_DAO_SUC != ret)
 	{
 		std::cout << "DiaSessionDataDBUtil::findSessionDatafromDB Find failed" << std::endl;

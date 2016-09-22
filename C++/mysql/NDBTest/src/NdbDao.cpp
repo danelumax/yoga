@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include "NdbUtils.h"
+#include "NdbWrapperCode.h"
 #include "NdbOperationCondition.h"
 #include "NdbAbstractExecutor.h"
 #include "VernalNdbTransaction.h"
@@ -38,23 +39,6 @@ int NdbDao::find(SearchOption & searchOption, std::vector<ResultSet> & records)
 	NdbOperationCondition::Type ndbOpType = NdbOperationCondition::UNKNOWN_OP;
 	buildQueryFilterType(query, NdbDao::PURE_QUERY, ndbOpType);
 
-//	/* just for test */
-//	std::cout << query.getType() << std::endl;
-//	std::vector<SearchOption::SearchCriteria*> criteriaVec = query.getCriteriaVector();
-//	std::vector<SearchOption::SearchCriteria*>::iterator iter = criteriaVec.begin();
-//	for(; iter!=criteriaVec.end(); ++iter)
-//	{
-//		SearchOption::SearchCriteria* searchCriteria = *iter;
-//		{
-//			if (searchCriteria)
-//			{
-//				std::cout << searchCriteria->key << " " << searchCriteria->type << " " << searchCriteria->value << std::endl;
-//			}
-//		}
-//	}
-//	std::cout << "ndbOpType :" << ndbOpType << std::endl;
-//	/* test finished */
-
 	std::vector<NdbColumnCondition*> tempVector;
 	NdbOperationTransaction* ndbOpTransaction = convertTransaction(_trans);
 
@@ -63,11 +47,12 @@ int NdbDao::find(SearchOption & searchOption, std::vector<ResultSet> & records)
 
 	buildQueryFilterContent(query, noc);
 
-	executor.execute();
+	int rt = executor.execute();
+	rt = convertReturnCode(rt);
 
 	buildQueryResult(&executor, records);
 
-	return 0;
+	return rt;
 }
 
 int NdbDao::insert(Modification& record)
@@ -95,7 +80,6 @@ int NdbDao::buildQueryFilterContent(NdbSearchOption & query, NdbOperationConditi
 			SearchOption::CRITERIA_TYPE ct = vqc->type;
 			NdbColumnCondition::Condition cond;
 			buildQueryFilterCond(ct, cond);
-
 
 //			std::cout << "NdbDao::buildQueryFilterContent tostring:"
 //					  << "\tkey:" << vqc->key
@@ -223,6 +207,8 @@ int NdbDao::buildQueryResult(NdbAbstractExecutor* queryExecutor, std::vector<Res
 	mapNdbRowDataToResultSet(rowData, sink);
 
 	records.push_back(sink);
+
+	return 0;
 }
 
 NdbOperationTransaction* NdbDao::convertTransaction(Transaction* trans)
@@ -247,3 +233,15 @@ void NdbDao::mapNdbRowDataToResultSet(NdbRowData& rowData, ResultSet& resultSet)
 	}
 }
 
+int NdbDao::convertReturnCode(int ndbReturnCode)
+{
+	int rt = RE_DAO_SUC;
+
+	if ( NDB_ERR_NO_DATA == ndbReturnCode)
+	{
+		std::cout << "NdbDao::convertReturnCode no data found." << std::endl;
+		rt = RE_DAO_NO_DATA;
+	}
+
+	return rt;
+}

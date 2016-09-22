@@ -9,19 +9,24 @@
 #include <stdlib.h>
 #include <iostream>
 #include <sstream>
+#include <NdbWrapperCode.h>
 
 
 int NdbUtils::executeNdbTransaction(NdbTransaction *& trans,
 									NdbTransaction::ExecType execType,
 									NdbOperation::AbortOption abortOp)
 {
-	if (trans->execute(execType, abortOp, 1) < 0)
+	if (trans->execute(execType, abortOp, 1) != 0)
 	{
 		std::cout << "NdbUtils::executeNdbTransaction ndb error\n\n" << std::endl;
-		return -1;
+		if (trans->getNdbError().code == NDB_ERR_NO_DATA)
+		{
+			std::cout << "NdbUtils::executeNdbTransaction result: no data found" << std::endl;
+			return RE_DAO_NO_DATA;
+		}
 	}
 
-	return 0;
+	return RE_NDB_SUC;
 }
 
 int NdbUtils::setNdbOperationType(NdbOperationCondition* opCondition,

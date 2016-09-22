@@ -52,6 +52,8 @@ private:
 
 	void mapNdbRowDataToResultSet(NdbRowData& rowData, ResultSet& resultSet);
 
+	int convertReturnCode(int ndbReturnCode);
+
 };
 
 #endif /* NDBDAO_H_ */
