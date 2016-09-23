@@ -23,6 +23,7 @@ public:
     void SearchUserData(std::string search_key, int search_id);
     void DeleteUserData(std::string search_key, int search_id);
     void ShowHelp();
+    int CheckDelete(Userdata* userData);
 
 private:
     std::vector<Userdata*> _userDataVec;

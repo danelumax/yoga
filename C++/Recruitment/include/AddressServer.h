@@ -23,7 +23,6 @@ public:
 	void registerState();
 	void run();
 	int updatePrefix(const std::string order, std::string& prefix);
-	std::string toLowerCase(std::string);
 private:
 	AddressServer();
 	static AddressServer* _instance;

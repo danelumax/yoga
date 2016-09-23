@@ -44,3 +44,17 @@ void Userdata::setName(std::string name)
 {
     _name = name;
 }
+
+void Userdata::toString()
+{
+	std::cout << getName() << " "
+			  << getMobile() << " "
+			  << getAddress() << std::endl;
+}
+
+void Userdata::operator=(const Userdata& userDate)
+{
+	_name = userDate.getName();
+	_mobile = userDate.getMobile();
+	_address = userDate.getAddress();
+}

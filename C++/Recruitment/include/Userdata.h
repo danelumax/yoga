@@ -30,6 +30,8 @@ public:
     void setAddress(std::string address);
     void setMobile(std::string mobile);
     void setName(std::string name);
+    void toString();
+    void operator=(const Userdata& userDate);
 
 private:
     std::string _name;

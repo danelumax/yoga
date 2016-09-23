@@ -10,6 +10,7 @@
 #include <boost/format.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
+#include "StringUtils.h"
 #include <SignalManagement.h>
 
 typedef boost::tokenizer< boost::char_separator<char> > CustomTokenizer;
@@ -52,6 +53,7 @@ void AddressServer::registerState()
 	_stateMap["listall"] = new ListAllState(_handler);
 	_stateMap["help"] = new HelpState(_handler);
 	_stateMap["quit"] = new QuitState(_handler);
+	_stateMap["exit"] = new QuitState(_handler);
 }
 
 void AddressServer::init()
@@ -59,7 +61,6 @@ void AddressServer::init()
     _handler->InitUserDataList();
     _handler->Print();
     registerState();
-
 }
 
 void AddressServer::run()
@@ -67,15 +68,16 @@ void AddressServer::run()
 	std::string order;
 
 	SignalManagement::getInstance()->signal(SIGINT, SignalManagement::KEEP_RUNNING, AddressServer::die);
-	//input order command
+	/* input order command */
     while(!_shutDown)
     {
         std::cout << _prefix << "> ";
         std::cin >> order;
         /* change Upper to Lower */
-        order = toLowerCase(order);
+        order = StringUtils::toLowerCase(order);
         if(!updatePrefix(order, _prefix))
         {
+        	/* state pattern */
         	std::map<std::string, OptionState*>::iterator iter = _stateMap.find(order);
         	if (iter != _stateMap.end())
         	{
@@ -113,16 +115,5 @@ void AddressServer::die(int sig)
 	SignalManagement::getInstance()->sigDefault(sig);
 	_instance->_shutDown = true;
 
-}
-
-std::string AddressServer::toLowerCase(std::string s)
-{
-	std::string ret(s.size(), char());
-	for(unsigned int i = 0; i < s.size(); ++i)
-	{
-		ret[i] = (s[i] <= 'Z' && s[i] >= 'A') ? s[i]+('a'-'A') : s[i];
-	}
-
-	return ret;
 }
 

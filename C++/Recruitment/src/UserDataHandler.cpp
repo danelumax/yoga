@@ -5,6 +5,7 @@
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
 #include "UserDataHandler.h"
+#include "StringUtils.h"
 
 typedef boost::tokenizer< boost::char_separator<char> > CustomTokenizer;
 
@@ -43,7 +44,7 @@ void UserDataHandler::InitUserDataList()
     fin.close();
 }
 
-//display the address information in term of linked list
+/* display the address information in term of linked list */
 void UserDataHandler::Print()
 {
 	if (_userDataVec.size() > 0)
@@ -51,9 +52,7 @@ void UserDataHandler::Print()
 		std::vector<Userdata*>::iterator iter = _userDataVec.begin();
 		for(; iter!=_userDataVec.end(); ++iter)
 		{
-			std::cout << (*iter)->getName() << " "
-					  << (*iter)->getMobile() << " "
-					  << (*iter)->getAddress() << std::endl;
+			(*iter)->toString();
 		}
 	}
 	else
@@ -62,7 +61,7 @@ void UserDataHandler::Print()
 	}
 }
 
-//Insert the address information into linked list
+/* Insert the address information into linked list */
 int UserDataHandler::InsertUserData()
 {
 	int ret = 0;
@@ -106,7 +105,7 @@ void UserDataHandler::WriteFile()
     fout.close();
 }
 
-//judge similiar std::string
+/* judge similiar std::string */
 int is_sub_str(std::string str, std::string sub_str)
 {
     int i,j,k;
@@ -158,23 +157,22 @@ void UserDataHandler::SearchUserData(std::string search_key, int search_id)
         }
         if( is_sub_str(result, key) != 0 )
         {
-        	std::cout << (*iter)->getName() << " "
-        			  << (*iter)->getMobile() << " "
-        			  << (*iter)->getAddress() << std::endl;
+        	(*iter)->toString();
             count++;
         }
     }
-    std::cout <<count<<" address entries searched"<<std::endl;
+    std::cout << " address entries searched"<<std::endl;
 }
 
 
 void UserDataHandler::DeleteUserData(std::string search_key, int search_id)
 {
-    int count = 0;
     std::string result;
     std::string key = search_key;
     if(is_sub_str(search_key, ".*") == 1)
-        key = key.substr(0, search_key.length()-strlen(".*"));
+    {
+        key = key.substr(0, search_key.length() - strlen(".*"));
+    }
 
     std::vector<Userdata*>::iterator iter = _userDataVec.begin();
     /* don't add ++iter */
@@ -182,32 +180,40 @@ void UserDataHandler::DeleteUserData(std::string search_key, int search_id)
     {
         switch(search_id)
         {
-            case 1:
+            case Userdata::NAME:
                 result = (*iter)->getName();
                 break;
-            case 2:
+            case Userdata::MOBILE:
                 result = (*iter)->getMobile();
                 break;
-            case 3:
+            case Userdata::ADDRESS:
                 result = (*iter)->getAddress();
                 break;
+            default:
+            	break;
         }
         if( is_sub_str(result, key) != 0 )
         {
         	/* point to next element, must be set */
-        	iter = _userDataVec.erase(iter);
-            count++;
+        	if (CheckDelete((*iter)) == 0)
+        	{
+        		//delete (*iter);
+        		iter = _userDataVec.erase(iter);
+        		std::cout <<"Address entries delete one item"<<std::endl;
+        	}
+        	else
+        	{
+        		break;
+        	}
         }
         else
         {
         	iter++;
         }
     }
-
-    std::cout <<count<<" address entries deleted"<<std::endl;
 }
 
-//Show help message
+/* Show help message */
 void UserDataHandler::ShowHelp()
 {
     std::cout <<"help message"<<std::endl;
@@ -215,4 +221,21 @@ void UserDataHandler::ShowHelp()
     std::cout <<"#search  this order is used to search relevent information"<<std::endl;
     std::cout <<"#delete  this order is used to delete relevent information"<<std::endl;
     std::cout <<"#dispaly  this order is used to display relevent information"<<std::endl;
+}
+
+int UserDataHandler::CheckDelete(Userdata* userData)
+{
+	int ret = 1;
+	std::string checkOption("");
+	std::cout << "Do you really want to delete below item ? (yes/no)\n";
+	userData->toString();
+	std::cout << "(yes/no):";
+	std::cin >> checkOption;
+	checkOption = StringUtils::toLowerCase(checkOption);
+	if ("yes" == checkOption)
+	{
+		ret = 0;
+	}
+
+	return ret;
 }
