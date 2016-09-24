@@ -174,6 +174,14 @@ int NdbDao::buildQueryFilterType(NdbSearchOption & query,
 			{
 				ndbOpType = NdbOperationCondition::QUERY_SINGLE;
 			}
+			else if (queryPurpose == NdbDao::QUERY_TO_DELETE)
+			{
+				ndbOpType = NdbOperationCondition::DELETE_SINGLE;
+			}
+			else
+			{
+				return RE_DAO_INVALID_ARGUMENT;
+			}
 			break;
 		}
 		default:

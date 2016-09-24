@@ -18,6 +18,7 @@ public:
 	{
 		QUERY_SINGLE = 1,
 		INSERT,
+		DELETE_SINGLE,
 		UNKNOWN_OP
 	};
 	NdbOperationCondition(std::string tableName, Type type);
