@@ -96,37 +96,6 @@ static void do_update(Ndb* myNdb)
 	}
 }
 
-/*************************************************
- * Delete one tuple (the one with primary key 3) *
- *************************************************/
-static void do_delete(Ndb* myNdb)
-{
-	const NdbDictionary::Dictionary* myDict= myNdb->getDictionary();
-	const NdbDictionary::Table *myTable= myDict->getTable("api_simple");
-
-	if (myTable == NULL)
-		APIERROR(myDict->getNdbError());
-
-	NdbTransaction *myTransaction= myNdb->startTransaction();
-	if (myTransaction == NULL)
-		APIERROR(myNdb->getNdbError());
-
-	NdbOperation *myOperation= myTransaction->getNdbOperation(myTable);
-	if (myOperation == NULL)
-		APIERROR(myTransaction->getNdbError());
-
-	/* a DELETE operation */
-	myOperation->deleteTuple();
-	 /* find (3,3) */
-	myOperation->equal( "ATTR1", 3 );
-
-	NdbUtils::executeNdbTransaction(myTransaction,
-									NdbTransaction::Commit,
-									NdbOperation::AbortOnError);
-
-	myNdb->closeTransaction(myTransaction);
-}
-
 /*****************************
  * Read and print all tuples *
  *****************************/
@@ -188,10 +157,13 @@ static void run_application()
 
 	std::cout << "\ninsert" << std::endl;
 	DiaSessionDataDBUtil::insertSessionDataToDB();
+
 	std::cout << "\nupdate" << std::endl;
 	do_update(ndb);
+
 	std::cout << "\ndelete" << std::endl;
-	do_delete(ndb);
+	DiaSessionDataDBUtil::deleteSessionDataInDB();
+
 	std::cout << "\nread" << std::endl;
 	do_read(ndb);
 

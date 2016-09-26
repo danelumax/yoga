@@ -147,6 +147,10 @@ int NdbAbstractExecutor::prepareNdbOperation(NdbOperation * &myOp, NdbOperationC
 		{
 			return NdbUtils::prepareNdbOperationValues(myOp, opCondition);
 		}
+		case NdbOperationCondition::DELETE_SINGLE:
+		{
+			return 0;
+		}
 		default:
 		{
 			return -1;
@@ -169,6 +173,7 @@ int NdbAbstractExecutor::executeNdbTransaction(NdbTransaction* &trans)
 												   NdbOperation::AbortOnError);
 		}
 		case NdbOperationCondition::INSERT:
+		case NdbOperationCondition::DELETE_SINGLE:
 		{
 			return _transaction->commitTransaction();
 		}

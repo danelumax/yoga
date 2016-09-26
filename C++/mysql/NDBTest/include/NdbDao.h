@@ -33,6 +33,7 @@ public:
 	//int find(SearchOption& query, ResultSet& record);
 	virtual int find(SearchOption& searchOption, std::vector<ResultSet>& records);
 	virtual int insert(Modification& record);
+	virtual int remove(SearchOption& searchOption);
 private:
 	NdbOperationTransaction* convertTransaction(Transaction* trans);
 	int buildChangeParameters(Modification* change, NdbOperationCondition &noc);

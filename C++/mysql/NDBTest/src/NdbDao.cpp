@@ -68,6 +68,33 @@ int NdbDao::insert(Modification& record)
 	return 0;
 }
 
+int NdbDao::remove(SearchOption& searchOption)
+{
+	/* convert search option to NDB special search option */
+	NdbSearchOption query;
+	if (mapToNdbSearchOption(searchOption, query) != 0)
+	{
+		return RE_DAO_ERROR;
+	}
+
+	std::string tableName = query.getTable();
+	NdbOperationCondition::Type ndbOpType = NdbOperationCondition::UNKNOWN_OP;
+	buildQueryFilterType(query, NdbDao::QUERY_TO_DELETE, ndbOpType);
+
+	std::vector<NdbColumnCondition*> tempVector;
+	NdbOperationTransaction* ndbOpTransaction = convertTransaction(_trans);
+
+	NdbOperationCondition noc(tableName, ndbOpType);
+	NdbAbstractExecutor executor(noc, ndbOpTransaction);
+
+	buildQueryFilterContent(query, noc);
+
+	int rt = executor.execute();
+	rt = convertReturnCode(rt);
+
+	return rt;
+}
+
 int NdbDao::buildQueryFilterContent(NdbSearchOption & query, NdbOperationCondition & queryFilter)
 {
 	std::vector<SearchOption::SearchCriteria*> conditions = query.getCriteriaVector();

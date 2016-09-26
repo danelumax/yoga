@@ -59,6 +59,30 @@ int DiaSessionDataDBUtil::findSessionDatafromDB()
 	return 0;
 }
 
+int DiaSessionDataDBUtil::deleteSessionDataInDB()
+{
+	int ret = 0;
+
+	DBServiceProvider* db = DBServiceProvider::getInstance();
+	Transaction* transaction = db->startTransaction();
+	Dao* dao = db->getDao(transaction);
+
+	std::string table = "api_simple";
+	SearchOption querySession(table);
+	querySession.addCriteria(SEARCH_OPTION_QUERY_TYPE, SearchOption::CT_EQ, SEARCH_OPTION_QUERY_TYPE_SINGLE_PK);
+	querySession.addCriteria("ATTR1", SearchOption::CT_EQ, "3");
+	ret = dao->remove(querySession);
+	if (ret!=RE_DAO_SUC && ret!=RE_DAO_NO_DATA)
+	{
+		std::cout << "DiaSessionDataDBUtil::Delete data from database failed" << std::endl;
+		return -1;
+	}
+
+    ret = transaction->commit();
+
+	return 0;
+}
+
 void DiaSessionDataDBUtil::sinkValueForSessionTable(ResultSet& record)
 {
 	std::map<std::string, std::string> test = record.getValues();

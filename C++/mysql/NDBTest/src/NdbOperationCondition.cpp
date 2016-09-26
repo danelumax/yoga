@@ -27,7 +27,8 @@ bool NdbOperationCondition::isSingleRowOpearation()
 	bool singleRowOperation = false;
 
 	if (_type == NdbOperationCondition::QUERY_SINGLE
-	    ||_type == NdbOperationCondition::INSERT)
+			|| _type == NdbOperationCondition::INSERT
+			|| _type == NdbOperationCondition::DELETE_SINGLE)
 	{
 		singleRowOperation = true;
 	}

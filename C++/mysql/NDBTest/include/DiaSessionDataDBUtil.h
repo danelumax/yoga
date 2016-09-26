@@ -14,6 +14,7 @@ class DiaSessionDataDBUtil {
 public:
 	static int insertSessionDataToDB();
 	static int findSessionDatafromDB();
+	static int deleteSessionDataInDB();
 	static void sinkValueForSessionTable(ResultSet& record);
 private:
 	DiaSessionDataDBUtil(){};

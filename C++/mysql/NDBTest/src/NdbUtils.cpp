@@ -76,6 +76,15 @@ int NdbUtils::setNdbOperationActivity(NdbOperation * &oper, NdbOperationConditio
 			}
 			break;
 		}
+		case NdbOperationCondition::DELETE_SINGLE:
+		{
+			if (oper->deleteTuple() != 0)
+			{
+				std::cout << "NdbUtils::setNdbOperationActivity DELETE_SINGLE tuple ndb error" << std::endl;
+				return -1;
+			}
+			break;
+		}
 		default:
 		{
 			return -1;
@@ -228,4 +237,6 @@ int NdbUtils::sinkValues(NdbAbstractExecutor* queryExecutor, NdbRowData& sink)
 	getValue(ndbRecAttr, valueSink);
 
 	sink.addValue("ATTR2", valueSink);
+
+	return RE_NDB_SUC;
 }

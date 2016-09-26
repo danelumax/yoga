@@ -26,6 +26,7 @@ public:
 	virtual ~Dao();
 	virtual int find(SearchOption& searchOption, std::vector<ResultSet>& records) = 0;
 	virtual int insert(Modification& record) = 0;
+	virtual int remove(SearchOption& searchOption) = 0;
 protected:
 	Transaction* _trans;
 };
