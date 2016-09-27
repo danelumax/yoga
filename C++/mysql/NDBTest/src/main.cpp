@@ -157,6 +157,7 @@ static void run_application()
 
 	std::cout << "\ninsert" << std::endl;
 	DiaSessionDataDBUtil::insertSessionDataToDB();
+	DiaSessionDataDBUtil::findSessionDatafromDB();
 
 	std::cout << "\nupdate" << std::endl;
 	do_update(ndb);
@@ -165,10 +166,11 @@ static void run_application()
 	DiaSessionDataDBUtil::deleteSessionDataInDB();
 
 	std::cout << "\nread" << std::endl;
-	do_read(ndb);
-
-	std::cout << "\nfind" << std::endl;
+	//do_read(ndb);
 	DiaSessionDataDBUtil::findSessionDatafromDB();
+
+	//std::cout << "\nfind" << std::endl;
+	//DiaSessionDataDBUtil::findSessionDatafromDB();
 }
 
 void createMysql()

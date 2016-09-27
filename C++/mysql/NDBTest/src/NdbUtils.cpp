@@ -26,6 +26,11 @@ int NdbUtils::executeNdbTransaction(NdbTransaction *& trans,
 		}
 	}
 
+	if (trans->getNdbError().classification == NdbError::NoDataFound)
+	{
+		std::cout << "### Detected that deleted tuple doesn't exist! ###" << std::endl;
+	}
+
 	return RE_NDB_SUC;
 }
 
