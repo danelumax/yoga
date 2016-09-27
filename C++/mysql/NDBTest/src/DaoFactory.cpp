@@ -17,6 +17,13 @@ DaoFactory::DaoFactory()
 
 DaoFactory::~DaoFactory()
 {
+	std::vector<Transaction*>::iterator iter = _daoTransaction.begin();
+	for (; iter!=_daoTransaction.end(); ++iter)
+	{
+		Transaction* trans = (*iter);
+		delete trans;
+	}
+	_daoTransaction.clear();
 }
 
 DaoFactory* DaoFactory::getInstance()
@@ -47,7 +54,30 @@ Transaction* DaoFactory::startTransaction()
 		transaction = NULL;
 	}
 
+	_daoTransaction.push_back(transaction);
+
 	return transaction;
+}
+
+void DaoFactory::closeTransaction(Transaction* transaction)
+{
+	if (!transaction)
+	{
+		std::cout << "input transaction is null" << std::endl;
+		return;
+	}
+
+	std::vector<Transaction*>::iterator iter = _daoTransaction.begin();
+	for(; iter!=_daoTransaction.end(); ++iter)
+	{
+		Transaction* trans = (*iter);
+		if (trans == transaction)
+		{
+			delete trans;
+			_daoTransaction.erase(iter);
+			break;
+		}
+	}
 }
 
 Dao *DaoFactory::factoryDao(Transaction* transaction)

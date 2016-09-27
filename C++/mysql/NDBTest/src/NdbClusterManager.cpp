@@ -76,6 +76,14 @@ Ndb* NdbClusterManager::getNdb()
 	return _ndbPool->getNdb();
 }
 
+void NdbClusterManager::returnNdb(Ndb* ndb)
+{
+	if (_ndbPool)
+	{
+		_ndbPool->returnNdb(ndb);
+	}
+}
+
 void NdbClusterManager::run()
 {
 	connectToCluster();

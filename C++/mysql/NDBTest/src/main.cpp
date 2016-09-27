@@ -137,13 +137,13 @@ static void do_read(Ndb* myNdb)
   
 		if (myTransaction->getNdbError().classification == NdbError::NoDataFound)
 		{
-			if (i == 3)
+			if (i == 5)
 				std::cout << "Detected that deleted tuple doesn't exist!" << std::endl;
 			else
 				APIERROR(myTransaction->getNdbError());
 		}
 
-		if (i != 3)
+		if (i != 5)
 		{
 			printf(" %2d    %2d\n", i, myRecAttr->u_32_value());
 		}

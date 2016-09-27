@@ -19,6 +19,7 @@ public:
 	int commitTransaction();
 	NdbTransaction* getNdbTransaction();
 	Ndb* getNdb();
+	void close();
 private:
 	Ndb* _ndb;
 	NdbTransaction* _ndbTrans;

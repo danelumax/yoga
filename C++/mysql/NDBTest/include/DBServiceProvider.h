@@ -26,6 +26,7 @@ public:
 	int insert(Modification& record);
 	Dao* getDao(Transaction* transaction = NULL);
 	Transaction* startTransaction();
+	void closeTransaction(Transaction* transaction);
 private:
 	DBServiceProvider();
 	static DBServiceProvider* _instance;

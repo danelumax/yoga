@@ -53,4 +53,19 @@ Ndb* NdbOperationTransaction::getNdb()
 	return _ndb;
 }
 
+void NdbOperationTransaction::close()
+{
+	if (_ndbTrans != NULL)
+	{
+		_ndbTrans->close();
+		_ndbTrans = NULL;
+	}
+
+	if (_ndb != NULL)
+	{
+		NdbClusterManager::getInstance()->returnNdb(_ndb);
+		_ndb = NULL;
+	}
+}
+
 

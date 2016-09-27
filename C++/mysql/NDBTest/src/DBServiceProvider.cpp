@@ -89,3 +89,8 @@ Transaction* DBServiceProvider::startTransaction()
 {
 	return DaoFactory::getInstance()->startTransaction();
 }
+
+void DBServiceProvider::closeTransaction(Transaction* transaction)
+{
+	DaoFactory::getInstance()->closeTransaction(transaction);
+}

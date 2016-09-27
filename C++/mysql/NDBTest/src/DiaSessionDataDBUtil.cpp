@@ -28,6 +28,7 @@ int DiaSessionDataDBUtil::insertSessionDataToDB()
 		Dao* dao = db->getDao(transaction);
 	    dao->insert(modify);
 	    transaction->commit();
+	    db->closeTransaction(transaction);
 
 	    //db->insert(modify);
 	}
@@ -70,7 +71,7 @@ int DiaSessionDataDBUtil::deleteSessionDataInDB()
 	std::string table = "api_simple";
 	SearchOption querySession(table);
 	querySession.addCriteria(SEARCH_OPTION_QUERY_TYPE, SearchOption::CT_EQ, SEARCH_OPTION_QUERY_TYPE_SINGLE_PK);
-	querySession.addCriteria("ATTR1", SearchOption::CT_EQ, "3");
+	querySession.addCriteria("ATTR1", SearchOption::CT_EQ, "5");
 	ret = dao->remove(querySession);
 	if (ret!=RE_DAO_SUC && ret!=RE_DAO_NO_DATA)
 	{
@@ -79,6 +80,8 @@ int DiaSessionDataDBUtil::deleteSessionDataInDB()
 	}
 
     ret = transaction->commit();
+
+    db->closeTransaction(transaction);
 
 	return 0;
 }

@@ -20,6 +20,7 @@ public:
 	virtual ~NdbConnectionPool();
 	void factory(Ndb_cluster_connection* ndbClusterConnection);
 	Ndb* getNdb();
+	void returnNdb(Ndb* ndb);
 private:
 	Ndb* factoryNdb();
 	void addPoolNdb(Ndb* ndb);

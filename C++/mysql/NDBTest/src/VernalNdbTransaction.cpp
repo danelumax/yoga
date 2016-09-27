@@ -16,6 +16,13 @@ VernalNdbTransaction::VernalNdbTransaction()
 
 VernalNdbTransaction::~VernalNdbTransaction()
 {
+	if (_ndbTrans)
+	{
+		_ndbTrans->close();
+
+		delete _ndbTrans;
+		_ndbTrans = NULL;
+	}
 }
 
 int VernalNdbTransaction::start()

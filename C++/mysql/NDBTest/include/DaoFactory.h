@@ -9,6 +9,7 @@
 #define DAOFACTORY_H_
 
 #include "Transaction.h"
+#include <vector>
 #include "Dao.h"
 #include "NdbDao.h"
 
@@ -19,10 +20,12 @@ public:
 	static DaoFactory* getInstance();
 	static void destory();
 	Transaction* startTransaction();
+	void closeTransaction(Transaction* transaction);
 	Dao* factoryDao(Transaction* transaction = NULL);
 private:
 	DaoFactory();
 	static DaoFactory* _instance;
+	std::vector<Transaction*> _daoTransaction;
 };
 
 #endif /* DAOFACTORY_H_ */

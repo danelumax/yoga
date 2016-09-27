@@ -8,7 +8,7 @@
 #include "NdbConnectionPool.h"
 #include <iostream>
 
-const int NdbPoolSize = 20;
+const int NdbPoolSize = 10;
 
 NdbConnectionPool::NdbConnectionPool()
 	:_initNdbPoolSize(NdbPoolSize), _ndbClusterConnection(NULL),_databaseName("ndb_examples")
@@ -56,7 +56,7 @@ void NdbConnectionPool::factory(Ndb_cluster_connection *ndbClusterConnection)
 	}
 }
 
-Ndb *NdbConnectionPool::getNdb()
+Ndb* NdbConnectionPool::getNdb()
 {
 	if (!_freeQueue.empty())
 	{
@@ -80,6 +80,16 @@ Ndb *NdbConnectionPool::getNdb()
 	}
 
 	return NULL;
+}
+
+void NdbConnectionPool::returnNdb(Ndb* ndb)
+{
+	std::map<Ndb*, Ndb*>::iterator iter = _busyQueue.find(ndb);
+	if(iter != _busyQueue.end())
+	{
+		_freeQueue.push(ndb);
+		_busyQueue.erase(iter);
+	}
 }
 
 void NdbConnectionPool::addPoolNdb(Ndb *ndb)

@@ -19,6 +19,7 @@ public:
 	static void destory();
 	int connectToCluster();
 	Ndb* getNdb();
+	void returnNdb(Ndb* ndb);
 	void run();
 	bool isNDBClusterRunning();
 private:
