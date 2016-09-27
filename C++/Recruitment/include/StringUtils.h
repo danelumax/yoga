@@ -16,6 +16,7 @@ public:
 	StringUtils();
 	virtual ~StringUtils();
 	static std::string toLowerCase(std::string needChangeStr);
+	static int isSubStr(std::string str, std::string subStr);
 };
 
 #endif /* STRINGUTILS_H_ */

@@ -6,6 +6,7 @@
  */
 
 #include "StringUtils.h"
+#include <boost/algorithm/string.hpp>
 
 StringUtils::StringUtils()
 {
@@ -31,4 +32,16 @@ std::string StringUtils::toLowerCase(std::string needChangeStr)
 	}
 
 	return ResultStr;
+}
+
+int StringUtils::isSubStr(std::string str, std::string subStr)
+{
+	int ret = 0;
+	boost::iterator_range<std::string::iterator> r = boost::algorithm::find_first(str, subStr);
+	if (r.empty())
+	{
+		ret = 1;
+	}
+
+	return ret;
 }

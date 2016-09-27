@@ -105,41 +105,16 @@ void UserDataHandler::WriteFile()
     fout.close();
 }
 
-/* judge similiar std::string */
-int is_sub_str(std::string str, std::string sub_str)
-{
-    int i,j,k;
-    int len = sub_str.length();
-    int flag = 0;
-    char *str_char = new char;
-    char *sub_str_char = new char;
-    strcpy(str_char, str.c_str());
-    strcpy(sub_str_char, sub_str.c_str());
-
-    for(i=0; str_char[i]!=0; i+=k)
-    {
-        k = 1;
-        for(j=0; sub_str_char[j]!=0; j++)
-        {
-            if(str_char[i+j] != sub_str_char[j])
-                break;
-        }
-        if(j == len)
-        {
-            k = len;
-            flag = 1;
-        }
-    }
-    return flag;
-}
-
 void UserDataHandler::SearchUserData(std::string search_key, int search_id)
 {
     std::string result;
     std::string key = search_key;
     int count = 0;
-    if(is_sub_str(search_key, ".*") == 1)
-        key = key.substr(0, search_key.length()-strlen(".*"));
+    /* Fuzzy Matching */
+    if (StringUtils::isSubStr(search_key, ".*") == 0)
+    {
+        key = key.substr(0, search_key.length() - strlen(".*"));
+    }
     std::vector<Userdata*>::iterator iter = _userDataVec.begin();
     for(; iter!=_userDataVec.end(); ++iter)
     {
@@ -155,21 +130,20 @@ void UserDataHandler::SearchUserData(std::string search_key, int search_id)
                 result = (*iter)->getAddress();
                 break;
         }
-        if( is_sub_str(result, key) != 0 )
+        if (StringUtils::isSubStr(result, key) == 0)
         {
         	(*iter)->toString();
             count++;
         }
     }
-    std::cout << " address entries searched"<<std::endl;
+    std::cout << count << " address entries searched"<<std::endl;
 }
-
 
 void UserDataHandler::DeleteUserData(std::string search_key, int search_id)
 {
     std::string result;
     std::string key = search_key;
-    if(is_sub_str(search_key, ".*") == 1)
+    if (StringUtils::isSubStr(search_key, ".*") == 0)
     {
         key = key.substr(0, search_key.length() - strlen(".*"));
     }
@@ -192,7 +166,7 @@ void UserDataHandler::DeleteUserData(std::string search_key, int search_id)
             default:
             	break;
         }
-        if( is_sub_str(result, key) != 0 )
+        if (StringUtils::isSubStr(result, key) == 0)
         {
         	/* point to next element, must be set */
         	if (CheckDelete((*iter)) == 0)
