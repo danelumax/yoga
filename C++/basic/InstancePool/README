@@ -1,0 +1,45 @@
+[Output]
+
+System start, initialize 3 ndb obj ...
+1804289383
+846930886
+1681692777
+Free queue size : 3
+Busy queue size : 0
+
+Fetch 3 ndb from pool ...
+1804289383
+846930886
+1681692777
+Free queue size : 0
+Busy queue size : 3
+
+Ndb is not enough, we will create extra 2 ndb ...
+1714636915
+1957747793
+Free queue size : 0
+Busy queue size : 5
+
+Start to recover ndb
+Recover one ndb
+Free queue size : 1
+Busy queue size : 4
+Recover one ndb
+Free queue size : 2
+Busy queue size : 3
+Recover one ndb
+Free queue size : 3
+Busy queue size : 2
+Recover one ndb
+Free queue size : 4
+Busy queue size : 1
+Recover one ndb
+Free queue size : 5
+Busy queue size : 0
+
+List all free queue :
+1804289383
+846930886
+1681692777
+1714636915
+1957747793
