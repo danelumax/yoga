@@ -1,0 +1,11 @@
+[Output]
+
+Testing SMS
+Use SMS to send message "Tea" to Lee
+Use SMS to send message "Urgency: Tea" to Lee
+Use SMS to send message "Sepcial: Tea" to Lee
+
+Testing Mobile
+Use Mobile to send message "Tea" to Lee
+Use Mobile to send message "Urgency: Tea" to Lee
+Use Mobile to send message "Sepcial: Tea" to Lee
