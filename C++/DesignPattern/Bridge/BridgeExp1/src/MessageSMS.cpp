@@ -18,7 +18,7 @@ MessageSMS::~MessageSMS()
 
 void MessageSMS::send(std::string message, std::string toUser)
 {
-	std::cout << "Use SMS to send message \"" << message << "\" to " << toUser << std::endl;
+	std::cout << "Use <SMS> to send message \"" << message << "\" to " << toUser << std::endl;
 }
 
 

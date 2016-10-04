@@ -1,0 +1,14 @@
+[Output]
+
+Testing SMS
+Use <SMS> to send message "Tea" to Lee
+Use <SMS> to send message "Urgency: Tea" to Lee
+Use <SMS> to send message "Sepcial: Tea" to Lee
+
+Testing Mobile
+Use <Mobile> to send message "Urgency: Milk Tea" to Lee
+Use <Mobile> to send message "Sepcial: Milk Tea" to Lee
+
+Testing E-mail
+Use <E-mail> to send message "Urgency: Black Tea" to Lee
+Use <E-mail> to send message "Sepcial: Black Tea" to Lee

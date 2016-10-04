@@ -19,5 +19,5 @@ MessageMobile::~MessageMobile() {
 
 void MessageMobile::send(std::string message, std::string toUser)
 {
-	std::cout << "Use Mobile to send message \"" << message << "\" to " << toUser << std::endl;
+	std::cout << "Use <Mobile> to send message \"" << message << "\" to " << toUser << std::endl;
 }
