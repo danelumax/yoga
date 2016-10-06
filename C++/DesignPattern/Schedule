@@ -1,6 +1,6 @@
-# Design Pattern #		# C++ #
-Simple Facotry			All Done
-Facade			
+# Design Pattern #		# C++ #			# data #
+Simple Facotry			All Done		2016-10-05
+Facade				All Done		2016-10-06			
 Adapter
 Singleton
 Factory Method
@@ -21,5 +21,5 @@ Flyweight
 Interpreter
 Decorator
 Chain of Responsibilty
-Bridge				All Done
+Bridge				All Done		2016-10-04	
 Visitor
