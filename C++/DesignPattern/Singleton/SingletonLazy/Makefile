@@ -1,8 +1,8 @@
 CCPLUS  =       g++
 RM	=	rm -rf
 
-DIR_INC	:=	.
-DIR_SRC	:=	.
+DIR_INC	:=	./include
+DIR_SRC	:=	./src
 DIR_RELEASE :=	./release
 OBJ_SUFFIX	= .o
 
@@ -13,7 +13,7 @@ CPP_SOURCES:= $(filter %.cpp, $(SOURCES))
 
 OBJECTS := $(foreach OBJ,$(CPP_SOURCES:$(DIR_SRC)%.cpp=%$(OBJ_SUFFIX)),$(DIR_RELEASE)$(OBJ))
 
-TARGET = Singleton
+TARGET = SingletonLazy
 
 BIN_TARGET = ${DIR_RELEASE}/${TARGET}
 

@@ -6,7 +6,8 @@
  */
 #include "AppConfig.h"
 
-AppConfig* AppConfig::_instance = NULL;
+/* Hungry difference */
+AppConfig* AppConfig::_instance = new AppConfig();
 
 AppConfig::AppConfig()
 {
@@ -15,10 +16,6 @@ AppConfig::AppConfig()
 
 AppConfig* AppConfig::getInstance()
 {
-	if (NULL == _instance)
-	{
-		_instance = new AppConfig();
-	}
 	return _instance;
 }
 
