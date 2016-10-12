@@ -26,7 +26,7 @@ int DiaSessionDataDBUtil::insertSessionDataToDB()
 		DBServiceProvider* db = DBServiceProvider::getInstance();
 
 		Transaction* transaction = db->startTransaction();
-		Dao* dao = db->getDao(transaction);
+		Dao* dao = db->getDao("DAO_NDB", transaction);
 	    dao->insert(modify);
 	    transaction->commit();
 	    db->closeTransaction(transaction);
@@ -77,7 +77,7 @@ int DiaSessionDataDBUtil::deleteSessionDataInDB()
 
 	DBServiceProvider* db = DBServiceProvider::getInstance();
 	Transaction* transaction = db->startTransaction();
-	Dao* dao = db->getDao(transaction);
+	Dao* dao = db->getDao("DAO_NDB", transaction);
 
 	std::string table = "api_simple";
 	SearchOption querySession(table);

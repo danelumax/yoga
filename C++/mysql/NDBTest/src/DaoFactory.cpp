@@ -80,8 +80,16 @@ void DaoFactory::closeTransaction(Transaction* transaction)
 	}
 }
 
-Dao *DaoFactory::factoryDao(Transaction* transaction)
+Dao *DaoFactory::factoryDao(std::string key, Transaction* transaction)
 {
-	NdbDao* dao = new NdbDao(transaction);
-	return dao;
+	if ("DAO_NDB" == key)
+	{
+		NdbDao* ndbDao = new NdbDao(transaction);
+		return ndbDao;
+	}
+	else
+	{
+		std::cout << "DaoFactory:: not support dao: " << key <<  "for key." << std::endl;
+		return NULL;
+	}
 }

@@ -24,7 +24,7 @@ public:
 	int find(SearchOption& searchOption, ResultSet& record);
 	int find(SearchOption& searchOption, std::vector<ResultSet>& records);
 	int insert(Modification& record);
-	Dao* getDao(Transaction* transaction = NULL);
+	Dao* getDao(const std::string& key, Transaction* transaction = NULL);
 	Transaction* startTransaction();
 	void closeTransaction(Transaction* transaction);
 private:

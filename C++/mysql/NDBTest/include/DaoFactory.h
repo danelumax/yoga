@@ -21,7 +21,7 @@ public:
 	static void destory();
 	Transaction* startTransaction();
 	void closeTransaction(Transaction* transaction);
-	Dao* factoryDao(Transaction* transaction = NULL);
+	Dao* factoryDao(std::string key, Transaction* transaction = NULL);
 private:
 	DaoFactory();
 	static DaoFactory* _instance;
