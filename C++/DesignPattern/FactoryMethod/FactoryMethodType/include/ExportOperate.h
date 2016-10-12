@@ -15,9 +15,8 @@ class ExportOperate
 public:
 	ExportOperate();
 	virtual ~ExportOperate();
-	void Export(std::string data);
-	/* delay to creator */
-	virtual ExportFileApi* factoryMethod() = 0;
+	void Export(int type, std::string data);
+	virtual ExportFileApi* factoryMethod(int type);
 };
 
 #endif /* EXPORTOPERATE_H_ */
