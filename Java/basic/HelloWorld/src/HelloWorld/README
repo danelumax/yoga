@@ -1,0 +1,4 @@
+[Compile and run steps]
+
+#> javac -d . HelloWorld.java
+#> java HelloWorld.HelloWorld
