@@ -1,0 +1,9 @@
+[Output]
+
+Test Schema1 ...
+Now in Intel CPU, pins = 1156
+Now in GA Mainboard, cpuHoles = 1156
+
+Test Schema2 ...
+Now in AMD CPU, pins = 939
+Now in MSI Mainboard, cpuHoles = 939
