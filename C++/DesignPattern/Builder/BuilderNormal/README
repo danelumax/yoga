@@ -1,0 +1,30 @@
+[Output]
+
+Output to Txt File:
+One Penny Company, 2016-10-17
+Product 001, 100, 80
+Product 002, 99, 55
+John
+
+Output to Xml File:
+<?xml version='1.0' encoding='gb2312'?>
+<Header>
+	One Penny Company
+	2016-10-17
+</Header>
+<Body>
+	<Data>
+		Product 001
+		100
+		80
+	</Data>
+	<Data>
+		Product 002
+		99
+		55
+	</Data>
+</Body>
+<Footer>
+	John
+</Footer>
+
