@@ -1,0 +1,6 @@
+input: "      1      14     358"
+regex: "\\s+"
+
+[Output]
+
+Split result: 1, 14, 358
