@@ -1,0 +1,12 @@
+[Output]
+
+Test Personal Order ...
+Split Order: Customer: John, Product: P0001, ProductNum: 1000
+Split Order: Customer: John, Product: P0001, ProductNum: 1000
+Order: Customer: John, Product: P0001, ProductNum: 925
+
+Test Enterprise Order ...
+Split Order: Enterprise: Apple Company, Product: A001, ProductNum: 1000
+Split Order: Enterprise: Apple Company, Product: A001, ProductNum: 1000
+Split Order: Enterprise: Apple Company, Product: A001, ProductNum: 1000
+Order: Enterprise: Apple Company, Product: A001, ProductNum: 855
