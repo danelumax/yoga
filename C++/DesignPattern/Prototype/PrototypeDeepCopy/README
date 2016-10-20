@@ -1,0 +1,7 @@
+[Output]
+
+This is the first time to get instance: Product: Product #1, ProductNum: 100
+
+This is the second time to get instance: Product: Product #2, ProductNum: 80
+
+Get Prototype instance again: Product: Product #1, ProductNum: 100
