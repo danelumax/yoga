@@ -8,6 +8,7 @@
 #ifndef MEDIATOR_H_
 #define MEDIATOR_H_
 
+/* just for interface restraint */
 class Colleague;
 
 class Mediator

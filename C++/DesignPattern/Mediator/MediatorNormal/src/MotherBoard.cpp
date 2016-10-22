@@ -9,12 +9,10 @@
 
 MotherBoard::MotherBoard()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-MotherBoard::~MotherBoard() {
-	// TODO Auto-generated destructor stub
+MotherBoard::~MotherBoard()
+{
 }
 
 void MotherBoard::setCdDriver(CDDriver *cdDriver)

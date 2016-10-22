@@ -9,7 +9,11 @@
 #define MOTHERBOARD_H_
 
 #include "Mediator.h"
-#include "Colleague.h"
+#include "CDDriver.h"
+#include "CPU.h"
+#include "SoundCard.h"
+#include "VideoCard.h"
+//class Colleague;
 
 class MotherBoard : public Mediator
 {
