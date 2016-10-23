@@ -1,0 +1,11 @@
+[Output]
+
+Just Check Brief Info of DepId: 010101 ...
+UserId: user0001, UserName: John1
+UserId: user0002, UserName: John2
+UserId: user0003, UserName: John3
+
+List All Detailed Info of DepId: 010101 ...
+UserId: user0001, UserName: John1, DepId: 010101
+UserId: user0002, UserName: John2, DepId: 010101
+UserId: user0003, UserName: John3, DepId: 010101
