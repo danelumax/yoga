@@ -13,7 +13,6 @@
 #include "CPU.h"
 #include "SoundCard.h"
 #include "VideoCard.h"
-//class Colleague;
 
 class MotherBoard : public Mediator
 {

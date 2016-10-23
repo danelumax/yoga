@@ -1,0 +1,17 @@
+[Output]
+
+Before Repeal Department ----------
+User Id: u1, Department Id: d1
+User Id: u1, Department Id: d2
+
+After Repealing Department:d1 ----------
+User Id: u1, Department Id: d2
+
+Before user dimission ----------
+Department Id: d2, User Id: u3
+Department Id: d2, User Id: u4
+Department Id: d2, User Id: u1
+
+After user dimission:u1 ----------
+Department Id: d2, User Id: u3
+Department Id: d2, User Id: u4
