@@ -53,10 +53,6 @@ void Proxy::setUserId(std::string userId)
     _realSubject->setUserId(userId);
 }
 
-void Proxy::toString()
-{
-}
-
 void Proxy::reload()
 {
 	std::string userId("");

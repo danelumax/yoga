@@ -26,7 +26,6 @@ public:
     virtual void setDepId(std::string depId);
     virtual void setName(std::string name);
     virtual void setUserId(std::string userId);
-    virtual void toString();
 private:
     void reload();
     UserModelApi* _realSubject;

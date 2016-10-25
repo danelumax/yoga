@@ -44,7 +44,3 @@ void UserModel::setUserId(std::string userId)
 {
     _userId = userId;
 }
-
-void UserModel::toString()
-{
-}

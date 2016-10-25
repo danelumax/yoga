@@ -20,7 +20,6 @@ public:
     virtual void setDepId(std::string depId) = 0;
     virtual void setName(std::string name) = 0;
     virtual void setUserId(std::string userId) = 0;
-    virtual void toString() = 0;
 
 };
 
