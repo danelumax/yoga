@@ -1,0 +1,17 @@
+[Test.properties]
+name=JJ
+Weight=4444
+Height=3333
+
+[Output]
+
+Test Get Single Value ...
+name = JJ
+JJ
+
+Test Get All Values ...
+name=JJ
+Weight=4444
+Height=3333
+
+Test Add one Single Value ...
