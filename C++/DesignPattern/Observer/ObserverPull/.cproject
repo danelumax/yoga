@@ -13,7 +13,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactName="Observer" buildProperties="" id="cdt.managedbuild.toolchain.gnu.base.1454846624" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
+<configuration artifactName="ObserverPull" buildProperties="" id="cdt.managedbuild.toolchain.gnu.base.1454846624" name="Default" parent="org.eclipse.cdt.build.core.emptycfg">
 <folderInfo id="cdt.managedbuild.toolchain.gnu.base.1454846624.355848468" name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.base.1865633873" name="cdt.managedbuild.toolchain.gnu.base" superClass="cdt.managedbuild.toolchain.gnu.base">
 <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.4306191" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
@@ -115,6 +115,6 @@
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<project id="Observer.null.853085012" name="Observer"/>
+<project id="ObserverPull.null.853085012" name="ObserverPull"/>
 </storageModule>
 </cproject>

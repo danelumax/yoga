@@ -7,17 +7,12 @@
 
 #include "Subject.h"
 
-std::string Subject::getContent()
+Subject::Subject()
 {
-	return _content;
 }
 
-void Subject::setContent(std::string content)
+Subject::~Subject()
 {
-	/*2. change status */
-	_content = content;
-	/*3. notify */
-	notifyObservers();
 }
 
 void Subject::attach(Observer *reader)
@@ -40,7 +35,6 @@ void Subject::detach(Observer *reader)
 /*4. traverse all reader to notify */
 void Subject::notifyObservers()
 {
-	std::cout << _subjectName << " comes hot news!" << std::endl;
 	std::vector<Observer*>::iterator iter = _readers.begin();
 	for(; iter!=_readers.end(); ++iter)
 	{

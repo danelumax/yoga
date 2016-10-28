@@ -13,7 +13,7 @@ CPP_SOURCES:= $(filter %.cpp, $(SOURCES))
 
 OBJECTS := $(foreach OBJ,$(CPP_SOURCES:$(DIR_SRC)%.cpp=%$(OBJ_SUFFIX)),$(DIR_RELEASE)$(OBJ))
 
-TARGET = Observer
+TARGET = ObserverPull
 
 BIN_TARGET = ${DIR_RELEASE}/${TARGET}
 

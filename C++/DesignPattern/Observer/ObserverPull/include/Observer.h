@@ -9,6 +9,7 @@
 #define OBSERVER_H_
 
 class Subject;
+
 class Observer
 {
 public:

@@ -8,16 +8,18 @@
 #ifndef READER_H_
 #define READER_H_
 
-#include <string>
-#include <iostream>
 #include "Subject.h"
 #include "Observer.h"
 
 class Reader : public Observer
 {
 public:
-	Reader(std::string name);
+	Reader();
+	virtual ~Reader();
 	virtual void update(Subject* subject);
+    std::string getName();
+    void setName(std::string _name);
+
 private:
 	std::string _name;
 };

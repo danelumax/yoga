@@ -18,17 +18,13 @@
 class Subject
 {
 public:
-	Subject(std::string name):_subjectName(name){};
-	virtual ~Subject(){};
-	std::string getContent();
-	void setContent(std::string);
+	Subject();
+	virtual ~Subject();
 	void attach(Observer *reader);
 	void detach(Observer *reader);
 	void notifyObservers();
 private:
 	std::vector<Observer*> _readers;
-	std::string _subjectName;
-	std::string _content;
 
 };
 
