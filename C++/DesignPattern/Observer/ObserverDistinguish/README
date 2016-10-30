@@ -1,0 +1,13 @@
+[Output]
+
+When Water Quality is Normal ---------->
+<Surveillance Staff> get the notification, current pollute level: 0
+
+When Water Quality is lightly polluted ---------->
+<Surveillance Staff> get the notification, current pollute level: 1
+<Alert Staff> get the notification, current pollute level: 1
+
+When Water Quality is moderately polluted ---------->
+<Surveillance Staff> get the notification, current pollute level: 2
+<Alert Staff> get the notification, current pollute level: 2
+<Surveillance Department Leader> get the notification, current pollute level: 2
