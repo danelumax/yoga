@@ -1,0 +1,10 @@
+[Compile]
+javac -d . CompileClassLoader.java
+
+[Run]
+java CompileClassLoader Hello Java1 Java2 Java3
+
+[Output]
+Runing Hello parameter: Java1
+Runing Hello parameter: Java2
+Runing Hello parameter: Java3
