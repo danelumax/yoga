@@ -1,0 +1,23 @@
+[Output]
+
+RandomAccessFile File Pointer Initial Position: 0
+
+Then Output java file: 
+("\nRandomAccessFile File Pointer Initial Position: " 
+				+ raf.getFilePointer());
+			raf.seek(300);
+			byte[] bbuf = new byte[1024];
+			int hasRead = 0;
+			
+			System.out.println("\nThen Output java file: ");
+			while((hasRead = raf.read(bbuf)) > 0) {
+				System.out.println(new String(bbuf, 0, hasRead));
+			}
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+}
+
