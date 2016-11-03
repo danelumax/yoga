@@ -1,0 +1,16 @@
+[Compile]]
+javac -d . *.java
+
+[Output]
+
+Test Eatable ...
+LambdaQs.LambdaQs$$Lambda$1/834600351@548c4f57
+Apple taste good!
+
+Test Flyable ...
+I am driving: LambdaQs.LambdaQs$$Lambda$2/135721597@87aac27
+Today's weather is :Sunning
+Airplane fly well!
+
+Test Addable ...
+Add 5 and 3: 8
