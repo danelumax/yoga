@@ -1,0 +1,16 @@
+[How to build JDBC runtime VM environment]
+1. Create a forward (TCP local:33006  remote:3306)  in VM Manager.
+2. Import mysql-connector-java.jar.
+3. In <dataSource> Bean configuration, mysql IP uses <localhost:forward port>, database uses existed database in mysql.
+   just like:
+   <property name="url" value="jdbc:mysql://127.0.0.1:33006/test"/>
+   <localhost:forward port>: 127.0.0.1:33006
+   <database>: test
+4. add privileges for the database which is used in Spring code.
+   > GRANT ALL PRIVILEGES ON * TO root@"%" IDENTIFIED BY "rootroot";
+   Note: execute this command after "# use <database>".
+5. Make sure Table <Student> has been created in database.
+
+[opertation]
+1. clean table
+   > truncate <tableName>
