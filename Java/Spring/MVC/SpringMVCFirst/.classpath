@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/activemq-all-5.14.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/aspectj-1.8.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/aspectjrt-1.7.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/aspectjweaver-1.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-aop-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-aspects-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-beans-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-context-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-context-support-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-core-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-expression-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-instrument-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-instrument-tomcat-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-jdbc-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-jms-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-messaging-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-orm-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-oxm-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-test-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-tx-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-web-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-webmvc-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-webmvc-portlet-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-websocket-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jasper.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/annotations-api.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
