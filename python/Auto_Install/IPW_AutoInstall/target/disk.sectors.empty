@@ -1,7 +1,0 @@
-unit: sectors
-
-###DEVICE_PATH###1 : start= 0, size= 0, Id= 0
-###DEVICE_PATH###2 : start= 0, size= 0, Id= 0
-###DEVICE_PATH###3 : start= 0, size= 0, Id= 0
-###DEVICE_PATH###4 : start= 0, size= 0, Id= 0
-
