@@ -1,0 +1,5 @@
+[Guide]
+http://javakart.blogspot.com/2012/12/spring-data-redis-hello-world-example.html
+
+[port]
+16379 forward to 6379(default)

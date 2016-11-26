@@ -1,0 +1,25 @@
+[Step]
+1. Add a Exchange just like "FirstExchange"
+2. Add a Queue just like "FirstQueue"
+3. Bind Queue into Exchange 
+
+[Port]
+1. web: http://localhost:15672/
+2. code: 5672
+
+[user/password]
+guest/guest
+
+[Remote]
+If you wish to allow the guest user to connect from a remote host, you should set the loopback_users configuration item to []. 
+A complete </etc/rabbitmq/rabbitmq.config> which does this would look like:
+
+[{rabbit, [{loopback_users, []}]}].
+
+[Start/Stop]
+invoke-rc.d rabbitmq-server stop
+invoke-rc.d rabbitmq-server start
+rabbitmqctl status
+
+[guide]
+http://www.rabbitmq.com/

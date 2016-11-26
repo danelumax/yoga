@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	  http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	  http://www.springframework.org/schema/rabbit
+	  http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+
+	<rabbit:connection-factory id="connectionFactory" 
+	host="localhost" port="25672" username="guest" password="guest"/>
+
+	<rabbit:admin connection-factory="connectionFactory"/>
+	<rabbit:queue id="FirstQueue"/>
+	
+	<rabbit:topic-exchange id="FirstExchange" name="FirstExchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="FirstQueue" pattern="liwei.first">
+			</rabbit:binding>
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+	
+	<bean id="asyncListener" class="com.spring.amqp.rabbit.SpringAMQPRabbitAyncListener"/>
+	
+	<rabbit:listener-container id="myListenerContainer" connection-factory="connectionFactory">
+		<rabbit:listener ref="asyncListener" queue-names="FirstQueue"/>
+	</rabbit:listener-container>
+
+</beans>
