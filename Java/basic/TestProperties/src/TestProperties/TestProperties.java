@@ -52,7 +52,8 @@ public class TestProperties {
 	
 	public static void main(String[] args) 
 		throws IOException {
-		String fileName = "Test.properties";
+		//String fileName = "Test.properties"; //for Linux
+		String fileName = "C://Users//eliwech//Desktop//OS//yoga//Java//basic//TestProperties//src//TestProperties//Test.properties";
 		System.out.println("\nTest Get Single Value ...");
 		String value = getValueByKey(fileName, "name");
 		System.out.println(value);
