@@ -1,0 +1,10 @@
+[Output]
+
+----- Delete Existed Table -----
+This SQL will impact 0 records
+----- Create Table -----
+This SQL will impact 0 records
+----- Insert Data -----
+This SQL will impact 1 records
+----- Query Data -----
+1   Liwei   

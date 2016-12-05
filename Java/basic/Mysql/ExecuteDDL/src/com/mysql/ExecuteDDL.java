@@ -20,26 +20,18 @@ public class ExecuteDDL {
 	private String user;
 	private String pass;
 
+	public ExecuteDDL() {
+		this.driver = "com.mysql.jdbc.Driver";
+		this.url = "jdbc:mysql://127.0.0.1:33006/test";
+		this.user = "root";
+		this.pass = "rootroot";
+	}
 	public Statement getStmt() {
 		return stmt;
 	}
 
 	public void setStmt(Statement stmt) {
 		this.stmt = stmt;
-	}
-	
-	public void initParam(String paramFile) throws IOException {
-		try(InputStream in = new BufferedInputStream(new FileInputStream(paramFile));) {
-			Properties props = new Properties();
-			props.load(new FileInputStream(paramFile));
-			this.driver = props.getProperty("driver");
-			this.url = props.getProperty("url");
-			this.user = props.getProperty("user");
-			this.pass = props.getProperty("pass");
-		} catch (IOException ex) {
-			System.out.println("bbb");
-			ex.getStackTrace();
-		}
 	}
 	
 	public void initMysql() throws Exception {
@@ -57,8 +49,6 @@ public class ExecuteDDL {
 		String deleteTabQL = "drop table jdbc_test";
 		
 		ExecuteDDL ed = new ExecuteDDL();
-		ed.initParam("C://Users//eliwech//Desktop//OS//yoga//Java//basic//Mysql//ExecuteDDL//src//com//mysql//mysql.properties");
-		//ed.initParam("mysql.properties"); //for Linux
 		ed.initMysql();
 		
 		ed.getStmt().executeUpdate(createTabSQL);
