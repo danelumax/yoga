@@ -60,6 +60,11 @@
 			<locationURI>PARENT-5-PROJECT_LOC/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/MVC/jstl-1.2.jar</locationURI>
 		</link>
 		<link>
+			<name>WebContent/WEB-INF/lib/mysql-connector-java-5.1.40-bin.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/mysql-connector-java-5.1.40-bin.jar</locationURI>
+		</link>
+		<link>
 			<name>WebContent/WEB-INF/lib/spring-aop-4.3.4.RELEASE.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/MVC/spring-aop-4.3.4.RELEASE.jar</locationURI>
@@ -83,6 +88,16 @@
 			<name>WebContent/WEB-INF/lib/spring-expression-4.3.4.RELEASE.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/MVC/spring-expression-4.3.4.RELEASE.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/spring-jdbc-4.3.4.RELEASE.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-jdbc-4.3.4.RELEASE.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/spring-tx-4.3.4.RELEASE.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/spring-tx-4.3.4.RELEASE.jar</locationURI>
 		</link>
 		<link>
 			<name>WebContent/WEB-INF/lib/spring-web-4.3.4.RELEASE.jar</name>
