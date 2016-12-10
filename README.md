@@ -1,3 +1,3 @@
 # yoga
-record my code way
-hello,world
+Record my code way
+Code is my fortune
