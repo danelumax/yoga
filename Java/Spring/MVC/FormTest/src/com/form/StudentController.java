@@ -1,6 +1,7 @@
 package com.form;
 
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,34 +22,21 @@ public class StudentController {
 	
 	@RequestMapping(value = "/addStudent", method = RequestMethod.POST)
 	public String addStudent(@ModelAttribute("command")Student student, ModelMap model) throws Exception {
-//		ModelManager manager = new ModelManager("C://Users//eliwech//Desktop//OS//yoga//Java//Spring//MVC//FormTest//resource//store.properties");
-//		manager.initProperties();
-//		manager.saveStudent(student);
-//		
-//		
-//		final String dropSQL = "drop table if exists student_table";
-//		final String createSQL = "create table student_table ( " +
-//				  				 "student_id int auto_increment primary key, " +
-//				  				 "student_name varchar(255)," +
-//				  				 "student_age int)";
-//		//final String insertSQL = "insert into student_table(student_name) values('Liwei')";
-//		final String selectSQL = "select * from student_table";
-//		
-//		ExecuteSQL es = new ExecuteSQL();
-//		
-////		System.out.println("----- Delete Existed Table -----");
-////		es.executeSql(dropSQL);
-//		
-////		System.out.println("----- Create Table -----");
-////		es.executeSql(createSQL);
-//		
-//		System.out.println("----- Insert Data -----");
-//		es.executeSql("insert into student_table(student_name) values('" + student.getName() + "')");
-//		
-//		System.out.println("----- Query Data -----");
-//		es.executeSql(selectSQL);
+		//saveModeltoProperties(Student);
 		
+		saveModeltoMysql(student);
 		
+		showView(student, model);
+		return "result";
+	}
+	
+	public void saveModeltoProperties(Student student) throws FileNotFoundException, IOException {
+		ModelManager manager = new ModelManager("C://Users//eliwech//Desktop//OS//yoga//Java//Spring//MVC//FormTest//resource//store.properties");
+		manager.initProperties();
+		manager.saveStudent(student);
+	}
+	
+	public void saveModeltoMysql(Student student) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		StudentDAOImpl studentDAOImpl = 
 				(StudentDAOImpl)context.getBean("studentDAOImpl");
@@ -56,7 +44,7 @@ public class StudentController {
 		System.out.println("------Records Creation--------" );
 	    studentDAOImpl.create(student.getName(), student.getAge());
 	    studentDAOImpl.create("Nuha", 2);
-	    studentDAOImpl.create("Ayan", 15);
+	    studentDAOImpl.create("Ayan", 18);
 	    
 	    System.out.println("------Listing Multiple Records--------" );
 	    List<Student> students = studentDAOImpl.listStudents();
@@ -70,16 +58,14 @@ public class StudentController {
 	    studentDAOImpl.update(2, 20);
 	    
 	    System.out.println("----Listing Record with ID = 2 -----" );
-	    //Student student = studentDAOImpl.getStudent(2);
 	    System.out.print("ID : " + student.getId() );
 	    System.out.print(", Name : " + student.getName() );
 	    System.out.println(", Age : " + student.getAge());  
-		
-		
-		
+	}
+	
+	public void showView(Student student, ModelMap model) {
 		model.addAttribute("name", "Liwei: " + student.getName());
 		model.addAttribute("age", student.getAge());
-		model.addAttribute("id", student.getId());      
-		return "result";
+		model.addAttribute("id", student.getId());  
 	}
 }
