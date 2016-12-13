@@ -10,7 +10,8 @@ public class StudentDAOImpl implements StudentDAO{
 	final String SingleQuerySQL = "select * from Student where id = ?";
 	final String ListAllSQL = "select * from Student";
 	final String SingleDeleteSQL = "delete from Student";
-	final String UpdateSQL = "update Student set age = ? where id = ?";
+	final String UpdateAgeSQL = "update Student set age = ? where id = ?";
+	final String UpdateNameSQL = "update Student set name = ? where id = ?";
 	
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
@@ -46,7 +47,14 @@ public class StudentDAOImpl implements StudentDAO{
 	}
 	@Override
 	public void update(Integer id, Integer age) {
-		this.jdbcTemplateObject.update(UpdateSQL, age, id);
+		this.jdbcTemplateObject.update(UpdateAgeSQL, age, id);
+		System.out.println("Update Record with ID = " + id);
+		return;
+	}
+	
+	@Override
+	public void update(Integer id, String name) {
+		this.jdbcTemplateObject.update(UpdateNameSQL, name, id);
 		System.out.println("Update Record with ID = " + id);
 		return;
 	}
