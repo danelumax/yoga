@@ -2,11 +2,17 @@
 <html>
 <head>
     <title>Spring MVC Form Handling</title>
+    <style type="text/css">
+	body {
+		background-image: url('http://crunchify.com/bg.png');
+	}
+	</style>
 </head>
+
 <body>
 
 <h2>Student Information</h2>
-<form:form method="POST" action="/FormTest/addStudent">
+<form:form method="POST" action="/RegistrationWeb/addStudent">
    <table>
     <tr>
         <td><form:label path="name">Name</form:label></td>

@@ -1,4 +1,4 @@
-package com.form;
+package com.registration;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -29,7 +29,7 @@ public class ModelPropertiesManager {
 	
 	public static ModelPropertiesManager getInstance() {
 		if (null == instance) {
-			instance = new ModelPropertiesManager("C://Users//eliwech//Desktop//OS//yoga//Java//Spring//MVC//FormTest//resource//store.properties");
+			instance = new ModelPropertiesManager("C://Users//eliwech//Desktop//OS//yoga//Java//Spring//MVC//RegistrationWeb//resource//store.properties");
 		}
 		return instance;
 	}

@@ -1,4 +1,4 @@
-package com.form;
+package com.registration;
 
 public class Welcome {
 	private String name;

@@ -1,4 +1,4 @@
-package com.form;
+package com.registration;
 public class Student {
 	private Integer age;
 	private String name;

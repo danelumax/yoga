@@ -1,4 +1,4 @@
-package com.form;
+package com.registration;
 
 import java.util.List;
 import javax.sql.DataSource;

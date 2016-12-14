@@ -15,11 +15,11 @@
 		
    	<!-- Definition for studentJDBCTemplate bean -->
    	<bean id="studentDAOImpl" 
-      	class="com.form.StudentDAOImpl">
+      	class="com.registration.StudentDAOImpl">
       	<property name="dataSource"  ref="dataSource" />    
    	</bean>
 
-	<bean id="modelMysqlManager" class="com.form.ModelMysqlManager" >
+	<bean id="modelMysqlManager" class="com.registration.ModelMysqlManager" >
 		<property name="studentDAOImpl" ref="studentDAOImpl" />
 	</bean>
 </beans>

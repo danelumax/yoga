@@ -1,4 +1,7 @@
-package com.form;
+package com.registration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.ui.ModelMap;
 
@@ -12,6 +15,10 @@ public class ModelMysqlManager {
 	public void setStudentDAOImpl(StudentDAOImpl studentDAOImpl) {
 		this.studentDAOImpl = studentDAOImpl;
 	}
+	
+	public Student getInitialStudent() {
+		return this.studentDAOImpl.getStudent(1);
+	}
 
 	public void saveModeltoMysql(Student student) {
 	    System.out.println("---- Save Web input into Mysql Database -----" );
@@ -23,8 +30,18 @@ public class ModelMysqlManager {
 		System.out.println("---- Query Student from Mysql Database -----" );
 		Student studentData = this.studentDAOImpl.getStudent(1);
 		
-		model.addAttribute("name", "Liwei: " + studentData.getName());
-		model.addAttribute("age", studentData.getAge());
-		model.addAttribute("id", studentData.getId());  
+		List<Student> list = new ArrayList<>();
+		list.add(studentData);
+		
+		model.addAttribute("list", list); 
+	}
+	
+	public List<Student> getStudentList() {
+		Student studentData = this.studentDAOImpl.getStudent(1);
+		
+		List<Student> list = new ArrayList<>();
+		list.add(studentData);
+		
+		return list;
 	}
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="FormTest">
+    <wb-module deploy-name="RegistrationWeb">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource"/>
-        <property name="context-root" value="FormTest"/>
-        <property name="java-output-path" value="/FormTest/build/classes"/>
+        <property name="java-output-path" value="/RegistrationWeb/build/classes"/>
+        <property name="context-root" value="RegistrationWeb"/>
     </wb-module>
 </project-modules>

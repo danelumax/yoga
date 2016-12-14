@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>FormTest</name>
+	<name>RegistrationWeb</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -29,6 +29,11 @@
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 	<linkedResources>
+		<link>
+			<name>WebContent/WEB-INF/lib/aopalliance-1.0.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/MVC/aopalliance-1.0.jar</locationURI>
+		</link>
 		<link>
 			<name>WebContent/WEB-INF/lib/commons-logging-1.2.jar</name>
 			<type>1</type>
@@ -120,4 +125,10 @@
 			<locationURI>PARENT-5-PROJECT_LOC/spring-framework-4.3.4.RELEASE-dist/spring-framework-4.3.4.RELEASE/libs/MVC/spring-websocket-4.3.4.RELEASE.jar</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/Desktop/OS</value>
+		</variable>
+	</variableList>
 </projectDescription>
