@@ -1,0 +1,1 @@
+1. if you want to implement RESTful function, you must add "<mvc:annotation-driven />" into *_serlet.xml

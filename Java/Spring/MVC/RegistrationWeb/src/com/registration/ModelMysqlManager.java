@@ -28,20 +28,11 @@ public class ModelMysqlManager {
 	
 	public void showView(ModelMap model) {
 		System.out.println("---- Query Student from Mysql Database -----" );
-		Student studentData = this.studentDAOImpl.getStudent(1);
-		
-		List<Student> list = new ArrayList<>();
-		list.add(studentData);
-		
+		List<Student> list = this.studentDAOImpl.listStudents();
 		model.addAttribute("list", list); 
 	}
 	
 	public List<Student> getStudentList() {
-		Student studentData = this.studentDAOImpl.getStudent(1);
-		
-		List<Student> list = new ArrayList<>();
-		list.add(studentData);
-		
-		return list;
+		return this.studentDAOImpl.listStudents();
 	}
 }
