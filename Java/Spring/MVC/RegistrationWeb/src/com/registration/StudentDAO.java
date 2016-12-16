@@ -19,4 +19,6 @@ public interface StudentDAO {
 	public void update(Integer id, Integer age);
 	
 	public void update(Integer id, String name);
+	
+	public void update(Integer id, String name, Integer age, String time);
 }	

@@ -1,13 +1,18 @@
 package com.registration;
-public class Student {
+
+import java.io.Serializable;
+
+public class Student implements Serializable {
 	private Integer age;
 	private String name;
 	private Integer id;
+	private String time;
    
 	public Student() {
 		this.name = new Welcome().getName();
 		this.age = 0;
 		this.id = 0;
+		this.time = null;
 	}
    
 	public void setAge(Integer age) {
@@ -27,5 +32,11 @@ public class Student {
 	}
 	public Integer getId() {
 		return id;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}
 }

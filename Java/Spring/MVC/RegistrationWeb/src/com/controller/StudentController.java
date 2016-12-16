@@ -3,7 +3,10 @@ package com.controller;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -44,7 +47,7 @@ public class StudentController {
 		
 		/* for properties */
 		//ModelPropertiesManager.getInstance().saveModeltoProperties(student);
-		
+				
 		/* for mysql */
 		mysqlManager.saveModeltoMysql(student);
 		
