@@ -51,4 +51,8 @@ public class ModelMysqlManager {
 	public List<Student> getStudentList() {
 		return this.studentDAOImpl.listStudents();
 	}
+	
+	public void deleteTimeoutDate() {
+		
+	}
 }
