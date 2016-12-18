@@ -8,7 +8,7 @@ public interface StudentDAO {
 	
 	public void setDataSource(DataSource ds);
 	
-	public void create(String name, Integer age);
+	public void insert(String name, Integer age, String time);
 	
 	public Student getStudent(Integer id);
 	

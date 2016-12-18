@@ -17,14 +17,19 @@
 				<th>Name</th>
 				<th>Age</th>
 				<th>Id</th>
+				<th>Time</th>
 			</tr>
      		<c:forEach items="${list}" var="item">  
 	  		<tr>
 	  			<td> <span class="Name"><c:out value="${item.name}" /></span> </td>
           		<td> <span class="Age"><c:out value="${item.age}" /></span> <br/> </td>
           		<td> <span class="id"><c:out value="${item.id}" /></span> <br/>	</td>
+          		<td> <span class="time"><c:out value="${item.time}" /></span> <br/>	</td>
       		</tr>
     		</c:forEach> 
-		</table>  
+		</table> 
+		<h3>
+			<a href="/RegistrationWeb/">Back to Home </a> <br>
+		</h3> 
 	</body>
 </html>

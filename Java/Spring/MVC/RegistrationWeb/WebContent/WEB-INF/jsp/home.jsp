@@ -23,17 +23,19 @@ body {
 	<br>
 	<div style="text-align:center">
 		<h2>Current Student Information</h2>
-		<table border="1" width="300" align="center">
+		<table border="1" width="400" align="center">
 			<tr>
 				<th>Name</th>
 				<th>Age</th>
 				<th>Id</th>
+				<th>Lease Time</th>
 			</tr>
      		<c:forEach items="${list}" var="item">  
 	  		<tr>
 	  			<td> <span class="Name"><c:out value="${item.name}" /></span> </td>
           		<td> <span class="Age"><c:out value="${item.age}" /></span> <br/> </td>
           		<td> <span class="id"><c:out value="${item.id}" /></span> <br/>	</td>
+          		<td> <span class="id"><c:out value="${item.leaseTime}" /></span> <br/>	</td>
       		</tr>
     		</c:forEach> 
 		</table>  

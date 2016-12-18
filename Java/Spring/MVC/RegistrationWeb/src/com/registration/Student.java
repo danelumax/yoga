@@ -7,9 +7,10 @@ public class Student implements Serializable {
 	private String name;
 	private Integer id;
 	private String time;
+	private String leaseTime;
    
 	public Student() {
-		this.name = new Welcome().getName();
+		this.name = "Default";
 		this.age = 0;
 		this.id = 0;
 		this.time = null;
@@ -38,5 +39,11 @@ public class Student implements Serializable {
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	public String getLeaseTime() {
+		return leaseTime;
+	}
+	public void setLeaseTime(String leaseTime) {
+		this.leaseTime = leaseTime;
 	}
 }

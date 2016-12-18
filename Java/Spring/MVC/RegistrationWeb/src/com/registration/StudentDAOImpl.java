@@ -6,10 +6,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 
 public class StudentDAOImpl implements StudentDAO{
-	final String InsertSQL = "insert into Student (name, age) values (?, ?)";
+	final String InsertSQL = "insert into Student (name, age, RegistrationTime) values (?, ?, ?)";
 	final String SingleQuerySQL = "select * from Student where id = ?";
 	final String ListAllSQL = "select * from Student";
-	final String SingleDeleteSQL = "delete from Student";
+	final String SingleDeleteSQL = "delete from Student where id = ?";
 	final String UpdateAgeSQL = "update Student set age = ? where id = ?";
 	final String UpdateNameSQL = "update Student set name = ? where id = ?";
 	final String UpdateStudentSQL = "update Student set name=?, age=?, RegistrationTime=? where id = ?";
@@ -23,9 +23,9 @@ public class StudentDAOImpl implements StudentDAO{
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	@Override
-	public void create(String name, Integer age) {
-		this.jdbcTemplateObject.update(InsertSQL, name, age);
-		System.out.println("Create Record Name = " + name + "Age = " + age);
+	public void insert(String name, Integer age, String time) {
+		this.jdbcTemplateObject.update(InsertSQL, name, age, time);
+		System.out.println("Create Record Name = " + name + ", Age = " + age  + ", Time = " + time);
 		return;
 	}
 	@Override
@@ -36,9 +36,9 @@ public class StudentDAOImpl implements StudentDAO{
 	}
 	@Override
 	public List<Student> listStudents() {
-		List<Student> stduents = this.jdbcTemplateObject.query(ListAllSQL,
+		List<Student> students = this.jdbcTemplateObject.query(ListAllSQL,
 								 new StudentMapper());
-		return stduents;
+		return students;
 	}
 	@Override
 	public void delete(Integer id) {
