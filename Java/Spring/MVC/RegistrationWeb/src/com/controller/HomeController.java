@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.registration.ModelMysqlManager;
-import com.registration.Student;
+import com.registration.RentDate;
 
 @Controller
 public class HomeController {
 	private ModelMysqlManager mysqlManager;
+	
 	public HomeController() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		this.mysqlManager = (ModelMysqlManager) context.getBean("modelMysqlManager");
@@ -22,6 +23,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(ModelMap model){
 		mysqlManager.showView(model);
+		
 		return "home";
 	}
 }

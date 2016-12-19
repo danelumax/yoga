@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.registration.ModelMysqlManager;
-import com.registration.Student;
+import com.registration.RentDate;
 
 @RestController
 public class RESTfulController {
@@ -20,8 +20,8 @@ public class RESTfulController {
 		this.mysqlManager = (ModelMysqlManager) context.getBean("modelMysqlManager");
 	}
 		
-	@RequestMapping(value="/studentJSON", method=RequestMethod.GET, headers="Accept=application/json")
-	public List<Student> getStudentJSON() {
-		return mysqlManager.getStudentList();
+	@RequestMapping(value="/rentInfoJSON", method=RequestMethod.GET, headers="Accept=application/json")
+	public List<RentDate> getRentInfoJSON() {
+		return mysqlManager.getAllDate();
 	}
 }

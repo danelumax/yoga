@@ -14,12 +14,19 @@
    	</bean>
 		
    	<!-- Definition for studentJDBCTemplate bean -->
-   	<bean id="studentDAOImpl" 
-      	class="com.registration.StudentDAOImpl">
+   	<bean id="MysqlDAO" 
+      	class="com.registration.MysqlDAO">
       	<property name="dataSource"  ref="dataSource" />    
    	</bean>
 
 	<bean id="modelMysqlManager" class="com.registration.ModelMysqlManager" >
-		<property name="studentDAOImpl" ref="studentDAOImpl" />
+		<property name="mysqlDAO" ref="MysqlDAO" />
+		<property name="rentDate" ref="RentDate" />
+	</bean>
+	
+	<bean id="RentDate" class="com.registration.RentDate" >
+		<property name="hostName" value="ecnshlx2087"/>
+		<property name="eid" value="eliwech"/>
+		<property name="duration" value="1"></property>
 	</bean>
 </beans>

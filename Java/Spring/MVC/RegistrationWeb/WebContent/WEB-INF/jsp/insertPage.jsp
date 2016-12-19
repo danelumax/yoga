@@ -11,20 +11,20 @@
 
 <body>
 
-<h2>Student Information</h2>
-<form:form method="POST" action="/RegistrationWeb/addStudent">
+<h2>Please Insert Rent Information</h2>
+<form:form method="POST" action="/RegistrationWeb/insertRentInfo">
    <table>
     <tr>
-        <td><form:label path="name">Name</form:label></td>
-        <td><form:input path="name" /></td>
+        <td><form:label path="hostName">HostName</form:label></td>
+        <td><form:input path="hostName" /></td>
     </tr>
     <tr>
-        <td><form:label path="age">Age</form:label></td>
-        <td><form:input path="age" /></td>
+        <td><form:label path="eid">eid</form:label></td>
+        <td><form:input path="eid" /></td>
     </tr>
     <tr>
-        <td><form:label path="id">id</form:label></td>
-        <td><form:input path="id" /></td>
+        <td><form:label path="duration">Duration</form:label></td>
+        <td><form:input path="duration" /></td>
     </tr>
     <tr>
         <td colspan="2">

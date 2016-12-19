@@ -58,17 +58,17 @@ public class ModelPropertiesManager {
 		} 
 	}
 	
-	public void saveStudent(Student student) throws IOException {
+	public void saveStudent(RentDate student) throws IOException {
 		try {
-			writeProperties("name", student.getName());
-			writeProperties("age", Integer.toString(student.getAge()));
-			writeProperties("id", Integer.toString(student.getId()));
+			writeProperties("HostName", student.getHostName());
+			writeProperties("eid", student.getEid());
+			writeProperties("Duration", Integer.toString(student.getDuration()));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	public void saveModeltoProperties(Student student) throws FileNotFoundException, IOException {
+	public void saveModeltoProperties(RentDate student) throws FileNotFoundException, IOException {
 		initProperties();
 		saveStudent(student);
 	}

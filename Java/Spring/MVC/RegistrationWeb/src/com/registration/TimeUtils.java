@@ -5,8 +5,6 @@ import java.util.Date;
 
 
 public class TimeUtils {
-	/* timeout is 100s */
-	private final static long TIMEOUT = 100;
 	static public long getLeaseTime(String registerTime) {
 		Date currentTime = new Date();
 		Timestamp registerTimeStamp =Timestamp.valueOf(registerTime);
@@ -25,10 +23,10 @@ public class TimeUtils {
 		return formatTime;
 	}
 	
-	static boolean isTimeout(String registerTime) {
+	static boolean isTimeout(String registerTime, int duration) {
 		boolean ret = false;
 		long leaseTimeSecond = getLeaseTime(registerTime);
-		if (leaseTimeSecond > TIMEOUT) {
+		if (leaseTimeSecond > duration * 60) {
 			ret = true;
 		}
 		

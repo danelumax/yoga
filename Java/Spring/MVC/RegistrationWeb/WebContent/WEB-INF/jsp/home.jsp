@@ -16,26 +16,26 @@ body {
 			---------- Welcome to Liwei's Page ----------<br> <br>
 		</h2>
 		<h3>
-			<a href="student">Register Student's Information </a> <br>
-			<a href="studentJSON ">Fetch JSON Info </a>
+			<a href="mainPage">Register Rent Information </a> <br>
+			<a href="rentInfoJSON ">Fetch JSON Info </a>
 		</h3>
 	</div>
 	<br>
 	<div style="text-align:center">
-		<h2>Current Student Information</h2>
-		<table border="1" width="400" align="center">
+		<h2>Current Rent Information</h2>
+		<table border="1" width="500" align="center">
 			<tr>
-				<th>Name</th>
-				<th>Age</th>
-				<th>Id</th>
+				<th>HostName</th>
+				<th>eid</th>
+				<th>Duration</th>
 				<th>Lease Time</th>
 			</tr>
      		<c:forEach items="${list}" var="item">  
 	  		<tr>
-	  			<td> <span class="Name"><c:out value="${item.name}" /></span> </td>
-          		<td> <span class="Age"><c:out value="${item.age}" /></span> <br/> </td>
-          		<td> <span class="id"><c:out value="${item.id}" /></span> <br/>	</td>
-          		<td> <span class="id"><c:out value="${item.leaseTime}" /></span> <br/>	</td>
+	  			<td> <span class="HostName"><c:out value="${item.hostName}" /></span> </td>
+          		<td> <span class="eid"><c:out value="${item.eid}" /></span> <br/> </td>
+          		<td> <span class="Duration"><c:out value="${item.duration}" /></span> <br/>	</td>
+          		<td> <span class="Leased Time"><c:out value="${item.leaseTime}" /></span> <br/>	</td>
       		</tr>
     		</c:forEach> 
 		</table>  

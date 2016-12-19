@@ -10,55 +10,64 @@ import java.util.List;
 import org.springframework.ui.ModelMap;
 
 public class ModelMysqlManager {
-	private StudentDAOImpl studentDAOImpl;
-	
-	public StudentDAOImpl getStudentDAOImpl() {
-		return this.studentDAOImpl;
+	private MysqlDAO mysqlDAO;
+	private RentDate rentDate;
+
+	public RentDate getRentDate() {
+		return rentDate;
 	}
 
-	public void setStudentDAOImpl(StudentDAOImpl studentDAOImpl) {
-		this.studentDAOImpl = studentDAOImpl;
-	}
-	
-	public Student getInitialStudent() {
-		return new Student();
+	public void setRentDate(RentDate rentDate) {
+		this.rentDate = rentDate;
 	}
 
-	public void saveModeltoMysql(Student student) {
+	public MysqlDAO getMysqlDAO() {
+		return mysqlDAO;
+	}
+
+	public void setMysqlDAO(MysqlDAO mysqlDAO) {
+		this.mysqlDAO = mysqlDAO;
+	}
+	
+	public RentDate getInitialStudent() {
+		return this.rentDate;
+	}
+
+	public void saveModeltoMysql(RentDate date) {
 	    System.out.println("---- Save Web input into Mysql Database -----" );
 	    
-		Date date1 = new Date();
-		String nowTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date1);
-		student.setTime(nowTime1);
+		Date currentTime = new Date();
+		String currentTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(currentTime);
+		date.setStartTime(currentTimeFormat);
 	    
-	    this.studentDAOImpl.insert(student.getName(), student.getAge(), student.getTime());
+	    this.mysqlDAO.insert(date.getHostName(), date.getEid(), date.getDuration(), date.getStartTime());
 	}
 	
 	public void showView(ModelMap model) {
 		System.out.println("---- Query Student from Mysql Database -----" );
-		List<Student> list = this.studentDAOImpl.listStudents();
+		List<RentDate> list = this.mysqlDAO.listAllDate();
 		model.addAttribute("list", deleteTimeoutStudent(list)); 
 	}
 	
-	public List<Student> getStudentList() {
-		return this.studentDAOImpl.listStudents();
+	public List<RentDate> getAllDate() {
+		return this.mysqlDAO.listAllDate();
 	}
 	
-	public List<Student> deleteTimeoutStudent(List<Student> students) {
-		Iterator<Student> it = students.iterator();
+	public List<RentDate> deleteTimeoutStudent(List<RentDate> list) {
+		Iterator<RentDate> it = list.iterator();
 		while(it.hasNext()) {
-			Student tmpStudent = (Student)it.next();
-			if(TimeUtils.isTimeout(tmpStudent.getTime())) {
-				System.out.println(tmpStudent.getName() + " is timeout!");
-				this.studentDAOImpl.delete(tmpStudent.getId());
+			RentDate tmpDate = (RentDate)it.next();
+			if(TimeUtils.isTimeout(tmpDate.getStartTime(), tmpDate.getDuration())) {
+				System.out.println(tmpDate.getHostName() + " is timeout!");
+				this.mysqlDAO.delete(tmpDate.getId());
 				it.remove();
-				tmpStudent = null;
+				tmpDate = null;
 			} else {
-				String leaseTime = TimeUtils.getFormatLeaseTime(tmpStudent.getTime());
-				tmpStudent.setLeaseTime(leaseTime);
+				String leaseTime = TimeUtils.getFormatLeaseTime(tmpDate.getStartTime());
+				tmpDate.setLeaseTime(leaseTime);
 			}
 		}
 		
-		return students;
+		return list;
 	}
 }

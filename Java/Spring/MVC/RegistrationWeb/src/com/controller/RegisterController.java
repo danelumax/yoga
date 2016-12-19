@@ -22,34 +22,34 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.registration.ModelMysqlManager;
 import com.registration.SpringException;
-import com.registration.Student;
+import com.registration.RentDate;
 
 import org.springframework.ui.ModelMap;
 
 
 @Controller
-public class StudentController {
+public class RegisterController {
 	private ModelMysqlManager mysqlManager;
-	public StudentController() {
+	public RegisterController() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		this.mysqlManager = (ModelMysqlManager) context.getBean("modelMysqlManager");
 	}
 	
-	@RequestMapping(value = "/student", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainPage", method = RequestMethod.GET)
 	public ModelAndView mainPage() {
-		Student student = mysqlManager.getInitialStudent();
-		return new ModelAndView("insertPage", "command", student);
+		RentDate date = mysqlManager.getInitialStudent();
+		return new ModelAndView("insertPage", "command", date);
 	}
 	
-	@RequestMapping(value = "/addStudent", method = RequestMethod.POST)
-	public String addStudent(@ModelAttribute("command")Student student, ModelMap model) throws Exception {
-		checkAttribute(student);
+	@RequestMapping(value = "/insertRentInfo", method = RequestMethod.POST)
+	public String addStudent(@ModelAttribute("command")RentDate date, ModelMap model) throws Exception {
+		checkAttribute(date);
 		
 		/* for properties */
 		//ModelPropertiesManager.getInstance().saveModeltoProperties(student);
 				
 		/* for mysql */
-		mysqlManager.saveModeltoMysql(student);
+		mysqlManager.saveModeltoMysql(date);
 		
 		mysqlManager.showView(model);
 		
@@ -57,17 +57,15 @@ public class StudentController {
 	}
 	
 	@ExceptionHandler({SpringException.class})
-	public void checkAttribute(Student student) {
-		if(student.getAge() > 200) {
+	public void checkAttribute(RentDate date) {
+		System.out.println(date.getHostName() + " " + date.getEid());
+		
+		if(date.getHostName().length() < 2 ) {
 			throw new SpringException("Given age is larger 200");
 		}
 		
-		if(student.getName().length() < 2 ){
+		if(date.getEid().length() < 2 ){
 			throw new SpringException("Given name is too short");
-		}
-		
-		if(student.getId() < 0 ){
-			throw new SpringException("Given id is smaller than 0");
 		}
 	}
 }

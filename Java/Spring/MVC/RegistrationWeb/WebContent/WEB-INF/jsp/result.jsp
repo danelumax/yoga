@@ -11,20 +11,20 @@
 	</head>
 
 	<body>
-		<h2>Current Student Information</h2>
-		<table border="1" width="300">
+		<h2>Current Rent Information</h2>
+		<table border="1" width="400">
 			<tr>
-				<th>Name</th>
-				<th>Age</th>
-				<th>Id</th>
-				<th>Time</th>
+				<th>HostName</th>
+				<th>eid</th>
+				<th>Duration</th>
+				<th>Start Time</th>
 			</tr>
      		<c:forEach items="${list}" var="item">  
-	  		<tr>
-	  			<td> <span class="Name"><c:out value="${item.name}" /></span> </td>
-          		<td> <span class="Age"><c:out value="${item.age}" /></span> <br/> </td>
-          		<td> <span class="id"><c:out value="${item.id}" /></span> <br/>	</td>
-          		<td> <span class="time"><c:out value="${item.time}" /></span> <br/>	</td>
+	  		<tr>          		
+          		<td> <span class="HostName"><c:out value="${item.hostName}" /></span> </td>
+          		<td> <span class="eid"><c:out value="${item.eid}" /></span> <br/> </td>
+          		<td> <span class="Duration"><c:out value="${item.duration}" /></span> <br/>	</td>
+          		<td> <span class="startTime"><c:out value="${item.startTime}" /></span> <br/>	</td>
       		</tr>
     		</c:forEach> 
 		</table> 
