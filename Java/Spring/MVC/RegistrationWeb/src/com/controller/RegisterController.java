@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.registration.ModelMysqlManager;
 import com.registration.SpringException;
-import com.registration.RentDate;
+import com.registration.RentData;
 
 import org.springframework.ui.ModelMap;
 
@@ -37,12 +37,12 @@ public class RegisterController {
 	
 	@RequestMapping(value = "/mainPage", method = RequestMethod.GET)
 	public ModelAndView mainPage() {
-		RentDate date = mysqlManager.getInitialStudent();
+		RentData date = mysqlManager.getInitialStudent();
 		return new ModelAndView("insertPage", "command", date);
 	}
 	
 	@RequestMapping(value = "/insertRentInfo", method = RequestMethod.POST)
-	public String addStudent(@ModelAttribute("command")RentDate date, ModelMap model) throws Exception {
+	public String addStudent(@ModelAttribute("command")RentData date, ModelMap model) throws Exception {
 		checkAttribute(date);
 		
 		/* for properties */
@@ -57,7 +57,7 @@ public class RegisterController {
 	}
 	
 	@ExceptionHandler({SpringException.class})
-	public void checkAttribute(RentDate date) {
+	public void checkAttribute(RentData date) {
 		System.out.println(date.getHostName() + " " + date.getEid());
 		
 		if(date.getHostName().length() < 2 ) {

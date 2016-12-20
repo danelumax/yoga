@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.registration.ModelMysqlManager;
-import com.registration.RentDate;
+import com.registration.RentData;
 
 @RestController
 public class RESTfulController {
@@ -21,7 +21,8 @@ public class RESTfulController {
 	}
 		
 	@RequestMapping(value="/rentInfoJSON", method=RequestMethod.GET, headers="Accept=application/json")
-	public List<RentDate> getRentInfoJSON() {
-		return mysqlManager.getAllDate();
+	public List<RentData> getRentInfoJSON() {
+		List<RentData> list = this.mysqlManager.getAllDate();
+		return this.mysqlManager.deleteTimeoutStudent(list);
 	}
 }

@@ -10,9 +10,9 @@ public interface DAO {
 	
 	public void insert(String hostname, String eid, Integer duration, String startTime);
 	
-	public RentDate getStudent(Integer id);
+	public RentData getStudent(Integer id);
 	
-	public List<RentDate> listAllDate();
+	public List<RentData> listAllDate();
 	
 	public void delete(Integer id);
 	

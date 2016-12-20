@@ -21,10 +21,10 @@
 
 	<bean id="modelMysqlManager" class="com.registration.ModelMysqlManager" >
 		<property name="mysqlDAO" ref="MysqlDAO" />
-		<property name="rentDate" ref="RentDate" />
+		<property name="rentData" ref="RentData" />
 	</bean>
 	
-	<bean id="RentDate" class="com.registration.RentDate" >
+	<bean id="RentData" class="com.registration.RentData" >
 		<property name="hostName" value="ecnshlx2087"/>
 		<property name="eid" value="eliwech"/>
 		<property name="duration" value="1"></property>

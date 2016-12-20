@@ -11,14 +11,14 @@ import org.springframework.ui.ModelMap;
 
 public class ModelMysqlManager {
 	private MysqlDAO mysqlDAO;
-	private RentDate rentDate;
+	private RentData rentData;
 
-	public RentDate getRentDate() {
-		return rentDate;
+	public RentData getRentData() {
+		return rentData;
 	}
 
-	public void setRentDate(RentDate rentDate) {
-		this.rentDate = rentDate;
+	public void setRentData(RentData rentData) {
+		this.rentData = rentData;
 	}
 
 	public MysqlDAO getMysqlDAO() {
@@ -29,11 +29,11 @@ public class ModelMysqlManager {
 		this.mysqlDAO = mysqlDAO;
 	}
 	
-	public RentDate getInitialStudent() {
-		return this.rentDate;
+	public RentData getInitialStudent() {
+		return this.rentData;
 	}
 
-	public void saveModeltoMysql(RentDate date) {
+	public void saveModeltoMysql(RentData date) {
 	    System.out.println("---- Save Web input into Mysql Database -----" );
 	    
 		Date currentTime = new Date();
@@ -45,18 +45,18 @@ public class ModelMysqlManager {
 	
 	public void showView(ModelMap model) {
 		System.out.println("---- Query Student from Mysql Database -----" );
-		List<RentDate> list = this.mysqlDAO.listAllDate();
+		List<RentData> list = this.mysqlDAO.listAllDate();
 		model.addAttribute("list", deleteTimeoutStudent(list)); 
 	}
 	
-	public List<RentDate> getAllDate() {
+	public List<RentData> getAllDate() {
 		return this.mysqlDAO.listAllDate();
 	}
 	
-	public List<RentDate> deleteTimeoutStudent(List<RentDate> list) {
-		Iterator<RentDate> it = list.iterator();
+	public List<RentData> deleteTimeoutStudent(List<RentData> list) {
+		Iterator<RentData> it = list.iterator();
 		while(it.hasNext()) {
-			RentDate tmpDate = (RentDate)it.next();
+			RentData tmpDate = (RentData)it.next();
 			if(TimeUtils.isTimeout(tmpDate.getStartTime(), tmpDate.getDuration())) {
 				System.out.println(tmpDate.getHostName() + " is timeout!");
 				this.mysqlDAO.delete(tmpDate.getId());

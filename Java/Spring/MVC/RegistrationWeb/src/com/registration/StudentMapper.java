@@ -5,13 +5,13 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 /* user-defined query result, just for callback */
-public class StudentMapper implements RowMapper<RentDate> {
+public class StudentMapper implements RowMapper<RentData> {
 	@Override
-	public RentDate mapRow(ResultSet rs, int rowNum) throws SQLException {
-		RentDate date = new RentDate();
+	public RentData mapRow(ResultSet rs, int rowNum) throws SQLException {
+		RentData date = new RentData();
 		date.setId(rs.getInt("id"));
 		date.setHostName(rs.getString("hostname"));
-		date.setEid(rs.getString("id"));
+		date.setEid(rs.getString("eid"));
 		date.setDuration(rs.getInt("duration"));
 		date.setStartTime(rs.getString("startTime"));
 		return date;

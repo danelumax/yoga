@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.registration.ModelMysqlManager;
-import com.registration.RentDate;
+import com.registration.RentData;
 
 @Controller
 public class HomeController {

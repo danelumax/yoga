@@ -27,14 +27,14 @@ public class MysqlDAO implements DAO{
 		System.out.println("Create Record Hostname = " + hostname + ", eid = " + eid  + ", Duration = " + duration + ", StartTime = " + startTime);
 	}
 	@Override
-	public RentDate getStudent(Integer id) {
-		RentDate student = this.jdbcTemplateObject.queryForObject(SingleQuerySQL, 
+	public RentData getStudent(Integer id) {
+		RentData student = this.jdbcTemplateObject.queryForObject(SingleQuerySQL, 
 						  new Object[]{id}, new StudentMapper());
 		return student;
 	}
 	@Override
-	public List<RentDate> listAllDate() {
-		List<RentDate> students = this.jdbcTemplateObject.query(ListAllSQL, new StudentMapper());
+	public List<RentData> listAllDate() {
+		List<RentData> students = this.jdbcTemplateObject.query(ListAllSQL, new StudentMapper());
 		return students;
 	}
 	@Override

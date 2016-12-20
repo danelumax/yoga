@@ -2,7 +2,7 @@ package com.registration;
 
 import java.io.Serializable;
 
-public class RentDate implements Serializable {
+public class RentData implements Serializable {
 	private Integer id;
 	private String hostName;
 	private String eid;
@@ -10,7 +10,7 @@ public class RentDate implements Serializable {
 	private String startTime;
 	private String leaseTime;
 	
-	public RentDate() {
+	public RentData() {
 	}
 	
 	public Integer getId() {

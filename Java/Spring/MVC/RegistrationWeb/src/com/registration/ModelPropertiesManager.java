@@ -58,7 +58,7 @@ public class ModelPropertiesManager {
 		} 
 	}
 	
-	public void saveStudent(RentDate student) throws IOException {
+	public void saveStudent(RentData student) throws IOException {
 		try {
 			writeProperties("HostName", student.getHostName());
 			writeProperties("eid", student.getEid());
@@ -68,7 +68,7 @@ public class ModelPropertiesManager {
 		}
 	}
 	
-	public void saveModeltoProperties(RentDate student) throws FileNotFoundException, IOException {
+	public void saveModeltoProperties(RentData student) throws FileNotFoundException, IOException {
 		initProperties();
 		saveStudent(student);
 	}
