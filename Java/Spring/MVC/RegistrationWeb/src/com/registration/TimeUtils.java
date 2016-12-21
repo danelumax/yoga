@@ -9,6 +9,7 @@ public class TimeUtils {
 		Date currentTime = new Date();
 		Timestamp registerTimeStamp =Timestamp.valueOf(registerTime);
 		long leaseTime = currentTime.getTime() - registerTimeStamp.getTime();
+		
 		return leaseTime / 1000;
 	}
 	
@@ -20,6 +21,7 @@ public class TimeUtils {
 		int minute = (int)(leaseTimeSecond % 3600 / 60);
 		int second = (int)(leaseTimeSecond % 60);
 		String formatTime = day + " days, " + hour + " hours, " + minute + " minutes, " + second + " seconds";
+		
 		return formatTime;
 	}
 	

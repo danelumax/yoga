@@ -16,7 +16,7 @@ body {
 			---------- Welcome to Liwei's Page ----------<br> <br>
 		</h2>
 		<h3>
-			<a href="mainPage">Register Rent Information </a> <br>
+			<a href="registerInfo">Register Rent Information </a> <br>
 			<a href="rentInfoJSON ">Fetch JSON Info </a>
 		</h3>
 	</div>

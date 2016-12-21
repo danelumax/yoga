@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -20,10 +22,10 @@ public class HomeController {
 		this.mysqlManager = (ModelMysqlManager) context.getBean("modelMysqlManager");
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(ModelMap model){
-		mysqlManager.showView(model);
-		
+		List<RentData> list = this.mysqlManager.getAllDate();
+		model.addAttribute("list", this.mysqlManager.deleteTimeoutStudent(list));
 		return "home";
 	}
 }

@@ -14,6 +14,7 @@ public class StudentMapper implements RowMapper<RentData> {
 		date.setEid(rs.getString("eid"));
 		date.setDuration(rs.getInt("duration"));
 		date.setStartTime(rs.getString("startTime"));
+		
 		return date;
 	}
 }

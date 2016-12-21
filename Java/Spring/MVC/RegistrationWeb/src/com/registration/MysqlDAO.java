@@ -30,11 +30,13 @@ public class MysqlDAO implements DAO{
 	public RentData getStudent(Integer id) {
 		RentData student = this.jdbcTemplateObject.queryForObject(SingleQuerySQL, 
 						  new Object[]{id}, new StudentMapper());
+		
 		return student;
 	}
 	@Override
 	public List<RentData> listAllDate() {
 		List<RentData> students = this.jdbcTemplateObject.query(ListAllSQL, new StudentMapper());
+		
 		return students;
 	}
 	@Override

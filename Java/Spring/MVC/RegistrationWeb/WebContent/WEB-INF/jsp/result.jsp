@@ -29,7 +29,7 @@
     		</c:forEach> 
 		</table> 
 		<h3>
-			<a href="/RegistrationWeb/">Back to Home </a> <br>
+			<a href="home">Back to Home </a> <br>
 		</h3> 
 	</body>
 </html>

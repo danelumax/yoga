@@ -35,14 +35,19 @@ public class RegisterController {
 		this.mysqlManager = (ModelMysqlManager) context.getBean("modelMysqlManager");
 	}
 	
-	@RequestMapping(value = "/mainPage", method = RequestMethod.GET)
-	public ModelAndView mainPage() {
-		RentData date = mysqlManager.getInitialStudent();
-		return new ModelAndView("insertPage", "command", date);
+	@RequestMapping(value = "/registerInfo", method = RequestMethod.GET)
+	public ModelAndView registerInfo() {
+		RentData date = mysqlManager.getInitialData();
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("command", date);
+		modelAndView.setViewName("insertPage");
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/insertRentInfo", method = RequestMethod.POST)
-	public String addStudent(@ModelAttribute("command")RentData date, ModelMap model) throws Exception {
+	public String insertRentInfo(@ModelAttribute("command")RentData date, ModelMap model) throws Exception {
 		checkAttribute(date);
 		
 		/* for properties */
@@ -51,7 +56,8 @@ public class RegisterController {
 		/* for mysql */
 		mysqlManager.saveModeltoMysql(date);
 		
-		mysqlManager.showView(model);
+		List<RentData> list = this.mysqlManager.getAllDate();
+		model.addAttribute("list", this.mysqlManager.deleteTimeoutStudent(list));	
 		
 		return "result";
 	}

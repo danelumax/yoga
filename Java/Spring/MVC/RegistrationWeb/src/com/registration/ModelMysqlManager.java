@@ -29,7 +29,7 @@ public class ModelMysqlManager {
 		this.mysqlDAO = mysqlDAO;
 	}
 	
-	public RentData getInitialStudent() {
+	public RentData getInitialData() {
 		return this.rentData;
 	}
 
@@ -41,12 +41,6 @@ public class ModelMysqlManager {
 		date.setStartTime(currentTimeFormat);
 	    
 	    this.mysqlDAO.insert(date.getHostName(), date.getEid(), date.getDuration(), date.getStartTime());
-	}
-	
-	public void showView(ModelMap model) {
-		System.out.println("---- Query Student from Mysql Database -----" );
-		List<RentData> list = this.mysqlDAO.listAllDate();
-		model.addAttribute("list", deleteTimeoutStudent(list)); 
 	}
 	
 	public List<RentData> getAllDate() {
