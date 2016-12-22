@@ -4,6 +4,8 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.pojo.RentData;
+
 
 public class MysqlDAO implements DAO{
 	final String TableName = "MachineRent";

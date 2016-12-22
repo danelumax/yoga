@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
+import com.pojo.RentData;
+
 public class ModelPropertiesManager {
 	private Properties pps;
 	private String filePath;

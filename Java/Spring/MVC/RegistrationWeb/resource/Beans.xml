@@ -24,7 +24,7 @@
 		<property name="rentData" ref="RentData" />
 	</bean>
 	
-	<bean id="RentData" class="com.registration.RentData" >
+	<bean id="RentData" class="com.pojo.RentData" >
 		<property name="hostName" value="ecnshlx2087"/>
 		<property name="eid" value="eliwech"/>
 		<property name="duration" value="1"></property>

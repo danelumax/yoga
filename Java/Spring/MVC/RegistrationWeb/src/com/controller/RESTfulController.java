@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pojo.RentData;
 import com.registration.ModelMysqlManager;
-import com.registration.RentData;
 
 @RestController
 public class RESTfulController {

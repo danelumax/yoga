@@ -1,4 +1,4 @@
-package com.registration;
+package com.pojo;
 
 import java.io.Serializable;
 

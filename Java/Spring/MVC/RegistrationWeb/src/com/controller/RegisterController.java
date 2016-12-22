@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pojo.RentData;
 import com.registration.ModelMysqlManager;
 import com.registration.SpringException;
-import com.registration.RentData;
 
 import org.springframework.ui.ModelMap;
 

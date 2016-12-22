@@ -3,6 +3,8 @@ package com.registration;
 import java.util.List;
 import javax.sql.DataSource;
 
+import com.pojo.RentData;
+
 /* DAO Support Interface */
 public interface DAO {
 	

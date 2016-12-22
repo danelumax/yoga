@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.springframework.ui.ModelMap;
 
+import com.pojo.RentData;
+
 public class ModelMysqlManager {
 	private MysqlDAO mysqlDAO;
 	private RentData rentData;

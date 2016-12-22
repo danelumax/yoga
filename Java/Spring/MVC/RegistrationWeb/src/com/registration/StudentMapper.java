@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.pojo.RentData;
+
 /* user-defined query result, just for callback */
 public class StudentMapper implements RowMapper<RentData> {
 	@Override
