@@ -35,7 +35,7 @@ public class FindUserByUsername {
 		SqlSession sqlSession = null;
 		try {
 			// 创建数据库会话实例sqlSession
-			sqlSession = sqlSessionFactory.openSession();
+			sqlSession = sqlSessionFactory.openSession(); 
 			// 查询单个记录，根据用户id查询用户信息
 			List<User> list = sqlSession.selectList("test.findUserByUsername", "Liwei");
 			System.out.println("List number: " + list.size() + "\n" + list);

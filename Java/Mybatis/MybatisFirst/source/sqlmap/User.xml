@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</selectKey>
 	  insert into user(username,birthday,sex,address) 
 	  values(#{username},#{birthday},#{sex},#{address})
-	</insert>
+	</insert> 
 	
 	<!-- 删除用户 -->
 	<delete id="deleteUserById" parameterType="int">

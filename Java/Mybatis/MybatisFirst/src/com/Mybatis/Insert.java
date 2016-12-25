@@ -2,7 +2,6 @@ package com.Mybatis;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -40,7 +39,7 @@ public class Insert {
 			User user = new User();
 			user.setUsername("Yoga");
 			user.setAddress("Songjiang");
-			user.setSex("femail");
+			user.setSex("female");
 			user.setBirthday("1992-11-20");
 			sqlSession.insert("test.insertUser", user);
 			//提交事务
