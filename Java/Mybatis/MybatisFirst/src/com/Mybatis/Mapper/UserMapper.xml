@@ -3,7 +3,10 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.Mybatis.Mapper.UserMapper">
-
+	
+	<!-- 开启本mapper的namespace下的二缓存 -->
+	<cache/>
+	
 	<sql id="query_user_where">
 		<if test="userCustom!=null">
 			<if test="userCustom.sex!=null and userCustom.sex!=''">
