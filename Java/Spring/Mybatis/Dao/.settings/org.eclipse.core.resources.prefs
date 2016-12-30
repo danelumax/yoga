@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/com/ssm/dao/UserDao.java=UTF-8
+encoding//src/com/ssm/dao/UserDaoImpl.java=UTF-8
+encoding//src/com/ssm/po/User.java=UTF-8
+encoding//test/com/ssm/dao/UserDaoImplTest.java=UTF-8
