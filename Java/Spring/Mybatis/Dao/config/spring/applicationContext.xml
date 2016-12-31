@@ -35,24 +35,8 @@
 	</bean>
 	
 	<!-- 原始dao接口 -->
-	
 	<bean id="userDao" class="com.ssm.dao.UserDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 	
-	<!-- mapper配置 
-	MapperFactoryBean：根据mapper接口生成代理对象
-	-->
-	<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		mapperInterface指定mapper接口
-		<property name="mapperInterface" value="cn.itcast.ssm.mapper.UserMapper"/>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-	</bean> -->
-	<!-- mapper批量扫描，从mapper包中扫描出mapper接口，自动创建代理对象并且在spring容器中注册 
-	遵循规范：将mapper.java和mapper.xml映射文件名称保持一致，且在一个目录 中
-	自动扫描出来的mapper的bean的id为mapper类名（首字母小写）
-	-->
-	
-
-
 </beans>
