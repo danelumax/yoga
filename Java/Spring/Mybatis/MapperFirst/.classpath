@@ -24,25 +24,25 @@
 	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/slf4j-log4j12-1.7.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-aop-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-aspects-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-beans-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-context-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-context-support-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-core-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-expression-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-instrument-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-instrument-tomcat-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-jdbc-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-jms-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-messaging-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-orm-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-oxm-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-test-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-tx-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-web-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-webmvc-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-webmvc-portlet-4.3.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/SSM/spring-websocket-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-aop-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-aspects-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-beans-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-context-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-context-support-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-core-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-expression-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-instrument-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-instrument-tomcat-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-jdbc-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-jms-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-messaging-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-orm-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-oxm-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-test-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-tx-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-web-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-webmvc-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-webmvc-portlet-4.3.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/eliwech/Desktop/OS/Jar/spring-websocket-4.3.4.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

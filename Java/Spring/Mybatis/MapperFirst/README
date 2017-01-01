@@ -1,0 +1,12 @@
+[Tips]
+1. Don't use JAVA 8 and Spring 3 for Mybatis, I am using Spring 4.3, it is ok.
+2. MapperSanner can scan all mapper from mapper package instead of adding the bean of mapper manually
+
+<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<!-- 指定扫描的包名 
+	如果扫描多个包，每个包中间使用半角逗号分隔 -->
+	<property name="basePackage" value="com.ssm.mapper"/>
+	<!-- 仅仅希望获取一个 String的 Bean id， 然后在用String 的 bean id 来得到 具体的 sqlSessionFactory 对象  -->
+	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+</bean>
+
