@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/items/itemsList.jsp=UTF-8
+encoding//src/com/ssm/controller/ItemsController.java=UTF-8
+encoding//src/com/ssm/mapper/ItemsMapperCustom.java=UTF-8
+encoding//src/com/ssm/po/ItemsCustom.java=UTF-8
+encoding//src/com/ssm/po/ItemsQueryVo.java=UTF-8
+encoding//src/com/ssm/service/ItemsService.java=UTF-8
+encoding//src/com/ssm/service/impl/ItemsServiceImpl.java=UTF-8

@@ -4,12 +4,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	
-	<!-- 别名定义 -->
+	<!-- 配置别名 -->
 	<typeAliases>
-		<!-- 批量别名定义 
-		指定包名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名（首字母大写或小写都可以）
-		-->
+		<!-- 批量扫描别名定 --> 
 		<package name="com.ssm.po"/>
 	</typeAliases>
+	
+	<!-- 加载 映射文件 -->
+	<mappers>
+	</mappers>
 	
 </configuration>

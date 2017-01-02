@@ -14,12 +14,11 @@
 	<mvc:annotation-driven />
 	
 	<!-- scan controller from specific package-->
-   	<context:component-scan base-package="com.controller" />
+   	<context:component-scan base-package="com.ssm.controller" />
 
    	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
    		<property name="prefix" value="/WEB-INF/jsp/" />
       	<property name="suffix" value=".jsp" />
    	</bean>
  
-   
 </beans>
