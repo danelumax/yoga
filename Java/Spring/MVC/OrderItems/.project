@@ -70,6 +70,11 @@
 			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/ehcache-core-2.6.5.jar</locationURI>
 		</link>
 		<link>
+			<name>WebContent/WEB-INF/lib/hibernate-validator-4.3.0.Final.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Downloads/SpringMVC/day02/%E8%B5%84%E6%96%99/jar%E5%8C%85/hibernate-validator/hibernate-validator-4.3.0.Final.jar</locationURI>
+		</link>
+		<link>
 			<name>WebContent/WEB-INF/lib/javassist-3.17.1-GA.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/javassist-3.17.1-GA.jar</locationURI>
@@ -78,6 +83,16 @@
 			<name>WebContent/WEB-INF/lib/javax.servlet-api-3.1.0.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Jar/MVC/javax.servlet-api-3.1.0.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/jboss-logging-3.1.0.CR2.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Downloads/SpringMVC/day02/%E8%B5%84%E6%96%99/jar%E5%8C%85/hibernate-validator/jboss-logging-3.1.0.CR2.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/jsp-api.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/jsp-api.jar</locationURI>
 		</link>
 		<link>
 			<name>WebContent/WEB-INF/lib/jstl-1.2.jar</name>
@@ -233,6 +248,11 @@
 			<name>WebContent/WEB-INF/lib/spring-websocket-4.3.4.RELEASE.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/spring-websocket-4.3.4.RELEASE.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/validation-api-1.0.0.GA.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Downloads/SpringMVC/day02/%E8%B5%84%E6%96%99/jar%E5%8C%85/hibernate-validator/validation-api-1.0.0.GA.jar</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

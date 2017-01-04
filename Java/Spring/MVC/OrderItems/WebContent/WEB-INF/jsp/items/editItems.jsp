@@ -12,7 +12,14 @@
 </head>
 <body> 
 
-<form id="itemForm" action="/OrderItems/items/editItemsSubmit" method="post" >
+<!-- 显示错误信息 -->
+<c:if test="${allErrors!=null }">
+	<c:forEach items="${allErrors }" var="error">
+		<b style="font-family:times;color:red;font-size:30px"> ${error.defaultMessage}</b> <br/><br/>
+</c:forEach>
+</c:if>
+
+<form id="itemForm" action="${pageContext.request.contextPath }/items/editItemsSubmit" method="post" >
 <input type="hidden" name="id" value="${itemsCustom.id }"/>
 修改商品信息：
 <table width="100%" border=1>

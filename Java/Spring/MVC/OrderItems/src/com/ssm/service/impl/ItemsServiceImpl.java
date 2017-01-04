@@ -52,5 +52,5 @@ public class ItemsServiceImpl implements ItemsService{
 		itemsCustom.setId(id);
 		itemsMapper.updateByPrimaryKeyWithBLOBs(itemsCustom);
 	}
-
+	
 }
