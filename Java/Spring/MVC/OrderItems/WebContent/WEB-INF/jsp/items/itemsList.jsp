@@ -30,6 +30,12 @@ function queryItems(){
 <tr>
 <td>
 商品名称：<input name="itemsCustom.name" />
+商品类型：
+<select name="itemtype">
+	<c:forEach items="${itemtypes }" var="itemtype">
+		<option value="${itemtype.key }">${itemtype.value }</option>		
+	</c:forEach>
+</select>
 </td>
 <td>
 <input type="button" value="查询" onclick="queryItems()"/>

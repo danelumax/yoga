@@ -1,6 +1,8 @@
 package com.ssm.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,11 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ssm.controller.validation.ValidGroup1;
 import com.ssm.po.ItemsCustom;
 import com.ssm.po.ItemsQueryVo;
 import com.ssm.service.ItemsService;
@@ -28,6 +32,18 @@ public class ItemsController {
 	
 	@Autowired
 	private ItemsService itemsService;
+	
+	// 商品分类
+	//itemtypes表示最终将方法返回值放在request中的key
+	@ModelAttribute("itemtypes")
+	public Map<String, String> getItemTypes() {
+
+		Map<String, String> itemTypes = new HashMap<String, String>();
+		itemTypes.put("101", "数码");
+		itemTypes.put("102", "母婴");
+
+		return itemTypes;
+	}
 	
 	@RequestMapping("/queryItems")
 	public ModelAndView queryItems(HttpServletRequest request, ItemsQueryVo itemsQueryVo)throws Exception{
@@ -53,10 +69,10 @@ public class ItemsController {
 		
 	}
 		
-	@RequestMapping(value="/editItems",method={RequestMethod.POST,RequestMethod.GET})
 	//@RequestParam里边指定request传入参数名称和形参进行绑定。 把itemsCustom中的id属性，与形参items_id 映射
 	//通过required属性指定参数是否必须要传入
 	//通过defaultValue可以设置默认值，如果id参数没有传入，将默认值和形参绑定。
+	@RequestMapping(value="/editItems",method={RequestMethod.POST,RequestMethod.GET})
 	public String editItems(Model model,@RequestParam(value="id",required=true) Integer items_id)throws Exception {
 		
 		//调用service根据商品id查询商品信息
@@ -64,7 +80,7 @@ public class ItemsController {
 		
 		//通过形参中的model将model数据传到页面
 		//相当于modelAndView.addObject方法
-		model.addAttribute("itemsCustom", itemsCustom);
+		model.addAttribute("items", itemsCustom);
 		
 		return "items/editItems";
 	}
@@ -86,7 +102,7 @@ public class ItemsController {
 	 */
 	@RequestMapping("/editItemsSubmit")
 	public String editItemsSubmit(Model model, HttpServletRequest request,Integer id,
-			@Validated ItemsCustom itemsCustom, BindingResult bindingResult)throws Exception {
+			@ModelAttribute("items") @Validated(value = { ValidGroup1.class }) ItemsCustom itemsCustom, BindingResult bindingResult)throws Exception {
 		
 		// 获取校验错误信息
 		if (bindingResult.hasErrors()) {
@@ -99,6 +115,9 @@ public class ItemsController {
 			}
 			// 将错误信息传到页面
 			model.addAttribute("allErrors", allErrors);
+			
+			//可以直接使用model将提交pojo回显到页面
+			//model.addAttribute("items", itemsCustom);
 			
 			// 出错重新到商品修改页面
 			return "items/editItems";
@@ -150,8 +169,7 @@ public class ItemsController {
 	// 批量修改商品提交
 	// 通过ItemsQueryVo接收批量提交的商品信息，将商品信息存储到itemsQueryVo中itemsList属性中。
 	@RequestMapping("/editItemsAllSubmit")
-	public String editItemsAllSubmit(ItemsQueryVo itemsQueryVo)
-			throws Exception {
+	public String editItemsAllSubmit(ItemsQueryVo itemsQueryVo) throws Exception {
 		
 		System.out.println("List submit:");
 		List<ItemsCustom> list = itemsQueryVo.getItemsList();
