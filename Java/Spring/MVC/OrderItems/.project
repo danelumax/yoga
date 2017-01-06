@@ -55,6 +55,16 @@
 			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/commons-dbcp-1.2.2.jar</locationURI>
 		</link>
 		<link>
+			<name>WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Jar/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/commons-fileupload-1.2.2.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/commons-io-2.4.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Jar/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/commons-io-2.4.jar</locationURI>
+		</link>
+		<link>
 			<name>WebContent/WEB-INF/lib/commons-logging-1.1.1.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/commons-logging-1.1.1.jar</locationURI>
@@ -73,6 +83,21 @@
 			<name>WebContent/WEB-INF/lib/hibernate-validator-4.3.0.Final.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Downloads/SpringMVC/day02/%E8%B5%84%E6%96%99/jar%E5%8C%85/hibernate-validator/hibernate-validator-4.3.0.Final.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/jackson-annotations-2.8.5.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Jar/springmvc%E5%8A%A0%E5%85%A5json%E6%94%AF%E6%8C%81/jackson-annotations-2.8.5.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/jackson-core-2.8.5.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Jar/springmvc%E5%8A%A0%E5%85%A5json%E6%94%AF%E6%8C%81/jackson-core-2.8.5.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/jackson-databind-2.8.5.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Jar/springmvc%E5%8A%A0%E5%85%A5json%E6%94%AF%E6%8C%81/jackson-databind-2.8.5.jar</locationURI>
 		</link>
 		<link>
 			<name>WebContent/WEB-INF/lib/javassist-3.17.1-GA.jar</name>
