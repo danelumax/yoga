@@ -24,6 +24,10 @@ function queryItems(){
 
 </head>
 <body> 
+当前用户：${username }，
+<c:if test="${username!=null }">
+ <a href="${pageContext.request.contextPath }/logout.action">退出</a>
+</c:if>
 <form name="itemsForm" action="${pageContext.request.contextPath }/items/queryItems" method="post">
 查询条件：
 <table width="100%" border=1>
@@ -68,6 +72,9 @@ function queryItems(){
 
 </table>
 </form>
+
+<input type ="button" value="查看该项目的UML" onClick="location.href='http://localhost:8080/pic/OrderItemsUML.jpg'">
+
 </body>
 
 </html>

@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ssm.mapper.ItemsMapperCustom" >
 
+	<!-- echcache 二级缓存 -->
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	
 	<!-- 定义商品查询的sql片段，就是商品查询条件 -->
    	<sql id="query_items_where">
    	<!-- 使用动态sql，通过if判断，满足条件进行sql拼接 -->

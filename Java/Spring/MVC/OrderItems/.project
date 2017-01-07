@@ -265,16 +265,6 @@
 			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/spring-webmvc-4.3.4.RELEASE.jar</locationURI>
 		</link>
 		<link>
-			<name>WebContent/WEB-INF/lib/spring-webmvc-portlet-4.3.4.RELEASE.jar</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/spring-webmvc-portlet-4.3.4.RELEASE.jar</locationURI>
-		</link>
-		<link>
-			<name>WebContent/WEB-INF/lib/spring-websocket-4.3.4.RELEASE.jar</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Jar/SSM/spring-websocket-4.3.4.RELEASE.jar</locationURI>
-		</link>
-		<link>
 			<name>WebContent/WEB-INF/lib/validation-api-1.0.0.GA.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Downloads/SpringMVC/day02/%E8%B5%84%E6%96%99/jar%E5%8C%85/hibernate-validator/validation-api-1.0.0.GA.jar</locationURI>

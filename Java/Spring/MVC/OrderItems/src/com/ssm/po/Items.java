@@ -1,5 +1,6 @@
 package com.ssm.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -7,7 +8,7 @@ import javax.validation.constraints.Size;
 
 import com.ssm.controller.validation.ValidGroup1;
 
-public class Items {
+public class Items implements Serializable{
     private Integer id;
 
     //校验名称在1到30字符中间

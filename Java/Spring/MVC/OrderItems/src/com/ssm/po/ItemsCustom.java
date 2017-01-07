@@ -1,6 +1,8 @@
 package com.ssm.po;
 
-public class ItemsCustom extends Items {
+import java.io.Serializable;
+
+public class ItemsCustom extends Items implements Serializable{
 	
 	//添加商品信息的扩展属性
 
