@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	function randomNumber() {
+		return Math.round(Math.random()*100);
+	}
+	
+	var num1 = randomNumber();
+	alert(num1);
+	
+	function guess() {
+ 		var num2 = prompt("请输入1~100之间的数字", "0");
+ 		if (isNaN(+num2)) {
+ 			alert("请输入有效数字");
+ 			guess();
+ 		}
+ 		if (num2 > num1) {
+			alert("大了");
+			guess();
+		} else if (num2 < num1) {
+			alert("小了");
+			guess();
+		} else {
+			var result = confirm("恭喜您答对了！ 是否要继续游戏？");
+			if (result) {
+				num1 = randomNumber();
+				guess();
+			} else {
+				window.close();
+			}
+		}
+	}
+	
+	guess();
+</script>
+</head> 
+<body>
+
+</body>
+</html>
