@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Checkbox test</title>
+		
+	</head>
+	<body>
+		<form method="post" action="">
+		   	请选择您的爱好!
+			<br><input type="checkbox" id="checkedAll_2"/>全选/全不选
+		   	<br/>
+		    <input type="checkbox" name="items" value="足球"/>足球
+			<input type="checkbox" name="items" value="篮球"/>篮球
+			<input type="checkbox" name="items" value="游泳"/>游泳
+			<input type="checkbox" name="items" value="唱歌"/>唱歌
+		   	<br/>
+		    <input type="button" id="CheckedAll" value="全　选" onclick="checkType(true)"/>
+		    <input type="button" id="CheckedNo" value="全不选" onclick="checkType(false)"/>
+		    <input type="button" id="CheckedRev" value="反　选"/> 
+		
+			
+		</form>
+	</body>
+	<script language="JavaScript">	
+			function checkType(value) {
+				//1 获得到要操作4个input 对象
+				var items =  document.getElementsByName("items");
+				//2 遍历
+				for(var i = 0 ; i < items.length ; i++){
+					items[i].checked = value;
+				}
+				
+			}
+	
+			//反选
+			//1 获得反选按钮,添加点击事件
+			document.getElementById("CheckedRev").onclick=function(){
+				//2 获得到要操作4个input 对象
+				var items =  document.getElementsByName("items");
+				//3 遍历
+				for(var i = 0 ; i < items.length ; i++){
+					//判断 ,当前遍历的input的选中状态
+					//alert(items[i].checked);
+					/* if(items[i].checked){
+							//选中 ==> 没选中
+						items[i].checked=false;
+					}else{
+							//没选中==> 选中
+						items[i].checked=true;	
+						
+					} */
+					items[i].checked = !items[i].checked;
+				}
+				
+			}
+			
+	</script>
+</html>
