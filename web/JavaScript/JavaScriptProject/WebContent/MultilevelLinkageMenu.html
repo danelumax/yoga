@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<select id="province" >
+	<option>--请选择省份--</option>
+</select >
+
+<select id="city">
+	<option>--请选择城市--</option>
+</select>
+</body>
+<script type="text/javascript">
+/*
+	//json 对象
+	//java 中的 map  key:value
+	//创建json对象
+	var json = {"name":"tom","age":18};
+	//拿到json中的所有键
+	for(var key in json){
+	//根据键取得对应的值
+		alert(key+"==>"+json[key]);
+	}
+*/
+
+var json = {"上海":["杨浦","黄浦","嘉定","松江"],"河北省":["廊坊市","保定市","石家庄"],"山东省":["济南","青岛","烟台"],"河南省":["郑州市","洛阳市","开封"]};
+	
+//遍历json中的所有key,把key封装到option对象中,将option对象添加到省的select中
+//0 获得省的select对象
+var province = document.getElementById("province");
+var city = document.getElementById("city");
+//1 遍历json中的所有key
+for(var key in json){
+//2 key封装到option对象中
+		var option = document.createElement("option");
+		option.innerHTML = key;
+//3 添加
+		province.appendChild(option);
+	}
+
+//为province添加onchange事件
+province.onchange=function(){
+	//0 每次添加市之前,清空市的下拉选, 只显示--请选择城市--
+		city.length=1;
+	//1. 获得用户选择的省
+	var pronvinceKey = this.options[this.selectedIndex].innerHTML;
+	//2. 根据选择的省去json中取得对应 市数组
+	var cities = json[pronvinceKey];
+	//3. 遍历数组中的所有市,封装到option对象中
+	for(var i = 0 ; i < cities.length ; i++){
+		var option = document.createElement("option");
+			option.innerHTML = cities[i];
+	//4. 将option添加到city中
+			city.appendChild(option);
+	}
+	
+}
+
+
+</script>
+</html>
