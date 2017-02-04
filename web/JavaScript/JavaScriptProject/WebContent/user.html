@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>添加用户</title>
+	</head>
+	<body>
+		<center>
+			<br><br>
+			添加用户:<br><br>
+			姓名: <input type="text" name="name" id="name"  />&nbsp;&nbsp;
+			email: <input type="text" name="email" id="email" />&nbsp;&nbsp;
+			电话: <input type="text" name="tel" id="tel" /><br><br>
+			<input type="button" id="addUser" value="添加" />
+			<br><br>
+			<hr>
+			<br><br>
+			<table id="usertable" border="1" cellpadding="5" cellspacing=0>
+					<tr>
+						<th>姓名</th>
+						<th>email</th>
+						<th>电话</th>
+						<th>&nbsp;</th>
+					</tr>
+					<tr>
+						<td>Tom</td>
+						<td>tom@tom.com</td>
+						<td>5000</td>
+						<td><a href="javascript:void(0)" onclick="del(this)" >Delete</a></td>
+					</tr>
+					<tr>
+						<td>Jerry</td>
+						<td>jerry@sohu.com</td>
+						<td>8000</td>
+						<td><a href="javascript:void(0)" onclick="del(this)" >Delete</a></td>
+					</tr>
+			</table>
+		</center>
+	</body>
+	<script type="text/javascript">
+	//DHTML ==> Dynamic HTML ==> 动态HTML ==> 整合了HTML CSS JAVAScript DOM
+	// 对页面中的DOM对象的增强.
+	// 对页面中的DOM对象增加了一些属性和方法.
+	
+	
+	
+	
+	
+		//1 获得添加按钮 , 添加点击事件
+		document.getElementById("addUser").onclick=function(){
+			//2.获得表单中,用户名,邮箱,电话的值
+				var name = document.getElementById("name").value;
+				var email = document.getElementById("email").value;
+				var tel = document.getElementById("tel").value;
+			//3.创建一个tr对象
+				var tr = document.createElement("tr");
+			//4.直接在tr中添加4个td
+				tr.innerHTML="<td>"+name+"</td><td>"+email+"</td><td>"+tel+"</td><td><a href='javascript:void(0)' onclick='del(this)' >Delete</a></td>";
+				
+			
+			/* //4.创建4个td,分别放入 用户名,邮箱,电话
+			//5.将4个td 添加到tr中 */
+			//6.tr添加到table中
+				document.getElementById("usertable").appendChild(tr);
+		}
+	
+	//删除一行
+	function del(a){
+		//要删除一行,已知条件就是a标签.
+		//<a> --> <td> --> <tr> --> <table> 需要table 删除 <tr>    <a> --> <td> --> <tr>
+		a.parentNode.parentNode.parentNode.removeChild(a.parentNode.parentNode);
+	}
+	
+	
+	</script>
+</html>
