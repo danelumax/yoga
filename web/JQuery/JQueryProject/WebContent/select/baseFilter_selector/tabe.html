@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>tabe.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script src="../../js/jquery-1.4.2.js"></script>
+  </head>
+  <script type="text/javascript">
+  // 需求1： 表格t1 奇偶行交替变色
+  	/**
+  	 * $(document)=$()
+  	 * 一旦页面load 
+  	 */
+  	 $(document).ready(function(){
+	 	$("#t1 tr:even").css("background","red");
+		$("#t1 tr:odd").css("background","green");
+	
+	// 需求2： 表格t2 中， id列全部变色， name列不变色
+		/**
+		 * $("#t2 tr td:first").css("background","red");
+		 *   首先找到id为t2的元素，再查找下面的所有子元素tr,从第一个tr元素开始查找子元素:第一个td,找到以后停止
+		 */
+		//会去每一个tr下查找子元素第一个td，直到全部td都遍历过为止
+		$("#t2 tr td:first-child").css("background","red");
+		
+	// 需求3： 表格t3 中， 奇偶列交替变色
+		//each方法就是遍历每一个tr
+		$("#t3 tr").each(function(){
+			//查找每一个tr对象中的子元素：奇数行或者偶数行的子元素
+			//$(this) 当前每一个tr
+			$(this).children(":even").css("background","red");
+			$(this).children(":odd").css("background","green");
+		});
+		
+	 });
+  </script>
+  <body>
+    This is my HTML page. <br>
+		<table id="t1">
+			<tr>
+				<td>afds</td>
+				<td>asdf</td>
+			</tr>
+			<tr>
+				<td>asdf</td>
+				<td>afds</td>
+			</tr>
+			<tr>
+				<td>afds</td>
+				<td>asfd</td>
+			</tr>
+			<tr>
+				<td>asfd</td>
+				<td>afds</td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<br>
+		<table id="t2">
+			<tr>
+				<td>id</td>
+				<td>name</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>aaa</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>bbb</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>ccc</td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<br>
+		<table id="t3">
+			<tr>
+				<td>id</td>
+				<td>name</td>
+				<td>sex</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>aaa</td>
+				<td>aaa</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>bbb</td>
+				<td>aaa</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>ccc</td>
+				<td>aaa</td>
+			</tr>
+		</table>
+  </body>
+</html>
