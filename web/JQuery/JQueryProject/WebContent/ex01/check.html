@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>check.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<script language="JavaScript"  src="../js/jquery-1.4.2.js"></script>
+  </head>
+  <script type="application/javascript">
+  		$().ready(function(){
+			$("#checkItems").click(function(){
+				if($(this).attr("checked")){//被选中
+					$(":checkbox[name='items']").attr("checked",true);
+				}else{
+					$(":checkbox[name='items']").attr("checked",false);
+				}
+			});
+			
+			$("#checkall").click(function(){
+				$(":checkbox[name='items']").attr("checked",true);
+				$("#checkItems").attr("checked",true);
+			});
+			
+			$("#checkallNo").click(function(){
+				$(":checkbox[name='items']").attr("checked",false);
+				$("#checkItems").attr("checked",false);
+			});
+			
+			$("#check_revsern").click(function(){
+//				$(":checkbox[name='items']:checked").attr("checked",false);
+//				$(":checkbox[name='items']:not(:checked)").attr("checked",true);
+				$(":checkbox[name='items']").each(function(){
+					if($(this).attr("checked")){//如果被选中
+						$(this).attr("checked",false);
+					}else{//没有被选中
+						$(this).attr("checked",true);
+					}
+				});
+			});
+		});
+  </script>
+  <body>
+  	您的爱好很广泛!!!
+  	 <br>
+	 <input type="checkbox" name="checkItems"  id="checkItems" value="全选/全不选"/>全选/全不选
+	 <br>
+        <input type="checkbox" name="items" value="足球" />足球
+		<input type="checkbox" name="items" value="篮球"/>篮球
+		<input type="checkbox" name="items" value="游泳"/>游泳
+		<input type="checkbox" name="items" value="唱歌"/>唱歌
+		<br>
+		<input type="button" name="checkall" id="checkall" value="全选" />
+		<input type="button" name="checkall" id="checkallNo" value="全不选" />
+		<input type="button" name="checkall" id="check_revsern" value="反选" />
+  </body>
+</html>
+

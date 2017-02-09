@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>domjquery.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  <script src="../js/jquery-1.4.2.js"></script>
+  <script type="text/javascript">
+  	window.onload = function(){
+		/**
+  		 * jquery对象是数组对象
+  		 * jquery对象不可能为null,如果得到不值，那么数组的大小为0
+  		 */
+		var domObj = document.getElementById("username");//dom对象
+		var jQueryObj = $(domObj); //该对象就是一个jquery对象
+		var domObj2 = jQueryObj[0];//dom对象
+		var domObj3 = jQueryObj.get(0);//dom对象
+		alert(domObj2.getAttribute("name"));
+		alert(domObj3.getAttribute("name"));
+	}
+  </script> 
+  <body>
+    	<input type="text" name="username" id="username">
+  </body>
+</html>
