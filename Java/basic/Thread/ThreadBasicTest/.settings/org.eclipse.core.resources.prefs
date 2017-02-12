@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/com/thread/test/DaemonTest.java=UTF-8
+encoding//src/com/thread/test/JoinTest.java=UTF-8
+encoding//src/com/thread/test/ProducerConsumerWaitNotify.java=UTF-8
+encoding//src/com/thread/test/StopFlag.java=UTF-8
+encoding//src/com/thread/test/SynchronizedCodeBlock.java=UTF-8
+encoding//src/com/thread/test/ThreadBasicFunction.java=UTF-8
+encoding//src/com/thread/test/ThreadFirstTest.java=UTF-8
