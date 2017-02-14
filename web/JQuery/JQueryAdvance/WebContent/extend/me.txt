@@ -1,0 +1,4 @@
+写一个函数，该函数的名称是extend,有两个参数：destination,source
+   1、如果destination和source都是json对象，完成从source到destination的复制
+   2、如果destination是一个函数，source是一个json对象，则把source中的每一个key,value对赋值给destination的prototype
+   3、如果destination,source都是函数，则把source的prototype中的内容赋值给destination的prototype
