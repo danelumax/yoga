@@ -10,6 +10,8 @@
  * 内部函数的prototype中
  * @param {Object} json
  */
+
+
 namespace("com.jquery");
 com.jquery.extend = function (json){
 	/**
@@ -31,6 +33,7 @@ com.jquery.extend = function (json){
 //	aa:'aa',
 //	bb:'bb'
 //});
+//用json添加到F的prototype中，封装出一个类
 var Person = com.jquery.extend({
 	aa:'aa',
 	bb:'bb'

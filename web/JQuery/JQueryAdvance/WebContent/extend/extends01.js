@@ -7,6 +7,8 @@
 function Student(){
 	
 }
+
+//prototype相当于模板，相当于类的概念
 Student.prototype.setName = function(name){
 	this.name = name;
 }

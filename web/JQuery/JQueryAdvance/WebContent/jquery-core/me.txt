@@ -1,0 +1,30 @@
+(function(window){
+	/**
+	  *   jQuery是一个函数
+	                              是一个对象
+	                              是一个构造器函数
+	  */
+    //根据一个选择器，创建一个jQuery对象	  
+	var jQuery = function( selector, context ) {
+		return new jQuery.fn.init( selector, context );
+	},
+	
+	//fn就是jQuery对象上的一个属性，该属性指向了prototype
+	//jQuery的 prototype中的方法是根据jQuery的选择器获取到的jQuery对象，然后jQuery对象调用这些方法的
+	//利用jQuery的选择器得到的jQuery对象就相当于利用jQuery的构造器创建出来的对象
+	jQuery.fn = jQuery.prototype = {
+		each: function( callback, args ) {
+			return jQuery.each( this, callback, args );
+		},
+		ready:function(){}
+	};
+	//window对象动态的添加了一个属性jQuery,把匿名函数中的jQuery对象赋值给了window的jQuery对象
+	//$实际上是window的一个属性，也是jQuery对象
+	window.jQuery = window.$ = jQuery;
+	
+	jQuery.fn = jQuery.prototype = $.prototype = $.fn = window.$.fn = window.jQuery.fn = window.jQuery.prototype
+	
+	
+	//在jquery中，可以把一个方法加入到jQuery或者$本身上, 直接利用jQuery或者$调用,这样的方法称为全局方法，也称为全局插件
+	//在jquery中，可以把一个方法加入到jQuery或者$的prototype或者fn上，可以利用jquery的选择器获取到的jquery对象调用这些方法,这样的方法也称为插件方法
+})(window);
