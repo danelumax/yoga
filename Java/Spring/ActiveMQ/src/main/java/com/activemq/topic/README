@@ -1,0 +1,4 @@
+1. 默认topic不支持持久化
+2. 运行TopicSender, 在ActiveMQ上看到有新的消息Enqueued
+3. 运行TopicRecevie, 并没有返回消息
+4. 这是把TopicSender停掉，然后再启动， TopicRecevie就能收到消息了
