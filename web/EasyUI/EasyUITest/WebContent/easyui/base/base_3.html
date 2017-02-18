@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+  <head>
+    <title>jQuery 的菜单按钮...</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+       <!--jquery 的主文件...-->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<!--jquery  easyui 的主文件...-->
+	<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+	<!--jQuery 的主样式文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/default/easyui.css">
+	<!--jQuery 的图标文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/icon.css">
+	
+	<script type="text/javascript">
+		  $(function(){
+		  	
+			   $("#menu_1").menu({
+			   		left:100,
+					top:100
+			   }).show();
+		  })
+	</script>
+  
+  </head>
+  
+  <body>
+	<div  id="menu_1" style="width:150px" class="easyui-menu">
+		<div>新建文件夹</div>
+		<div class="menu-sep"></div>   
+		<div>创建快捷方式</div>
+		<div class="menu-sep"></div>   
+		<div>打开方式
+			<div style="width:150px" >
+				<div>使用快播打开</div>
+				<div>使用百度影音打开</div>
+				<div>使用其它方式打开</div>
+			</div>
+		</div>
+		
+		<div class="menu-sep"></div>   
+		<div>复制</div>
+		<div class="menu-sep"></div>   
+		<div data-options="iconCls:'icon-cancel'">删除</div>
+		<div class="menu-sep"></div>   
+		<div>粘贴</div>
+		<div class="menu-sep"></div>   
+		<div>属性</div>
+	</div>
+  </body>
+</html>

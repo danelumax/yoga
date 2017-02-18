@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+  <head>
+    <title>layoutMain.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->    <!--jquery 的主文件...-->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<!--jquery  easyui 的主文件...-->
+	<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+	<!--jQuery 的主样式文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/default/easyui.css">
+	<!--
+	<link type="text/css" rel="stylesheet" href="../../js/themes/bootstrap/easyui.css">-->
+	<!--jQuery 的图标文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/icon.css">
+	<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+
+	<script type="text/javascript">
+			$(function(){
+				itcast.init.pageUI();
+				//初始化页面按钮上面的事件...
+				itcast.init.bindEvent();
+				
+			})
+			
+			var itcast={
+				init:{
+					pageUI:function(){
+						$("#jeasyUItree").tree({
+				 		url:"treedata.json",
+						dnd:true,
+						animate:true,
+						checkbox:true,
+						lines:true,
+						onClick:function(node){
+							// alert(node);
+							
+								var tabs=$("#center_tab").tabs("getTab",node.text);
+								if(tabs){
+									$("#center_tab").tabs("select",node.text)
+									
+								}else{
+									//添加面板...
+									$("#center_tab").tabs('add',{    
+									    title:node.text,    
+									    //content:'Tab Body',    
+									    closable:true,  
+										href:"../../easyui/href/employee.html",//重新载入一个界面... 
+										onLoad:function(){
+											//alert($("#employeeId").length);
+											$("#employeeId").datagrid({
+												  		columns:[[
+															{"checkbox":true},
+															{title:"车次",width:100,field:'ceci'},
+															{title:"出发站<br>终点站",width:100,field:'startstate'},
+															{title:"出发时间<br>到达时间",width:100,field:'starttime'},
+															{title:"历时",width:100,field:'totaltime'},
+															{title:"商务座",width:100,field:'swz'},
+															{title:"备注",width:100,field:'bz'}
+														]
+														],
+														fitColumns:true,
+														url:"datagrid.json",
+														toolbar:
+															[{
+																text:"修改",
+																iconCls: 'icon-edit',
+																handler: function(){
+																	
+																	alert('编辑按钮')
+																}
+															},'-',{
+																text:"删除",
+																iconCls: 'icon-help',
+																handler: function(){
+																	alert('帮助按钮')
+																}
+															}]
+														,
+														onLoadSuccess:function(){
+															//创建页面的组件有两种方式  一种是通过标签创建,通过js +页面标签创建...
+															// alert($("#btn").size());
+															$("#btn").linkbutton({
+																iconCls:"icon-add"
+															})
+														},
+														loadMsg:"数据正在加载中....",
+														method:"POST",
+														pagination:true,
+														rownumbers:true,
+														singleSelect:true,
+														striped:true
+												  })
+											
+											
+										}
+										 
+									     
+									});  
+								}
+								
+							    
+								
+								
+								
+							}
+				 		})
+					},
+					bindEvent:function(){
+						 $("#btn_1").bind("click",function(){
+						 		$("#txl_tree").tree({
+							 		url:"treedata.json",
+									dnd:true,
+									animate:true,
+									checkbox:true,
+									lines:true,
+									onClick:function(node){
+										//alert(node.text);
+										//控制台打印
+										//console.info(node);
+										//$("#easyUITree").tree("getChildren",node)
+										var children=node.children;
+										alert(children.length)
+									}
+							 	})
+							
+							
+						 		$("#txl_window").window({
+									height:500,
+									width:200,
+									title:"通讯录"
+								})
+							
+							
+						 })
+						
+						  $("#btn_2").bind("click",function(){
+						 	  $.messager.confirm('确认','您确认想要推出系统？',function(r){    
+							    if (r){    
+							        alert('确认删除');    
+							    }    
+							});  
+							
+							
+						 })
+						
+					}
+				}
+			}
+		
+		
+		
+	</script>
+
+
+
+  </head>
+  
+  <body class="easyui-layout">   
+    <div data-options="region:'north',title:'North Title',split:true" style="height:100px;">
+			<div style="float:right;padding:10px;">
+					<a id="btn_1" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-tip'">通讯录</a>  
+					<a id="btn_2" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">退出系统</a>  
+			</div>
+	</div>   
+    <div data-options="region:'south',title:'Copyright © 2015 Sohu.com Inc. All Rights Reserved. 立伟个人 版权所有',split:true" style="height:30px;"></div>   
+    <div data-options="region:'west',title:'功能菜单',split:true" style="width:250px;">
+			<div id="leftaccording" class="easyui-accordion" data-options="fit:true">   
+			    <div title="航母检测平台" data-options="iconCls:'icon-save',selected:true" style="overflow:auto;padding:10px;">   
+			        
+						<ul id="jeasyUItree"></ul>
+					
+					   
+			    </div>   
+			    <div title="物业管理平台" data-options="iconCls:'icon-reload'" style="padding:10px;">   
+			        content2    
+			    </div>   
+			    <div title="人事管理平台">   
+			        content3    
+			    </div>   
+			</div>  
+				
+	
+	</div>  
+   
+    <div data-options="region:'east',iconCls:'icon-reload',title:'East',split:true" style="width:100px;"></div>   
+    
+    <div data-options="region:'center',title:'center title'" style="padding:5px;">
+			<div id="center_tab" class="easyui-tabs" data-options="fit:true" style="width:500px;height:250px;">   
+			    <div title="首页" style="padding:10px;">   
+			       	<img src="../../image/1.jpg" height="380">  
+			    </div>   
+			</div>  
+	</div>   
+	
+	
+	<div id="txl_window">
+			<ul id="txl_tree"></ul>		
+	</div>
+</body>  
+
+</html>

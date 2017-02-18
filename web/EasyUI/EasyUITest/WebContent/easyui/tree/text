@@ -1,0 +1,2 @@
+1. 将项目部署到tomcat上，不然无法发ajax请求
+2. http://localhost:8080/EasyUITest/easyui/tree/tree.html

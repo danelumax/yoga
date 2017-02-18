@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+  <head>
+    <title>datagrid.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--jquery 的主文件...-->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<!--jquery  easyui 的主文件...-->
+	<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+	<!--jQuery 的主样式文件...
+	<link type="text/css" rel="stylesheet" href="../../js/themes/default/easyui.css">
+	-->
+	
+	<link type="text/css" rel="stylesheet" href="../../js/themes/bootstrap/easyui.css">
+	<!--jQuery 的图标文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/icon.css">
+	<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			
+			  alert($("#btn").size());
+			  /**
+			   * 界面会传过去两个参数，第一个参数是当前页，第二个参数每页显示多少条
+			   * 1  ,每页显示10条
+			   * 
+			   * //第一个你们需要找到总记录数...
+			   *sql1=int total= select count(*) from table
+			   * 
+			   * param1===(page-1)*10  ,10
+			   * 
+			   *sql2=select * from table where ddd  limit 0,10  (10,10) .(20,10)
+			   * 
+			   * 
+			   */
+			  $("#datagrid").datagrid({
+			  		columns:[[
+						{"checkbox":true},
+						{title:"车次",width:100,field:'ceci'},
+						{title:"出发站<br>终点站",width:100,field:'startstate'},
+						{title:"出发时间<br>到达时间",width:100,field:'starttime'},
+						{title:"历时",width:100,field:'totaltime'},
+						{title:"商务座",width:100,field:'swz'},
+						{title:"备注",width:100,field:'bz'}
+					]
+					],
+					fitColumns:true,
+					url:"datagrid.json",
+					toolbar:
+						[{
+							text:"修改",
+							iconCls: 'icon-edit',
+							handler: function(){
+								alert('编辑按钮')
+							}
+						},'-',{
+							text:"删除",
+							iconCls: 'icon-help',
+							handler: function(){
+								alert('帮助按钮')
+							}
+						}]
+					,
+					onLoadSuccess:function(){
+						//创建页面的组件有两种方式  一种是通过标签创建,通过js +页面标签创建...
+						// alert($("#btn").size());
+						$("#btn").linkbutton({
+							iconCls:"icon-add"
+						})
+					},
+					loadMsg:"数据正在加载中....",
+					method:"POST",
+					pagination:true,
+					rownumbers:true,
+					singleSelect:true,
+					striped:true
+			  })
+			
+		})		
+		
+	</script>
+
+  </head>
+  
+  <body>
+   		<table id="datagrid"></table>
+  </body>
+</html>

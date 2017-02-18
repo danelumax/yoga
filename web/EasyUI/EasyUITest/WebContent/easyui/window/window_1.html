@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+  <head>
+    <title>window 弹出框</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--jquery 的主文件...-->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<!--jquery  easyui 的主文件...-->
+	<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+	<!--jQuery 的主样式文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/default/easyui.css">
+	<!--jQuery 的图标文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/icon.css">
+	
+	<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+	<!--直接找图标的网站... www.iconfinder.com-->
+	
+	<script type="text/javascript">
+		  $(function(){
+	  		$("#btn").click(function(){
+				$("#window").window({
+					title:"搜索",
+					height:300,
+					width:200,
+					//modal:true
+				})
+			})
+				
+				
+			$("#btn-1").click(function(){
+				$.messager.confirm('确认','您确认想要退出系统吗？',function(r){    
+				    if (r){    
+				        alert('确认删除');    
+				    }    
+				});  
+			})
+				
+				
+			$.messager.show({
+				title:'我的消息',
+				msg:'消息将在5秒后关闭。',
+				timeout:5000,
+				width:350,
+				height:200,
+				showType:'slide'
+			});
+
+		  })
+		
+	</script>
+	
+  </head>
+  
+  <body>
+	<!--把按钮渲染在这个a 标签上面... -->
+	<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+	<div id="window"></div>
+  	<div style="float:right">
+		<a id="btn-1" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">退出系统</a>
+ 	</div>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+  <head>
+    <title>面板布局...</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+     <!--jquery 的主文件...-->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<!--jquery  easyui 的主文件...-->
+	<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+	<!--jQuery 的主样式文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/default/easyui.css">
+	
+	<!--
+	<link type="text/css" rel="stylesheet" href="../../js/themes/bootstrap/easyui.css">-->
+	<!--jQuery 的图标文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/icon.css">
+	<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+
+	<script type="text/javascript">
+		 $(function(){
+		 	// $(".panel").draggable({ });
+			
+			$('#ccc').resizable({ 
+				maxWidth:250, 
+				maxHeight:300 
+			}); 
+		 })
+		
+		
+		
+	</script>
+
+	<style type="text/css">
+		#ccc{
+			
+			border:3px solid red;
+			height:100px;
+			width:200px;
+			background:#999999;
+		}
+		
+		
+	</style>
+
+  </head>
+  
+  <body>
+   		<div id="panel-easyui" class="easyui-panel" title="My Panel"     
+			        style="width:500px;height:150px;padding:10px;background:#fafafa;"   
+			        data-options="iconCls:'icon-save',closable:true,    
+			                collapsible:true,minimizable:true,maximizable:true">   
+			    <div id="ccc">panel content</div> 
+			    <p>panel content.</p>   
+			</div> 
+			
+		
+		
+  </body>
+</html>

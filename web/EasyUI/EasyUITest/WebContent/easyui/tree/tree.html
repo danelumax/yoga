@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+  <head>
+    <title>tree.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--jquery 的主文件...-->
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+	<!--jquery  easyui 的主文件...-->
+	<script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+	<!--jQuery 的主样式文件...
+	<link type="text/css" rel="stylesheet" href="../../js/themes/default/easyui.css">
+	-->
+	
+	<link type="text/css" rel="stylesheet" href="../../js/themes/bootstrap/easyui.css">
+	<!--jQuery 的图标文件...-->
+	<link type="text/css" rel="stylesheet" href="../../js/themes/icon.css">
+	<script type="text/javascript" src="../../js/locale/easyui-lang-zh_CN.js"></script>
+
+	<script type="text/javascript">
+		
+			$(function(){
+				
+				 $("#easyUITree").tree({
+				 		url:"treedata.json",
+						dnd:true,
+						animate:true,
+						checkbox:true,
+						lines:true,
+						onClick:function(node){
+							//alert(node.text);
+							//控制台打印
+							//console.info(node);
+							//$("#easyUITree").tree("getChildren",node)
+							var children=node.children;
+							alert(children.length)
+						}
+				 })
+				
+				
+			})
+		
+		
+		
+	</script>
+
+  </head>
+  
+  <body>
+    	<ul id="easyUITree">
+    	</ul>
+  </body>
+</html>
