@@ -1,7 +1,7 @@
-package com.hibernate.test;
+package com.hibernate.test.helloworld;
 
 public class User {
-	private String id;
+	private Integer id;
 	private String name;
 	private String password;
 	
@@ -13,10 +13,10 @@ public class User {
 	public void setSal(double sal) {
 		this.sal = sal;
 	}
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {

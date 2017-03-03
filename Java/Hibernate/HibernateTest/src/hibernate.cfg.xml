@@ -45,6 +45,6 @@
 		<!-- 引入ORM 映射文件 
 			填写src之后的路径
 		 -->
-		<mapping resource="com/hibernate/test/User.hbm.xml"/>
+		<mapping resource="com/hibernate/test/helloworld/User.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>
