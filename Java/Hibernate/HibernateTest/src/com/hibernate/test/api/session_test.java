@@ -52,10 +52,10 @@ public class session_test {
 		Transaction ts = session.beginTransaction();
 		
 		//先查询出你要修改的对象
-		User user = (User) session.get(User.class,1);
+		User user = (User) session.get(User.class,5);
 		
 		//在查询结果上,进行修改
-		user.setName("汤姆");
+		user.setName("rose");
 
 		session.update(user);
 		
@@ -82,7 +82,7 @@ public class session_test {
 		
 		//--------------------------------------------------------
 		//先查询出你要修改的对象
-				User user = (User) session.get(User.class,2);
+				User user = (User) session.get(User.class,5);
 				/*User user = new User();
 				user.setId(1);*/
 		//根据ID删除
@@ -113,7 +113,7 @@ public class session_test {
 		
 		//--------------------------------------------------------
 		//先查询出你要修改的对象
-				User user = (User) session.get(User.class,3);
+				User user = (User) session.get(User.class,6);
 				
 		//---------------------------------------------------------
 		
@@ -141,7 +141,7 @@ public class session_test {
 		
 		//--------------------------------------------------------
 		//先查询出你要修改的对象
-				User user = (User) session.load(User.class,3);
+				User user = (User) session.load(User.class,6);
 				
 		//---------------------------------------------------------
 		
@@ -233,11 +233,11 @@ public class session_test {
 		
 		//--------------------------------------------------------
 			//原生的Sql查询
-		SQLQuery query = session.createSQLQuery("select * from User");
+		SQLQuery query = session.createSQLQuery("select * from user");
 		// addEntity 将查询结果封装到指定对象中
 		query.addEntity(User.class);
 		
-		List<User> list =	query.list();
+		List<User> list = query.list();
 		
 		System.out.println(list);
 		

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping package="com.itheima.domain" >
+ 	<class name="Customer" table="t_customer"   >
+		<id name="id" column="id"    >
+			<generator class="native"></generator>
+		</id> 
+		<!-- 告诉Hibernate , 乐观锁的版本号的属性名 -->
+		<version name="version"></version>
+			
+		<property name="name" column="name" type="string" ></property>
+ 		
+ 		<!-- 
+ 				lazy : 是否对set数据使用懒加载
+ 				fetch : 决定加载集合使用的sql语句种类
+ 		 -->
+ 		<set name="orders" batch-size="2"  >
+ 			<!--
+ 				key 用来描述外键
+ 				column : 外键的值
+ 			  -->
+ 			<key column="cid" ></key>
+ 			<!-- one-to-many 表达, Customer 与orders 的关系是一对多
+ 				class: 表达关联的另一方的完整类名
+ 			 -->
+ 			<one-to-many class="Order" />
+ 		</set>
+ 		<!-- 局部配置 -->
+ 		<query name="bcd"><![CDATA[from Order]]></query>
+ 	</class>
+ 	<!-- 全局配置 -->
+ 	<query name="abc"><![CDATA[from Customer]]></query>
+ </hibernate-mapping>

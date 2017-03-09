@@ -21,6 +21,11 @@
 			<locationURI>PARENT-4-PROJECT_LOC/Jar/Hibernate/antlr-2.7.6.jar</locationURI>
 		</link>
 		<link>
+			<name>lib/c3p0-0.9.1.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Jar/Hibernate/c3p0-0.9.1.jar</locationURI>
+		</link>
+		<link>
 			<name>lib/commons-collections-3.1.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/Jar/Hibernate/commons-collections-3.1.jar</locationURI>
