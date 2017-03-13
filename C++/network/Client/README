@@ -1,4 +1,0 @@
-[usage]
-./Client <what_you_want_to_send> <close_option>
-./client 123 close
-./client 456 notclose

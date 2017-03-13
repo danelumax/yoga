@@ -1,6 +1,0 @@
-[Step]
-1. Start server.
-2. Send message from one client.
-
-[Output]
-Receive message: 123
