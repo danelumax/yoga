@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class ThreadLocalTest {
-
+ 
 	private static ThreadLocal<Integer> x = new ThreadLocal<Integer>();
 	private static ThreadLocal<MyThreadScopeData> myThreadScopeData = new ThreadLocal<MyThreadScopeData>();
 	public static void main(String[] args) {

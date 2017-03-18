@@ -1,7 +1,0 @@
-[Output]
-
-----Running way: public abstract void ProxyTest.Person.walk()
-No Parameter
-----Running way: public abstract void ProxyTest.Person.sayHello(java.lang.String)
-Input Parameters:
-Monkey
