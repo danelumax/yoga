@@ -40,9 +40,9 @@
 		<!--
 		告诉Hibernate,我要使用C3p0连接池
  		hibernate.connection.provider_class org.hibernate.connection.C3P0ConnectionProvider -->
-		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+<!-- 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
 		<property name="hibernate.c3p0.max_size">5</property>
- 		<property name="hibernate.c3p0.min_size">2</property>
+ 		<property name="hibernate.c3p0.min_size">2</property> -->
 		
 		<!-- hibernate.connection.autocommit: 事务自动提交  -->
 		<!-- <property name="hibernate.connection.autocommit">true</property> -->
@@ -55,7 +55,7 @@
 		4: 可重复读
 		8: 串行化
 	 	-->
-		<property name="hibernate.connection.isolation">4</property>
+		<!-- <property name="hibernate.connection.isolation">4</property> -->
 		
 		<!-- 引入ORM 映射文件 
 			填写src之后的路径

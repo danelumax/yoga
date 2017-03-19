@@ -13,13 +13,13 @@ public class Demo1 {
 		Session session = HibernateUtils.openSession();
 		session.beginTransaction();
 		//------------------------------------------------
-		User u1 = (User) session.get(User.class, 1);// 发送select语句,从数据库取出记录.并封装成对象
+		User u1 = (User) session.get(User.class, 6);// 发送select语句,从数据库取出记录.并封装成对象
 												   // 持久化状态对象=> 存到缓存中
 		
-		User u2 = (User) session.get(User.class, 1);//再次查询时,会从缓存中查找,不会发送select
+		User u2 = (User) session.get(User.class, 6);//再次查询时,会从缓存中查找,不会发送select
 		
-		User u3 = (User) session.get(User.class, 1);//再次查询时,会从缓存中查找,不会发送select
-		
+		User u3 = (User) session.get(User.class, 6);//再次查询时,会从缓存中查找,不会发送select
+		    
 		//证明u1, u2, u3是同一个key-value
 		System.out.println(u1==u2);//true
 		System.out.println(u1==u3);//true

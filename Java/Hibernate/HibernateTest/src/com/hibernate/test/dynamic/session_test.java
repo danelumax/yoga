@@ -34,9 +34,9 @@ public class session_test {
 		
 		Transaction ts = session.beginTransaction();
 		
-		User u = (User) session.get(User.class, 1);
+		User u = (User) session.get(User.class, 6);
 		
-		u.setName("jerry");
+		u.setName("jack");
 		
 		//如果属性password的dynamic-update为true， 如果password没有修改，update语句中只有name
 		session.update(u);

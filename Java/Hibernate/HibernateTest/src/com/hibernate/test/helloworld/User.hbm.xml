@@ -13,7 +13,7 @@
  		 dynamic-update:动态更新  默认值"false"
  		 				true=> 没改动过的属性,将不会生成到update语句中
  	 -->
- 	<class name="User" table="user"  >
+ 	<class name="User" table="user" >
  		<!-- id: 配置实体与表中 id对应
  			name: user对象中标识主键的属性名称
  			column: 主键在表中的列名

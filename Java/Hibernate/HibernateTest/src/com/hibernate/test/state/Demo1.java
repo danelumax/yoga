@@ -169,7 +169,7 @@ public class Demo1 {
 		session.beginTransaction();
 		//------------------------------------------------
 		//通过get方法,得到持久状态对象
-		User u= (User) session.get(User.class, 1); // 持久状态
+		User u= (User) session.get(User.class, 6); // 持久状态
 	
 		u.setName("jerry");//持久状态
 	
