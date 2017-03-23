@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+           
+  	<bean id="personDao" class="com.spring.aop.basic.PersonDaoImpl"></bean>
+  	<!-- 1. 确定切面 -->
+  	<bean id="transaction" class="com.spring.aop.basic.Transaction"></bean>
+  	<aop:config>
+  		<!-- 
+  			2. 配置切点
+  			切入点表达式  确定目标类
+  		 -->
+  		<aop:pointcut 
+  			expression="execution(* com.spring.aop.basic..PersonDaoImpl.*(..))" 
+  			id="perform"/>
+  		<!-- 
+  			3. 根据切面和切点，指定通知方法
+  			ref指向的对象就是切面
+  		 -->
+  	    <aop:aspect ref="transaction">
+  	    	<aop:before method="beginTransaction" pointcut-ref="perform"/>
+  	    	<aop:after-returning method="commit" pointcut-ref="perform"/>
+  	    </aop:aspect>
+  	</aop:config>
+</beans>
