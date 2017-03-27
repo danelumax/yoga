@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+             	
+  	<!-- 扫描包加载 -->
+	<context:component-scan base-package="com.spring.aop.exception"></context:component-scan>
+	
+	<aop:config>
+  		<!-- 
+  			2. 配置切点
+  			切入点表达式  确定目标类
+  		 -->
+  		<aop:pointcut 
+  			expression="execution(* com.spring.aop.exception.service.impl.*.*(..))" 
+  			id="perform"/>
+  		<!-- 
+  			3. 根据切面和切点，指定通知方法
+  			ref指向的对象就是切面
+  		 -->
+  	    <aop:aspect ref="exceptionAspect">
+  	   		<aop:after-throwing method="throwingException" pointcut-ref="perform" throwing="ex"/>
+  	    </aop:aspect>
+  	</aop:config>
+  	
+</beans>
