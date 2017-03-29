@@ -22,6 +22,7 @@
   		<!-- 
   			3. 根据切面和切点，指定通知方法
   			ref指向的对象就是切面
+  			exceptionAspect 在ExceptionAspect.java的@Component("exceptionAspect")中定义
   		 -->
   	    <aop:aspect ref="exceptionAspect">
   	   		<aop:after-throwing method="throwingException" pointcut-ref="perform" throwing="ex"/>
