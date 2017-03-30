@@ -1,0 +1,141 @@
+package com.linkedlist;
+/*
+ * 链表，相当于火车
+ * 
+ * 提供方法：
+ * 1.向前插入结点
+ * 2.向后插入结点
+ * 3.删除一个头结点
+ * 4.删除一个尾结点
+ * 5.列出链表所有结点
+ * 6.查找一个指定结点
+ * 7.删除一个指定结点
+ * 8.得到链表长度
+ */
+
+public class LinkList {
+	//头结点
+	private Node first;
+	
+	public LinkList() {
+		first = null;
+	}
+	
+	/**
+	 * 插入一个结点，在头结点后进行插入
+	 */
+	public void insertFirst(long value) {
+		Node node = new Node(value);
+		//把first接到后面
+		node.next = first;
+		//first改指向
+		first = node;
+	}
+	
+	/**
+	 * 插入一个结点，在尾结点后进行插入
+	 */
+	public void insert(long value) {
+		Node node = new Node(value);
+		if (first == null) {
+			first = node;
+			return;
+		}
+		Node current = first;
+		while(current.next != null) {
+			current = current.next;
+		}
+		current.next = node;
+	}
+	
+	/**
+	 * 删除一个结点，在头结点后进行删除
+	 */
+	public Node deleteFirst() {
+		Node current = first;
+		first = current.next;
+		return current;
+	}
+	
+	/**
+	 * 删除一个结点，在尾结点后进行删除
+	 */
+	public void deleteEnd() {
+		Node current = first;
+		Node previous = first;
+		
+		while(current.next != null) {
+			previous = current;
+			current = current.next;
+		}
+		previous.next = null;
+	}
+		
+	/**
+	 * 显示方法
+	 */
+	public void ListAll() {
+		Node current = first;
+		//从first开始输出
+		while(current != null) {
+			current.display();
+			current = current.next;
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * 查找方法
+	 */
+	public Node find(long value) {
+		Node current = first;
+		while(current.data != value) {
+			if(current.next == null) {
+				return null;
+			}
+			current = current.next;
+		}
+		return current;
+	}
+	
+	/**
+	 * 删除方法，根据数据域来进行删除
+	 */
+	public Node delete(long value) {
+		Node current = first;
+		Node previous = first;
+		//如果不相等，一直找
+		while(current.data != value) {
+			//如果找到最后一个了，那么说明没有
+			if(current.next == null) {
+				return null;
+			}
+			previous = current;
+			current = current.next;
+		}
+		
+		//如果找到了
+		
+		if(current == first) {
+			//把后面一个当first
+			first = first.next;
+		} else {
+			//直接跳过current
+			previous.next = current.next;
+		}
+		
+		return current;
+	}
+	
+	public int Length() {
+		int count = 0;
+		Node current = first;
+		//从first开始计算
+		while(current != null) {
+			count++;
+			current = current.next;
+		}
+		
+		return count;
+	}
+}
