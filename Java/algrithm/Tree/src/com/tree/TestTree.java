@@ -25,7 +25,8 @@ public class TestTree {
 //		tree.afterOrder(tree.root);   // 4 3 15 90 20 10
 		//tree.delete(90);
 		//tree.inOrder(tree.root);
-		//tree.postorderTraversal(tree.root);
-		tree.inTraverse(tree.root);
+//		tree.postorderTraversal(tree.root);
+//		tree.inTraverse(tree.root);
+		tree.afterTraverse(tree.root);
 	}
 }

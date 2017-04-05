@@ -234,29 +234,6 @@ public class Tree {
 	}
 	
 	/**
-	 * 前序遍历（非递归）
-	 */
-    public void postorderTraversal(Node root) {
-        //只能使用非递归方式，来获得List
-    	Stack<Node> s = new Stack<Node>();
-        s.push(root);
-        while(!s.isEmpty()) {
-             
-        	Node t = s.pop();
-        	System.out.println(t.data);
-            
-        	//右边的要后出，所以要先进
-            if(t.rightChild != null) {
-            	s.push(t.rightChild);
-            }
-            //左边的要先出，所以要后进
-            if(t.leftChild != null) {
-            	s.push(t.leftChild);
-            }
-        }
-    }
-	
-	/**
 	 * 中序遍历
 	 */
 	public void inOrder(Node localNode) {
@@ -269,24 +246,6 @@ public class Tree {
 			inOrder(localNode.rightChild);
 		}
 	}
-	
-	public void inTraverse(Node root) {
-		Stack<Node> s = new Stack<>();
-		Node p = root;
-		while(p!=null || !s.isEmpty()) {
-			if(p != null) {
-				s.push(p);
-				p = p.leftChild;
-			}
-			else {
-				p = s.pop();
-				System.out.println(p.data);
-				//中间get到了，开始考虑往右边走了
-				p = p.rightChild;
-			}
-		}
-	}
-	
 	
 	/**
 	 * 后序遍历
@@ -301,4 +260,83 @@ public class Tree {
 			System.out.println(localNode.data);
 		}
 	}
+	
+	
+	
+	
+	
+	/**
+	 * 先序遍历（非递归）
+	 */
+    public void postorderTraversal(Node root) {
+        Stack<Node> s = new Stack<>();
+        Node current = root;
+        
+	    while (current!=null || !s.isEmpty())
+	    {
+	        if (current != null)
+	        {
+	        	System.out.println(current.data);
+	            s.push(current);
+	            current = current.leftChild;
+	        } else {
+	            Node node = s.pop();
+	            current = node.rightChild;
+	        }
+	    }
+    }
+	
+	/**
+	 * 中序遍历（非递归）
+	 */
+	public void inTraverse(Node root) {
+		Stack<Node> s = new Stack<>();
+		Node current = root;
+		
+		while(current!=null || !s.isEmpty()) {
+			if (current != null) {
+				s.push(current);
+				current = current.leftChild;
+			} else {
+				current = s.pop();
+				System.out.println(current.data);
+				//中间get到了，开始考虑往右边走了
+				current = current.rightChild;
+			}
+		}
+	}
+	
+	/**
+	 * 后序遍历（非递归）
+	 */
+	public void afterTraverse(Node root) {
+		Stack<Node> s = new Stack<>();
+		Node current = root;
+		// pre 标记最近出栈的节点，用于判断是否是 current 节点的右孩子，如果是的话，就可以访问 current 节点
+		Node pre = current;
+		//isNeedPush 标记是出栈还是继续将左孩子进栈
+		boolean isNeedPush = true;
+		
+		while(current != null || !s.isEmpty()) {
+			if (current != null && isNeedPush) {
+				s.push(current);
+				current = current.leftChild;
+			} else {
+				if (s.isEmpty()) {
+					return;
+				}
+				current = s.peek();
+				if (current.rightChild!=null && current.rightChild != pre) {
+					current = current.rightChild;
+					isNeedPush = true;
+				} else {
+					current = s.pop();
+					System.out.println(current.data);
+					isNeedPush = false;
+					pre = current;
+				}
+			}
+		}
+	}
+		
 }
