@@ -27,6 +27,8 @@ public class TestTree {
 		//tree.inOrder(tree.root);
 //		tree.postorderTraversal(tree.root);
 //		tree.inTraverse(tree.root);
-		tree.afterTraverse(tree.root);
+		System.out.println("Depth = " + tree.getDepth(tree.root));
+		//tree.afterTraverse(tree.root);
+		tree.levelOrder(tree.root);
 	}
 }

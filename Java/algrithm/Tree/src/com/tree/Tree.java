@@ -1,5 +1,7 @@
 package com.tree;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 /*
@@ -338,5 +340,42 @@ public class Tree {
 			}
 		}
 	}
-		
+	
+	/*
+	 * 获取高度
+	 */
+	public int getDepth(Node node) {
+        if (node == null) {  
+            return 0;  
+        } else {
+        	int result = 0;
+            int leftDepth = getDepth(node.leftChild);  
+            int rightDepth = getDepth(node.rightChild);
+            if (leftDepth < rightDepth) {
+            	result = rightDepth + 1;
+            } else {
+            	result = leftDepth + 1;
+            }
+            return result;
+        }  
+	}
+	
+    // 层次遍历  
+    public void levelOrder(Node node) {  
+        if (node == null) {
+            return;  
+        }
+        Deque<Node> queue = new ArrayDeque<Node>();  
+        queue.add(node);  
+        while (!queue.isEmpty()) {  
+            Node outNode = queue.pop();  
+            System.out.println(outNode.data);  
+            if (outNode.leftChild != null) {
+                queue.add(outNode.leftChild); 
+            }
+            if (outNode.rightChild != null) { 
+                queue.add(outNode.rightChild);
+            }
+        }  
+    }  
 }
