@@ -1,7 +1,7 @@
 package com.tree;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Queue;
 import java.util.Stack;
 
 /*
@@ -278,6 +278,7 @@ public class Tree {
 	    {
 	        if (current != null)
 	        {
+	        	//先序， 一直往左边，走到哪里，显示到哪里
 	        	System.out.println(current.data);
 	            s.push(current);
 	            current = current.leftChild;
@@ -301,6 +302,7 @@ public class Tree {
 				current = current.leftChild;
 			} else {
 				current = s.pop();
+				//中序， 只显示弹出的
 				System.out.println(current.data);
 				//中间get到了，开始考虑往右边走了
 				current = current.rightChild;
@@ -342,21 +344,16 @@ public class Tree {
 	}
 	
 	/*
-	 * 获取高度
+	 * 获取深度
 	 */
 	public int getDepth(Node node) {
         if (node == null) {  
             return 0;  
         } else {
-        	int result = 0;
             int leftDepth = getDepth(node.leftChild);  
             int rightDepth = getDepth(node.rightChild);
-            if (leftDepth < rightDepth) {
-            	result = rightDepth + 1;
-            } else {
-            	result = leftDepth + 1;
-            }
-            return result;
+            
+            return 1 + Math.max(leftDepth, rightDepth);
         }  
 	}
 	
@@ -365,10 +362,10 @@ public class Tree {
         if (node == null) {
             return;  
         }
-        Deque<Node> queue = new ArrayDeque<Node>();  
+        Queue<Node> queue = new ArrayDeque<Node>();  
         queue.add(node);  
         while (!queue.isEmpty()) {  
-            Node outNode = queue.pop();  
+            Node outNode = queue.poll();  
             System.out.println(outNode.data);  
             if (outNode.leftChild != null) {
                 queue.add(outNode.leftChild); 
