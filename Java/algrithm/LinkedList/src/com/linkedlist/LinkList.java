@@ -15,21 +15,21 @@ package com.linkedlist;
 
 public class LinkList {
 	//头结点
-	private Node first;
+	private Node head;
 	
 	public LinkList() {
-		first = null;
+		head = null;
 	}
 	
 	/**
 	 * 插入一个结点，在头结点后进行插入
 	 */
-	public void insertFirst(long value) {
+	public void inserthead(long value) {
 		Node node = new Node(value);
-		//把first接到后面
-		node.next = first;
-		//first改指向
-		first = node;
+		//把head接到后面
+		node.next = head;
+		//head改指向
+		head = node;
 	}
 	
 	/**
@@ -37,11 +37,11 @@ public class LinkList {
 	 */
 	public void insert(long value) {
 		Node node = new Node(value);
-		if (first == null) {
-			first = node;
+		Node current = head;
+		if (head == null) {
+			head = node;
 			return;
 		}
-		Node current = first;
 		while(current.next != null) {
 			current = current.next;
 		}
@@ -51,9 +51,9 @@ public class LinkList {
 	/**
 	 * 删除一个结点，在头结点后进行删除
 	 */
-	public Node deleteFirst() {
-		Node current = first;
-		first = current.next;
+	public Node deletehead() {
+		Node current = head;
+		head = current.next;
 		return current;
 	}
 	
@@ -61,8 +61,8 @@ public class LinkList {
 	 * 删除一个结点，在尾结点后进行删除
 	 */
 	public void deleteEnd() {
-		Node current = first;
-		Node previous = first;
+		Node current = head;
+		Node previous = head;
 		
 		while(current.next != null) {
 			previous = current;
@@ -75,8 +75,8 @@ public class LinkList {
 	 * 显示方法
 	 */
 	public void ListAll() {
-		Node current = first;
-		//从first开始输出
+		Node current = head;
+		//从head开始输出
 		while(current != null) {
 			current.display();
 			current = current.next;
@@ -88,7 +88,7 @@ public class LinkList {
 	 * 查找方法
 	 */
 	public Node find(long value) {
-		Node current = first;
+		Node current = head;
 		while(current.data != value) {
 			if(current.next == null) {
 				return null;
@@ -102,8 +102,8 @@ public class LinkList {
 	 * 删除方法，根据数据域来进行删除
 	 */
 	public Node delete(long value) {
-		Node current = first;
-		Node previous = first;
+		Node current = head;
+		Node previous = head;
 		//如果不相等，一直找
 		while(current.data != value) {
 			//如果找到最后一个了，那么说明没有
@@ -116,9 +116,9 @@ public class LinkList {
 		
 		//如果找到了
 		
-		if(current == first) {
-			//把后面一个当first
-			first = first.next;
+		if(current == head) {
+			//把后面一个当head
+			head = head.next;
 		} else {
 			//直接跳过current
 			previous.next = current.next;
@@ -129,8 +129,8 @@ public class LinkList {
 	
 	public int Length() {
 		int count = 0;
-		Node current = first;
-		//从first开始计算
+		Node current = head;
+		//从head开始计算
 		while(current != null) {
 			count++;
 			current = current.next;
