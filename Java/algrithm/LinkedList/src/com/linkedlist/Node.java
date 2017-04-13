@@ -4,11 +4,11 @@ package com.linkedlist;
  */
 public class Node {
 	//数据域
-	public long data;
+	public int data;
 	//指针域
 	public Node next;
 	
-	public Node(long value) {
+	public Node(int value) {
 		this.data = value;
 	}
 	

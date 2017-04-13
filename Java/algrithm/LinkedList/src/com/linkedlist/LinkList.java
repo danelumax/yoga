@@ -1,4 +1,8 @@
 package com.linkedlist;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * 链表，相当于火车
  * 
@@ -24,7 +28,7 @@ public class LinkList {
 	/**
 	 * 插入一个结点，在头结点后进行插入
 	 */
-	public void inserthead(long value) {
+	public void inserthead(int value) {
 		Node node = new Node(value);
 		//把head接到后面
 		node.next = head;
@@ -35,7 +39,7 @@ public class LinkList {
 	/**
 	 * 插入一个结点，在尾结点后进行插入
 	 */
-	public void insert(long value) {
+	public void insert(int value) {
 		Node node = new Node(value);
 		Node current = head;
 		if (head == null) {
@@ -138,4 +142,20 @@ public class LinkList {
 		
 		return count;
 	}
+	
+    public void removeDuplicates() {
+        //Write your code here
+          Node current = head;
+          Node pre = current;
+          Map<Integer, Integer> map = new HashMap<>();
+          while(current != null) {
+              if(map.containsKey(current.data)) {
+                  pre.next = current.next;
+              } else {
+                  map.put(current.data, 1);
+                  pre = current;
+              }
+              current = current.next;
+          }
+    }
 }
